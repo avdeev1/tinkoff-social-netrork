@@ -1,0 +1,5 @@
+<div class="links-container">
+  <img *ngIf="isProfile" [src]="image" class="profile-icon" alt="Иконка">
+  <i *ngIf="isIcon" [class]="'fa fa-' + icon" aria-hidden="true" (click)="changeHeart()"></i>
+  <a class="text" href="#" (click)="onPostPage($event)">{{text}}</a>
+</div>
