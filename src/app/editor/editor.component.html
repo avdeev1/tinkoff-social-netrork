@@ -4,7 +4,10 @@
       <nb-card-header>Публикация</nb-card-header>
       <nb-card-body>
         <input id="input_header" class="add-margin-bottom" type="text" nbInput fullWidth status="info" maxlength="100" placeholder="Заголовок">
-        <textarea id="input_text" nbInput fullWidth status="info" maxlength="2000" placeholder="Текст" rows="10"></textarea>
+        <textarea id="input_text" class="add-margin-bottom" nbInput fullWidth status="info" maxlength="2000" placeholder="Текст" rows="10"></textarea>
+
+        <app-loading-button (onFileSelect)="handlerEditor($event)"></app-loading-button>
+
         <label for="multiple_select">
           <h4>Метки</h4>
         </label>

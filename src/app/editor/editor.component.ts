@@ -12,4 +12,7 @@ export class EditorComponent implements OnInit {
   ngOnInit() {
   }
 
+  handlerEditor(str: string) {
+    console.log(str);
+  }
 }

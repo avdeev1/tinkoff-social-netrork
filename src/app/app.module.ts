@@ -5,11 +5,13 @@ import {NbButtonModule, NbCardModule, NbInputModule, NbLayoutModule, NbSelectMod
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EditorComponent } from './editor/editor.component';
+import { LoadingButtonComponent } from './loading-button/loading-button.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EditorComponent
+    EditorComponent,
+    LoadingButtonComponent
   ],
   imports: [
     BrowserModule,
