@@ -1,18 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { NbThemeModule } from '@nebular/theme';
+import {NbButtonModule, NbCardModule, NbInputModule, NbLayoutModule, NbSelectModule, NbThemeModule} from '@nebular/theme';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { EditorComponent } from './editor/editor.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EditorComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NbThemeModule.forRoot()
+    NbThemeModule.forRoot(),
+    NbLayoutModule,
+    NbCardModule,
+    NbInputModule,
+    NbSelectModule,
+    NbButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
