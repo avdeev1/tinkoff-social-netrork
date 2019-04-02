@@ -15,9 +15,9 @@ export class TextPostComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.isLong = this.text.split('').length > 1000;
+    this.isLong = this.text.length > 1000;
     if (this.isLong) {
-      this.short = this.text.split('').slice(0, 1000).join('') + '...';
+      this.short = this.text.slice(0, 1000) + '...';
     } else {
       this.short = this.text;
     }

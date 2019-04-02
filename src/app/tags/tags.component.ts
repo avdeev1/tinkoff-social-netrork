@@ -15,10 +15,4 @@ export class TagsComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  tagClick($event: MouseEvent) {
-    event.stopPropagation();
-    $event.preventDefault();
-    this.tagEvent.emit($event);
-  }
 }

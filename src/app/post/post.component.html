@@ -1,23 +1,20 @@
-<!--<nb-layout>-->
-<!--  <nb-layout-column>-->
-    <nb-card class="post-container" (click)="onPostPage($event)">
-      <nb-card-header>
-        <div class="infoLinks">
-            <app-info-post [post]="post"></app-info-post>
-        </div>
-        <h2>{{post.title}}</h2>
-        <div class="tags-links">
-          <app-tags [tags]="post.tags" class="tags"></app-tags>
-        </div>
-      </nb-card-header>
-      <nb-card-body>
-        <div *ngIf="post.imgPostSrc" class="div-img">
-          <img [src]="post.imgPostSrc" alt="Горгород" class="">
-        </div>
-        <div class="postText">
-          <app-text-post [text]="post.text"></app-text-post>
-        </div>
-      </nb-card-body>
-    </nb-card>
-<!--  </nb-layout-column>-->
-<!--</nb-layout>-->
+ <nb-card class="post-container" (click)="goToPostPage($event)">
+   <nb-card-header>
+     <div class="infoLinks">
+       <app-info-post [post]="post"></app-info-post>
+     </div>
+     <h2>{{post.title}}</h2>
+     <div class="tags-links">
+       <app-tags [tags]="post.tags" class="tags"></app-tags>
+     </div>
+   </nb-card-header>
+   <nb-card-body>
+     <div *ngIf="post.imgPostSrc" class="div-img">
+       <img [src]="post.imgPostSrc" alt="Горгород" class="">
+     </div>
+     <div class="postText">
+       <app-text-post [text]="post.text"></app-text-post>
+     </div>
+   </nb-card-body>
+ </nb-card>
+

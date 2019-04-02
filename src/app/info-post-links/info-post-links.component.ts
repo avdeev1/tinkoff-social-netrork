@@ -12,43 +12,22 @@ export class InfoPostLinksComponent implements OnInit {
   @Input() text: string;
   @Input() image: string;
   @Input() icon: string;
-  // @Input() iconColor = '#878a8c';
 
   isProfile: boolean;
   isIcon: boolean;
-  like = 'heart';
-  notLike = 'heart-o';
-  isLike = false;
 
-  constructor() { }
+  constructor() {
+  }
+
+  get giveMeIcon() {
+    return `fa fa-${this.icon}`;
+  }
 
   ngOnInit() {
-    if (this.like === this.icon) {
-      this.isLike = true;
-    }
     this.isProfile = !!(this.image);
     this.isIcon = !this.isProfile;
     if (this.image && this.icon) {
       throw new Error('Либо иконка, либо картинка');
-    }
-  }
-
-  onPostPage($event: MouseEvent) {
-    event.stopPropagation();
-    $event.preventDefault();
-    this.event.emit($event);
-  }
-
-  changeHeart() {
-    if (this.icon === this.like || this.icon === this.notLike) {
-      if (this.isLike) {
-        this.icon = this.notLike;
-        this.text = (parseInt(this.text, 10) - 1).toString();
-      } else {
-        this.icon = this.like;
-        this.text = (parseInt(this.text, 10) + 1).toString();
-      }
-      this.isLike = !this.isLike;
     }
   }
 }

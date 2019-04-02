@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {NbCardModule, NbLayoutModule, NbThemeModule, NbTreeGridModule} from '@nebular/theme';
+import {NbCardModule, NbLayoutModule, NbThemeModule } from '@nebular/theme';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,7 +25,6 @@ import { TextPostComponent } from './text-post/text-post.component';
     NbThemeModule.forRoot(),
     NbCardModule,
     NbLayoutModule,
-    NbTreeGridModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
