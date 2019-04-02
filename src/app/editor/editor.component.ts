@@ -7,12 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditorComponent implements OnInit {
 
+  file: File;
   constructor() { }
 
   ngOnInit() {
   }
 
-  handlerEditor(str: string) {
-    console.log(str);
+  isFile() { return !!this.file; }
+
+  handlerEditor(file: File) {
+    this.file = file;
   }
 }

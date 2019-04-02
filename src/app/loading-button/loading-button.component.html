@@ -1,1 +1,6 @@
-<button id="loading_buttton" nbButton outline status="info" size="small">Загрузить картинку</button>
+<span>
+    <input type="file" (change)="onNativeInputFileSelect($event)" #inputFile hidden />
+    <button nbButton outline status="info" size="small" (click)="selectFile()">
+      Загрузите картинку
+    </button>
+</span>
