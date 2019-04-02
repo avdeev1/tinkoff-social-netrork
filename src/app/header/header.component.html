@@ -10,10 +10,14 @@
         <input class="search-input" status="info" fieldSize="small" type="text" nbInput placeholder="Поиск">
       </div>
 
-      <div class="buttons" *ngIf="!isSignedIn; else signedButtons" >
+      <div
+        *ngIf="!isSignedIn; then unsignedButtons; else signedButtons">
+      </div>
+
+      <ng-template #unsignedButtons>
         <button class="sign-in" nbButton outline status="info" size="xsmall">Вход</button>
         <button class="sign-up" nbButton status="info" size="xsmall">Регистрация</button>
-      </div>
+      </ng-template>
 
       <ng-template #signedButtons>
         <div class="signed-buttons">
