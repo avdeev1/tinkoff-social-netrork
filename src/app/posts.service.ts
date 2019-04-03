@@ -144,7 +144,6 @@ export class PostsService {
       likes: 234,
       comments: 2,
       date: '24 марта 2018 в 14:58',
-      imgPostSrc: '',
       postId: 3
     }
   ];

@@ -1,5 +1,5 @@
 <div class="links-container">
   <img *ngIf="isProfile" [src]="image" class="profile-icon" alt="Иконка">
   <i *ngIf="isIcon" [class]="giveMeIcon" aria-hidden="true"></i>
-  <a class="text" href="#">{{text}}</a>
+  <a class="text" routerLink="#">{{text}}</a>
 </div>

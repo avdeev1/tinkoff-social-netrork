@@ -9,7 +9,7 @@ import {IPosts} from '../models';
 })
 export class PostComponent implements OnInit {
 
-  @Output() onPostPage = new EventEmitter<MouseEvent>();
+  @Output() clickPost = new EventEmitter<MouseEvent>();
 
   @Input() post: IPosts;
 
@@ -19,6 +19,6 @@ export class PostComponent implements OnInit {
   }
 
   goToPostPage($event: MouseEvent) {
-    this.onPostPage.emit($event);
+    this.clickPost.emit($event);
   }
 }

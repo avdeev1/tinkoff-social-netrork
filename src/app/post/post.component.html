@@ -1,7 +1,10 @@
  <nb-card class="post-container" (click)="goToPostPage($event)">
    <nb-card-header>
-     <div class="infoLinks">
-       <app-info-post [post]="post"></app-info-post>
+     <div class="info-block-container">
+       <app-info-post-links [text]="post.user" [image]="post.profilePhotoSrc" class="block"></app-info-post-links>
+       <app-info-post-links [text]="post.likes.toString()" icon="heart" class="block"></app-info-post-links>
+       <app-info-post-links [text]="post.comments.toString()" icon="commenting-o" class="block"></app-info-post-links>
+       <app-info-post-links [text]="post.date.toString()" icon="calendar-o" class="block"></app-info-post-links>
      </div>
      <h2>{{post.title}}</h2>
      <div class="tags-links">

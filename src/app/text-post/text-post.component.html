@@ -1,4 +1,4 @@
 <div>
   {{short}}
 </div>
-<span *ngIf="isLong" (click)="showFull()" class="full-post">Читать полностью</span>
+<a *ngIf="isLong" (click)="showFull()" routerLink="#" class="full-post">Читать полностью</a>

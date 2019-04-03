@@ -3,10 +3,10 @@ export interface IPosts {
   text: string;
   tags: string[];
   user: string;
-  profilePhotoSrc: string;
+  profilePhotoSrc?: string;
   likes: number;
   comments: number;
   date: string;
-  imgPostSrc: string;
+  imgPostSrc?: string;
   postId: number;
 }
