@@ -12,7 +12,6 @@ export class InfoPostLinksComponent implements OnInit {
   @Input() icon: string;
 
   isProfile: boolean;
-  isIcon: boolean;
 
   constructor() {
   }
@@ -23,7 +22,6 @@ export class InfoPostLinksComponent implements OnInit {
 
   ngOnInit() {
     this.isProfile = !!(this.image);
-    this.isIcon = !this.isProfile;
     if (this.image && this.icon) {
       throw new Error('Либо иконка, либо картинка');
     }
