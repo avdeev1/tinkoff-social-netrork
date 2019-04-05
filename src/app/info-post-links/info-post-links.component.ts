@@ -7,8 +7,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class InfoPostLinksComponent implements OnInit {
 
-  @Output() event = new EventEmitter<MouseEvent>();
-
   @Input() text: string;
   @Input() image: string;
   @Input() icon: string;

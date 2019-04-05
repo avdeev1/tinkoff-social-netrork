@@ -7,8 +7,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class TagsComponent implements OnInit {
 
-  @Output() tagEvent = new EventEmitter<MouseEvent>();
-
   @Input() tags: string[];
 
   constructor() { }
