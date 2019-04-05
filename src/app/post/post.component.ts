@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {IPosts} from '../models';
+import {IPost} from '../models';
 
 @Component({
   selector: 'app-post',
@@ -11,7 +11,7 @@ export class PostComponent implements OnInit {
 
   @Output() clickPost = new EventEmitter<MouseEvent>();
 
-  @Input() post: IPosts;
+  @Input() post: IPost;
 
   constructor() { }
 
