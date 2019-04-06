@@ -1,4 +1,4 @@
-export interface IPosts {
+export interface IPost {
   title: string;
   text: string;
   tags: string[];
@@ -9,4 +9,10 @@ export interface IPosts {
   date: string;
   imgPostSrc?: string;
   postId: number;
+}
+
+export interface IUser {
+  user: string;
+  profilePhotoSrc?: string;
+  postsId: number[];
 }
