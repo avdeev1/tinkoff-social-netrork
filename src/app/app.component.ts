@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { PostsService } from './posts.service';
-import {IPosts} from './models';
+import {IPost} from './models';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +9,5 @@ import {IPosts} from './models';
 })
 export class AppComponent {
 
-  posts: IPosts[] = new PostsService().posts;
+  posts: IPost[] = new PostsService().posts;
 }
