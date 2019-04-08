@@ -16,3 +16,10 @@ export interface IUser {
   profilePhotoSrc?: string;
   postsId: number[];
 }
+
+
+export interface IComment {
+  user: IUser;
+  date: string;
+  text: string;
+}

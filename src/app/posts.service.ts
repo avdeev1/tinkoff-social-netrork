@@ -3,7 +3,7 @@ import { IPost } from './models';
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'post'
 })
 export class PostsService {
 

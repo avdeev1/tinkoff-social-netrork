@@ -1,0 +1,7 @@
+<nb-layout>
+  <nb-layout-column class="post-container">
+    <app-post [post]="post"></app-post>
+    <app-comment *ngFor="let comm of comments" [comment]="comm" [submit]="true"></app-comment>
+    <app-comment [comment]="emptyComm" [submit]="false" (onPublishComment)="addComment($event)"></app-comment>
+  </nb-layout-column>
+</nb-layout>
