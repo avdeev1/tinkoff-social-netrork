@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-const MAX_LENGTH_POST = 560;
+const MAX_POST_LENGTH = 560;
 
 @Component({
   selector: 'app-text-post',
@@ -17,9 +17,9 @@ export class TextPostComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.isLong = this.text.length > MAX_LENGTH_POST;
+    this.isLong = this.text.length > MAX_POST_LENGTH;
     if (this.isLong) {
-      this.short = this.text.slice(0, MAX_LENGTH_POST) + '...';
+      this.short = this.text.slice(0, MAX_POST_LENGTH) + '...';
     } else {
       this.short = this.text;
     }
