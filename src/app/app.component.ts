@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import { PostsService } from './posts.service';
+import {IPost} from './models';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-  title = 'Fintech Social Network';
+
+  posts: IPost[] = new PostsService().posts;
+
 }
