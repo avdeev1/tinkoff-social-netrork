@@ -4,6 +4,8 @@ import {
   NbCardModule,
   NbLayoutModule,
   NbThemeModule,
+  NbButtonModule,
+  NbInputModule
 } from '@nebular/theme';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +14,7 @@ import { PostComponent } from './post/post.component';
 import { InfoPostLinksComponent } from './info-post-links/info-post-links.component';
 import { TagsComponent } from './tags/tags.component';
 import { TextPostComponent } from './text-post/text-post.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -19,14 +22,18 @@ import { TextPostComponent } from './text-post/text-post.component';
     PostComponent,
     InfoPostLinksComponent,
     TagsComponent,
-    TextPostComponent
+    TextPostComponent,
+    AppComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NbThemeModule.forRoot(),
     NbCardModule,
-    NbLayoutModule
+    NbLayoutModule,
+    NbButtonModule,
+    NbInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
