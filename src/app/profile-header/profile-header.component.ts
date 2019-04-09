@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {IPost, IUser} from '../models';
 import {UserService} from '../user.service';
 import {PostsService} from '../posts.service';
+import {IPost, IUser} from '../models';
 
 @Component({
   selector: 'app-profile-header',
@@ -10,13 +10,21 @@ import {PostsService} from '../posts.service';
 })
 export class ProfileHeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private postService: PostsService,
+    private userService: UserService
+  ) {
+  }
 
-  user: IUser = new UserService().user;
-  posts: IPost[] = new PostsService().posts.filter( post => this.user.postsId.includes(post.postId));
-  comments: number = this.posts.reduce((sum, post) => sum + post.comments, 0);
+  user: IUser;
+  posts: IPost[];
+  comments: number;
 
   ngOnInit() {
+    this.posts = this.postService.posts;
+    this.user = this.userService.user;
+    this.posts = this.posts.filter( post => this.user.postsId.includes(post.postId));
+    this.comments = this.posts.reduce((sum, post) => sum + post.comments, 0);
   }
 
 }
