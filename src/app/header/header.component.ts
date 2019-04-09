@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {NbDialogService} from '@nebular/theme';
+import {SignInFormComponent} from '../sign-in-form/sign-in-form.component';
+import {SignUpFormComponent} from '../sign-up-form/sign-up-form.component';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +11,7 @@ import {Component, OnInit} from '@angular/core';
 export class HeaderComponent implements OnInit {
   isSignedIn = false;
 
-  constructor() {
+  constructor(private dialogService: NbDialogService) {
   }
 
   ngOnInit() {
@@ -16,6 +19,14 @@ export class HeaderComponent implements OnInit {
 
   handleClickExit() {
     this.isSignedIn = false;
+  }
+
+  onSignInClick() {
+    this.dialogService.open(SignInFormComponent);
+  }
+
+  onSignUpClick() {
+    this.dialogService.open(SignUpFormComponent);
   }
 
 }

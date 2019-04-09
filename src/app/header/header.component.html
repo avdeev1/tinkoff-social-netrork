@@ -15,8 +15,8 @@
       </div>
 
       <ng-template #unsignedButtons>
-        <button class="sign-in" nbButton outline status="info" size="xsmall">Вход</button>
-        <button class="sign-up" nbButton status="info" size="xsmall">Регистрация</button>
+        <button class="sign-in" nbButton outline status="info" size="xsmall" (click)="onSignInClick()">Вход</button>
+        <button class="sign-up" nbButton status="info" size="xsmall" (click)="onSignUpClick()">Регистрация</button>
       </ng-template>
 
       <ng-template #signedButtons>
