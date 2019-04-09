@@ -10,4 +10,5 @@ import {IPost} from './models';
 export class AppComponent {
 
   posts: IPost[] = new PostsService().posts;
+
 }

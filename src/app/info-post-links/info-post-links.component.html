@@ -1,5 +1,5 @@
 <div class="links-container">
-  <span *ngIf="isProfile; then img; else icon"></span>
+  <span *ngIf="!!image; then img; else icon"></span>
   <a class="text" routerLink="#">{{text}}</a>
 </div>
 
