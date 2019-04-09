@@ -9,13 +9,6 @@ const routes: Routes = [
     pathMatch: 'full',
     component: AppComponent,
   },
-  {
-    path: 'login',
-    pathMatch: 'full',
-    component: AppLoginComponent,
-    canActivate: [AuthGuard]
-  },
-  
 ];
 
 @NgModule({
