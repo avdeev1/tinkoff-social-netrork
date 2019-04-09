@@ -21,9 +21,8 @@ export class ProfileHeaderComponent implements OnInit {
   comments: number;
 
   ngOnInit() {
-    this.posts = this.postService.posts;
     this.user = this.userService.user;
-    this.posts = this.posts.filter( post => this.user.postsId.includes(post.postId));
+    this.posts = this.postService.posts.filter( post => this.user.postsId.includes(post.postId));
     this.comments = this.posts.reduce((sum, post) => sum + post.comments, 0);
   }
 
