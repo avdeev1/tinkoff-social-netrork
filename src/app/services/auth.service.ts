@@ -23,6 +23,9 @@ export class AuthService {
       );
   }
 
+  register(login: string, password: string, repeatPassword: string): boolean {
+    return true;
+  }
   logout(): Observable<boolean> {
     return of(true)
       .pipe(tap(() => {
