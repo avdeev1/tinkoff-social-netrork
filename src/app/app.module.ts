@@ -16,6 +16,7 @@ import { TagsComponent } from './tags/tags.component';
 import { TextPostComponent } from './text-post/text-post.component';
 import { ProfileHeaderComponent } from './profile-header/profile-header.component';
 import { HeaderComponent } from './header/header.component';
+import { ShowPostsComponent } from './show-posts/show-posts.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { HeaderComponent } from './header/header.component';
     TagsComponent,
     TextPostComponent,
     ProfileHeaderComponent,
-    HeaderComponent
+    HeaderComponent,
+    ShowPostsComponent
   ],
   imports: [
     BrowserModule,

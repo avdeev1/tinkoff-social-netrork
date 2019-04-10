@@ -1,4 +1,4 @@
-<nb-layout-header>
+<!--<nb-layout-header>-->
   <div class="header-container">
 
     <div class="logo">
@@ -14,16 +14,16 @@
     </div>
 
     <ng-template #unsignedButtons>
-      <button class="sign-in" nbButton outline status="info" size="xsmall">Вход</button>
-      <button class="sign-up" nbButton status="info" size="xsmall">Регистрация</button>
+      <button class="sign-in header-btn" nbButton outline status="info" size="xsmall" (click)="handleClickExit()">Вход</button>
+      <button class="sign-up header-btn" nbButton status="info" size="xsmall">Регистрация</button>
     </ng-template>
 
     <ng-template #signedButtons>
       <div class="signed-buttons">
-        <a>@Vitaly</a>
+        <a class="profile" [routerLink]="['profile', '1']">@Vitaly</a>
         <a class="exit" (click)="handleClickExit()">Выход</a>
       </div>
     </ng-template>
 
   </div>
-</nb-layout-header>
+<!--</nb-layout-header>-->
