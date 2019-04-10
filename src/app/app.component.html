@@ -1,4 +1,18 @@
 <nb-layout>
+  <nb-layout-column>
+    <nb-sidebar state="compacted">
+
+      <a href="#" (click)="toggle()"><i class="fa fa-bars"></i></a>
+      <nb-card>
+        <nb-card-body>
+          <nb-menu [items]="navbarLink"> </nb-menu>
+        </nb-card-body>
+      </nb-card>
+    </nb-sidebar>
+  </nb-layout-column>
+
+</nb-layout>
+<nb-layout>
   <app-header></app-header>
   <nb-layout-column class="post-container">
     <app-post *ngFor="let post of posts" [post]="post"></app-post>
