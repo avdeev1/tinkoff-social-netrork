@@ -5,7 +5,9 @@ import {
   NbLayoutModule,
   NbThemeModule,
   NbButtonModule,
-  NbInputModule
+  NbInputModule,
+  NbMenuModule,
+  NbSidebarModule
 } from '@nebular/theme';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,9 +17,6 @@ import { ResolversModule } from './resolvers/resolvers.module';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
-
-
-import { NbThemeModule, NbMenuModule, NbLayoutModule, NbCardModule, NbSidebarModule, } from '@nebular/theme';
 import { PostComponent } from './post/post.component';
 import { InfoPostLinksComponent } from './info-post-links/info-post-links.component';
 import { TagsComponent } from './tags/tags.component';
@@ -45,8 +44,7 @@ import { HeaderComponent } from './header/header.component';
     NbCardModule,
     NbLayoutModule,
     NbButtonModule,
-    NbInputModule
-    NbThemeModule.forRoot(),
+    NbInputModule,
     NbMenuModule.forRoot(),
     NbLayoutModule,
     NbCardModule,
