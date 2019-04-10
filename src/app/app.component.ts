@@ -5,6 +5,10 @@ import { AuthService } from "./services/auth.service";
 import { Observable } from "rxjs";
 import { Router } from "@angular/router";
 import { AuthGuard } from './guards/auth.guard';
+import {Component} from '@angular/core';
+import { PostsService } from './posts.service';
+import {IPost} from './models';
+
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
@@ -14,10 +18,10 @@ import { AuthGuard } from './guards/auth.guard';
 export class AppComponent {
   title = "Fintech Social Network";
   navbarLink = MENU_NAVBAR_LINK;
-  
+
   constructor(private sidebarService: NbSidebarService, private router: Router,
     private AuthService: AuthService) {
-    
+
     }
 
   toggle() {
@@ -34,5 +38,8 @@ export class AppComponent {
         this.router.navigateByUrl('/');
       });
   }
-  
+
+
+  posts: IPost[] = new PostsService().posts;
+
 }
