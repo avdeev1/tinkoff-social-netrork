@@ -4,6 +4,8 @@ import {
   NbCardModule,
   NbLayoutModule,
   NbThemeModule,
+  NbButtonModule,
+  NbInputModule
 } from '@nebular/theme';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +15,7 @@ import { InfoPostLinksComponent } from './info-post-links/info-post-links.compon
 import { TagsComponent } from './tags/tags.component';
 import { TextPostComponent } from './text-post/text-post.component';
 import { ProfileHeaderComponent } from './profile-header/profile-header.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -21,14 +24,17 @@ import { ProfileHeaderComponent } from './profile-header/profile-header.componen
     InfoPostLinksComponent,
     TagsComponent,
     TextPostComponent,
-    ProfileHeaderComponent
+    ProfileHeaderComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NbThemeModule.forRoot(),
     NbCardModule,
-    NbLayoutModule
+    NbLayoutModule,
+    NbButtonModule,
+    NbInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
