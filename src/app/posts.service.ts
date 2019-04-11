@@ -15,10 +15,13 @@ export class PostsService {
   }
 
   getPostsForProfilePage() {
-    console.log(this.user.postIds);
     return this.posts.filter(post => {
       return this.user.postIds.includes(post.postId);
     });
+  }
+
+  getCountOfComments() {
+    return this.getPostsForProfilePage().reduce((sum, post) => sum + post.comments, 0);
   }
 
   public posts: IPost[] = [{
@@ -243,8 +246,4 @@ export class PostsService {
       postId: 3
     }
   ];
-
-  getCountOfComments() {
-    return this.getPostsForProfilePage().reduce((sum, post) => sum + post.comments, 0);
-  }
 }
