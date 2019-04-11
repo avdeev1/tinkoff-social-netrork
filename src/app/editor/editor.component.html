@@ -1,28 +1,24 @@
-<nb-layout>
-  <nb-layout-column>
-    <nb-card>
-      <nb-card-header>Публикация</nb-card-header>
-      <nb-card-body>
-        <input id="input_header" class="add-margin-bottom" type="text" nbInput fullWidth status="info" maxlength="100" placeholder="Заголовок">
-        <textarea id="input_text" class="add-margin-bottom" nbInput fullWidth status="info" maxlength="2000" placeholder="Текст" rows="10"></textarea>
+<nb-card>
+  <nb-card-header>Публикация</nb-card-header>
+  <nb-card-body>
+    <input id="input_header" class="add-margin-bottom" type="text" nbInput fullWidth status="info" maxlength="100" placeholder="Заголовок">
+    <textarea id="input_text" class="add-margin-bottom" nbInput fullWidth status="info" maxlength="2000" placeholder="Текст" rows="10"></textarea>
 
-        <app-loading-button (onFileSelect)="handlerEditor($event)"></app-loading-button>
-        <span *ngIf="isFile(); then fileSelected else fileNotSelected"></span>
-        <ng-template #fileSelected>{{file[0].name}}</ng-template>
-        <ng-template #fileNotSelected>Файл не выбран</ng-template>
+    <app-loading-button (onFileSelect)="handlerEditor($event)"></app-loading-button>
+    <span *ngIf="isFile(); then fileSelected else fileNotSelected"></span>
+    <ng-template #fileSelected>{{file[0].name}}</ng-template>
+    <ng-template #fileNotSelected>Файл не выбран</ng-template>
 
-        <label for="multiple_select">
-          <h4>Метки</h4>
-        </label>
-        <nb-select id="multiple_select" class="add-margin-bottom" multiple outline status="info" placeholder="Выберите метки">
-          <nb-option value="1">Фантастика</nb-option>
-          <nb-option value="2">Драма</nb-option>
-          <nb-option value="3">Романтика</nb-option>
-          <nb-option value="4">Историческое</nb-option>
-        </nb-select>
-        <button nbButton class="add-margin-right" status="info">Опубликовать</button>
-        <button nbButton outline status="info">Сохранить</button>
-      </nb-card-body>
-    </nb-card>
-  </nb-layout-column>
-</nb-layout>
+    <label for="multiple_select">
+      <h4>Метки</h4>
+    </label>
+    <nb-select id="multiple_select" class="add-margin-bottom" multiple outline status="info" placeholder="Выберите метки">
+      <nb-option value="1">Фантастика</nb-option>
+      <nb-option value="2">Драма</nb-option>
+      <nb-option value="3">Романтика</nb-option>
+      <nb-option value="4">Историческое</nb-option>
+    </nb-select>
+    <button nbButton class="add-margin-right" status="info">Опубликовать</button>
+    <button nbButton outline status="info">Сохранить</button>
+  </nb-card-body>
+</nb-card>

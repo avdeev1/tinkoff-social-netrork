@@ -1,0 +1,29 @@
+<nb-layout-header>
+  <div class="header-container">
+
+    <div class="logo">
+      <a>LOGO</a>
+    </div>
+
+    <div class="search">
+      <input class="search-input" status="info" fieldSize="small" type="text" nbInput placeholder="Поиск">
+    </div>
+
+    <div
+      *ngIf="!isSignedIn; then unsignedButtons; else signedButtons">
+    </div>
+
+    <ng-template #unsignedButtons>
+      <button class="sign-in" nbButton outline status="info" size="xsmall">Вход</button>
+      <button class="sign-up" nbButton status="info" size="xsmall">Регистрация</button>
+    </ng-template>
+
+    <ng-template #signedButtons>
+      <div class="signed-buttons">
+        <a>@Vitaly</a>
+        <a class="exit" (click)="handleClickExit()">Выход</a>
+      </div>
+    </ng-template>
+
+  </div>
+</nb-layout-header>
