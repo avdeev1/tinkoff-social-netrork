@@ -1,30 +1,28 @@
-import { Component, ChangeDetectionStrategy } from "@angular/core";
-import { MENU_NAVBAR_LINK } from "./menu-service-items";
-import { NbSidebarService } from "@nebular/theme";
-import { AuthService } from "./services/auth.service";
-import { Observable } from "rxjs";
-import { Router } from "@angular/router";
-import { AuthGuard } from './guards/auth.guard';
-import { PostsService } from './posts.service';
-import {IPost} from './models';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { MENU_NAVBAR_LINK } from './menu-service-items';
+import { NbSidebarService } from '@nebular/theme';
+import { AuthService } from './services/auth.service';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
+  selector: 'app-root',
+  templateUrl: './app.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ["./app.component.less"]
+  styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-  posts: IPost[] = new PostsService().posts;
-  title = "Fintech Social Network";
+  title = 'Fintech Social Network';
   navbarLink = MENU_NAVBAR_LINK;
+  isCompact = true;
 
   constructor(private sidebarService: NbSidebarService, private router: Router,
-    private AuthService: AuthService) {
+              private AuthService: AuthService) {
 
     }
 
   toggle() {
+    this.isCompact = !this.isCompact;
     this.sidebarService.toggle(true);
     return false;
   }

@@ -3,17 +3,21 @@
 @import "assets/font.css";
 
 .nb-theme-default nb-menu .menu-items>.menu-item{
-  border:0px;
+  border: 0;
 }
 .nb-theme-default nb-menu .menu-items>.menu-item:first-child{
-  border: 0px;
+  border: 0;
 }
 
 .menu-icon:before{
   font-size: 1.6rem;
-
 }
-.nb-theme-default {
+
+.nb-theme-default nb-layout .layout .layout-container .content .columns nb-layout-column {
+  padding: 1.25rem 1rem;
+}
+
+.nb-theme-default .nav-bar nb-card-body{
   overflow: inherit;
   padding: 0;
 }
@@ -21,7 +25,17 @@
  padding-top: 0.4rem;
 }
 
+.nb-theme-default nb-sidebar.compacted .main-container, .nb-theme-default nb-sidebar.expanded .main-container {
+  height: auto;
+}
 
+.nb-theme-default nb-sidebar.compacted nb-menu .menu-items>.menu-item i, .nb-theme-default nb-menu .menu-item .menu-icon {
+  margin: 0;
+}
+
+.nb-theme-default nb-menu .menu-item a {
+    padding: 0.675rem;
+}
 
 .fa {
   color: #878a8c;
@@ -29,4 +43,12 @@
 
 .fa-heart:before {
   color:#F65947;
+}
+.fa-gear:before, .fa-cog:before {
+  color: white;
+  font-size: 2em;
+}
+
+.nb-theme-default nb-layout .layout nb-layout-header nav {
+  justify-content: center;
 }
