@@ -1,11 +1,28 @@
 import { Injectable } from '@angular/core';
-import { IPost } from './models';
+import {IPost, IUser} from './models';
+import {UserService} from "./user.service";
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostsService {
+
+  user: IUser;
+
+  constructor(private userService: UserService) {
+    this.user = this.userService.user;
+  }
+
+  getPostsForProfilePage() {
+    return this.posts.filter(post => {
+      return this.user.postIds.includes(post.postId);
+    });
+  }
+
+  getCountOfComments() {
+    return this.getPostsForProfilePage().reduce((sum, post) => sum + post.comments, 0);
+  }
 
   public posts: IPost[] = [{
     title: 'Слово мэра',
@@ -229,6 +246,4 @@ export class PostsService {
       postId: 3
     }
   ];
-
-  constructor() { }
 }

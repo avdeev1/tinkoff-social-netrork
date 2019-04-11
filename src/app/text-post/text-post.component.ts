@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-const MAX_POST_LENGTH = 560;
+const MAX_POST_LENGTH = 660;
 
 @Component({
   selector: 'app-text-post',

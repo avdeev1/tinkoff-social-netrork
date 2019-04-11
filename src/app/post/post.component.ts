@@ -8,10 +8,8 @@ import {IPost} from '../models';
   styleUrls: ['./post.component.less']
 })
 export class PostComponent implements OnInit {
-
   @Input() post: IPost;
 
-  constructor() { }
 
   ngOnInit() {
   }

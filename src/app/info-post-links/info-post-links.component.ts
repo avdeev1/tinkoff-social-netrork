@@ -11,6 +11,8 @@ export class InfoPostLinksComponent implements OnInit {
   @Input() image: string;
   @Input() icon: string;
 
+  isHeart: boolean;
+
   constructor() {
   }
 
@@ -19,6 +21,9 @@ export class InfoPostLinksComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.icon) {
+      this.isHeart = this.icon.indexOf('heart') >= 0;
+    }
     if (!this.image && !this.icon) {
       this.image = 'https://faucethub.io/assets/img/avatars/3523614_1531331166.jpg';
     }

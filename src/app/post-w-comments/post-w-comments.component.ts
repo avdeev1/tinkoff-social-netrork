@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {IComment, IPost} from '../models';
 import {CommentsService} from '../comments.service';
 import {PostsService} from '../posts.service';
+import {UserService} from '../user.service';
 
 @Component({
   selector: 'app-post-w-comments',
@@ -13,7 +14,7 @@ export class PostWCommentsComponent implements OnInit {
   commServ: CommentsService = new CommentsService();
   comments: IComment[] = this.commServ.comments;
   emptyComm: IComment = this.commServ.emptyComment;
-  post: IPost = new PostsService().posts[0];
+  post: IPost = new PostsService(new UserService()).posts[0];
   constructor() {
 
   }

@@ -14,7 +14,7 @@ export interface IPost {
 export interface IUser {
   user: string;
   profilePhotoSrc?: string;
-  postsId: number[];
+  postIds: number[];
 }
 
 

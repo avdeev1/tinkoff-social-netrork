@@ -9,13 +9,13 @@ import { AuthService } from '../services/auth.service';
 export class AuthGuard implements CanActivate {
 
   constructor(private router: Router,
-    private authService: AuthService) { }
+              private authService: AuthService) { }
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
     return this.authService.isAuth
       .pipe(
         tap(authResult => {
-          if (authResult == route.data.shouldBeAuthenticated) {
+          if (authResult === route.data.shouldBeAuthenticated) {
             this.router.navigateByUrl(route.data.redirectTo);
           }
         }),
