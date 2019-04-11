@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
   }
 
   handleClickExit() {
-    this.isSignedIn = false;
+    this.isSignedIn = !this.isSignedIn;
   }
 
 }

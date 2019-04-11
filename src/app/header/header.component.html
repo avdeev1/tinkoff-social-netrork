@@ -1,6 +1,6 @@
 <div class="header-container">
   <div class="logo">
-    <a>LOGO</a>
+    <a routerLink="/">LOGO</a>
   </div>
 
   <div class="search">
@@ -12,7 +12,7 @@
   </div>
 
   <ng-template #unsignedButtons>
-    <button class="sign-in header-btn" nbButton outline status="info" size="xsmall">Вход
+    <button class="sign-in header-btn" nbButton outline status="info" size="xsmall" (click)="handleClickExit()">Вход
     </button>
     <button class="sign-up header-btn" nbButton status="info" size="xsmall">Регистрация</button>
   </ng-template>

@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'Fintech Social Network';
   navbarLink = MENU_NAVBAR_LINK;
+  isCompact = true;
 
   constructor(private sidebarService: NbSidebarService, private router: Router,
               private AuthService: AuthService) {
@@ -21,6 +22,7 @@ export class AppComponent {
     }
 
   toggle() {
+    this.isCompact = !this.isCompact;
     this.sidebarService.toggle(true);
     return false;
   }
