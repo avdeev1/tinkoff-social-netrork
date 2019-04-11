@@ -21,7 +21,9 @@ import { PostComponent } from './post/post.component';
 import { InfoPostLinksComponent } from './info-post-links/info-post-links.component';
 import { TagsComponent } from './tags/tags.component';
 import { TextPostComponent } from './text-post/text-post.component';
+import { ProfileHeaderComponent } from './profile-header/profile-header.component';
 import { HeaderComponent } from './header/header.component';
+import { ShowPostsComponent } from './show-posts/show-posts.component';
 
 @NgModule({
   declarations: [
@@ -30,8 +32,9 @@ import { HeaderComponent } from './header/header.component';
     InfoPostLinksComponent,
     TagsComponent,
     TextPostComponent,
-    AppComponent,
-    HeaderComponent
+    ProfileHeaderComponent,
+    HeaderComponent,
+    ShowPostsComponent
   ],
   imports: [
     FormsModule,

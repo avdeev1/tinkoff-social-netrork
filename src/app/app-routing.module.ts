@@ -1,13 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent} from './app.component';
-import { AuthGuard } from './guards/auth.guard';
+import {ShowPostsComponent} from "./show-posts/show-posts.component";
+import {ProfileHeaderComponent} from "./profile-header/profile-header.component";
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: AppComponent,
+    component: ShowPostsComponent,
   },
+  {
+    path: 'profile/1',
+    component: ProfileHeaderComponent
+  }
 ];
 
 @NgModule({
