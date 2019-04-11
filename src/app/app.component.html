@@ -2,7 +2,7 @@
   <nb-layout-header fixed>
     <app-header></app-header>
   </nb-layout-header>
-  <nb-layout-column class="nav-bar" [ngClass]="{notCompact: !isCompact}">
+  <nb-layout-column class="nav-bar" [class.notCompact]=!isCompact>
     <nb-sidebar state="compacted">
       <a href="#" (click)="toggle()"><i class="fa fa-bars"></i></a>
       <nb-card>

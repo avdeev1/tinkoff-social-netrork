@@ -8,6 +8,6 @@
 </ng-template>
 
 <ng-template #icon>
-  <i [class]="giveMeIcon" [ngClass]="{like: isHeart}" aria-hidden="true"></i>
+  <i [class]="giveMeIcon" [class.like]=isHeart aria-hidden="true"></i>
   <a class="text">{{text}}</a>
 </ng-template>

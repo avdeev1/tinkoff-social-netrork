@@ -10,7 +10,7 @@
     </a>
   </div>
   <div class="posts-and-likes">
-    ПОСТЫ: <span>{{user.postsId.length}}</span>  КОММЕНТАРИИ: <span>{{comments}}</span>
+    ПОСТЫ: <span>{{user.postIds.length}}</span>  КОММЕНТАРИИ: <span>{{comments}}</span>
   </div>
 </nb-card>
 <app-post *ngFor="let post of posts" [post]="post"></app-post>
