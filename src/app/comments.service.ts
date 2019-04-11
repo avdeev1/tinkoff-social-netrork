@@ -3,7 +3,7 @@ import {IComment} from './models';
 import {UserService} from './user.service';
 
 @Injectable({
-  providedIn: 'post'
+  providedIn: 'root'
 })
 export class CommentsService {
 

@@ -1,7 +1,17 @@
 <nb-layout>
   <nb-layout-column class="post-container">
     <app-post [post]="post"></app-post>
-    <app-comment *ngFor="let comm of comments" [comment]="comm" [submit]="true"></app-comment>
-    <app-comment [comment]="emptyComm" [submit]="false" (onPublishComment)="addComment($event)"></app-comment>
+    <nb-card *ngFor="let comm of comments">
+      <nb-card-header>
+        <div class="info-block-container">
+          <app-info-post-links [text]="comm.user.user" [image]="comm.user.profilePhotoSrc" class="block"></app-info-post-links>
+          <app-info-post-links [text]="comm.date" icon="calendar-o" class="block"></app-info-post-links>
+        </div>
+      </nb-card-header>
+      <nb-card-body>
+        {{comm.text}}
+      </nb-card-body>
+    </nb-card>
+    <app-comment [user]="emptyComm.user" (onPublishComment)="addComment($event)"></app-comment>
   </nb-layout-column>
 </nb-layout>

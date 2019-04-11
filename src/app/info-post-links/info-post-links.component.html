@@ -1,12 +1,13 @@
 <div class="links-container">
-  <span *ngIf="isProfile; then img; else icon"></span>
-  <a class="text" routerLink="#">{{text}}</a>
+  <span *ngIf="!!image; then img; else icon"></span>
 </div>
 
 <ng-template #img>
   <img [src]="image" class="profile-icon" alt="Иконка">
+  <a class="text" [routerLink]="['profile', text]">{{text}}</a>
 </ng-template>
 
 <ng-template #icon>
   <i [class]="giveMeIcon" aria-hidden="true"></i>
+  <a class="text">{{text}}</a>
 </ng-template>

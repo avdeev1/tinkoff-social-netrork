@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-info-post-links',
@@ -11,8 +11,6 @@ export class InfoPostLinksComponent implements OnInit {
   @Input() image: string;
   @Input() icon: string;
 
-  isProfile: boolean;
-
   constructor() {
   }
 
@@ -21,7 +19,9 @@ export class InfoPostLinksComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.isProfile = !!(this.image);
+    if (!this.image && !this.icon) {
+      this.image = 'https://faucethub.io/assets/img/avatars/3523614_1531331166.jpg';
+    }
     if (this.image && this.icon) {
       throw new Error('Либо иконка, либо картинка');
     }

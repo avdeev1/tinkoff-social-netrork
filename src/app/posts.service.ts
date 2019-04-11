@@ -3,7 +3,7 @@ import { IPost } from './models';
 
 
 @Injectable({
-  providedIn: 'post'
+  providedIn: 'root'
 })
 export class PostsService {
 
@@ -223,7 +223,6 @@ export class PostsService {
         'Солдаты трущоб улыбаются мне.',
       tags: [ 'Патриотизм', 'Хаски' ],
       user: '@papinomoloko',
-      profilePhotoSrc: 'https://news-r.ru/upload/iblock/8de/8de7f24f6e5f8003552b30ea1a1da839.jpg',
       likes: 234,
       comments: 2,
       date: '24 марта 2018 в 14:58',
