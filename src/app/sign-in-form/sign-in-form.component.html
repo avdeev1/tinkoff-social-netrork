@@ -1,29 +1,14 @@
-<nb-card class="card">
-  <div class="sing-in-card">
-
-    <img class="img" width=30rem height=306rem src="http://on-desktop.com/wps/Backgrounds_Blue_waves_035506_.jpg">
-
-    <div class="form">
-      <h2>Вход</h2>
-      <div class="login">
-        <input status="info" fieldSize="small" type="text" nbInput placeholder="Логин">
-      </div>
-
-      <div class="password">
-        <input status="info" fieldSize="small" type="text" nbInput placeholder="Пароль">
-      </div>
-
-      <div class="sign-in-button">
-        <button nbButton outline status="info" size="xsmall">Вход</button>
-      </div>
-
-      <div class="lets-sign-up">
-        <span>Нет аккаунта? </span>
-        <a href="#">Создать аккаунт</a>
-      </div>
-
-    </div>
+<div class="container">
+  <h1>Вход</h1>
+  <form [formGroup]="signInForm" novalidate>
+    <input class="login" formControlName="login" status="info" fullWidth fieldSize="medium" type="text" nbInput
+           placeholder="Логин">
+    <input class="pass" formControlName="pass" status="info" fullWidth fieldSize="medium" type="text" nbInput
+           placeholder="Пароль">
+  </form>
+  <div class="sign-in-button">
+    <button nbButton outline status="info" size="xsmall">Вход</button>
   </div>
-</nb-card>
+</div>
 
 
