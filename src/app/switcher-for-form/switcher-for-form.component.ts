@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../services/auth.service';
 
 @Component({
@@ -10,10 +10,10 @@ export class SwitcherForFormComponent implements OnInit {
   isSignIn = false;
 
   constructor(private autoService: AuthService) {
-    this.isSignIn = this.autoService.getIsSignIn();
   }
 
   ngOnInit() {
+    this.isSignIn = this.autoService.getIsSignIn();
   }
 
   toggleForm() {

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { delay, tap } from 'rxjs/internal/operators';
+import {SignFormComponent} from '../sign-form/sign-form.component';
+import {NbDialogService} from '@nebular/theme';
 
 @Injectable()
 export class AuthService {
@@ -10,17 +12,23 @@ export class AuthService {
   }
   openSignInDialog() {
     this.isSignIn = true;
+    this.openForm();
   }
 
   openSignUpDialog() {
     this.isSignIn = false;
+    this.openForm();
+  }
+
+  openForm() {
+    this.dialogService.open(SignFormComponent);
   }
 
   getIsSignIn() {
     return this.isSignIn;
   }
 
-  constructor() { }
+  constructor(private dialogService: NbDialogService) { }
   userName = new BehaviorSubject(!!localStorage.getItem('userName'));
   isAuth = new BehaviorSubject(!!localStorage.getItem('isAuth'));
 
