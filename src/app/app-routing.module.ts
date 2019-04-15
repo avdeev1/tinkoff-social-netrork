@@ -12,11 +12,11 @@ const routes: Routes = [
     component: ShowPostsComponent,
   },
   {
-    path: 'profile/1',
+    path: 'profile',
     component: ProfileHeaderComponent
   },
   {
-    path: 'editor',
+    path: 'create',
     component: EditorComponent
   }
 ];
