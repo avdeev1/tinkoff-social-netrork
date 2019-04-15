@@ -1,14 +1,14 @@
 <div class="container">
   <h1>Вход</h1>
-  <form [formGroup]="signInForm" novalidate>
+  <form [formGroup]="signInForm" (submit)="onSubmit()">
     <input class="login" formControlName="login" status="info" fullWidth fieldSize="medium" type="text" nbInput
            placeholder="Логин">
     <input class="pass" formControlName="pass" status="info" fullWidth fieldSize="medium" type="text" nbInput
            placeholder="Пароль">
+    <div class="sign-in-button">
+      <button nbButton outline status="info" size="xsmall" [disabled]="!signInForm.valid">Вход</button>
+    </div>
   </form>
-  <div class="sign-in-button">
-    <button nbButton outline status="info" size="xsmall">Вход</button>
-  </div>
 </div>
 
 
