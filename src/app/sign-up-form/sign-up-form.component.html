@@ -10,10 +10,11 @@
 
       <input class="doublePass" formControlName="doublePass" fullWidth status="info" fieldSize="medium" type="text"
              nbInput placeholder="Повторите пароль">
-      <div class="error" *ngIf="isError()">
+      <div class="error" *ngIf="signUpForm.controls['passwords'].controls['doublePass'].dirty && isError()">
         Пароли не совпадают
       </div>
     </div>
+
     <div class="sign-up-button">
       <button type="submit" nbButton outline status="info" size="xsmall" [disabled]="!signUpForm.valid">
         Зарегистрироваться

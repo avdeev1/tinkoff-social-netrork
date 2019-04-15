@@ -18,15 +18,14 @@ export class SignUpFormComponent implements OnInit {
     this.signUpForm = this.fb.group({
       login: ['', [Validators.required]],
       passwords: this.fb.group({
-        pass: [''],
-        doublePass: ['']
+        pass: ['', Validators.required],
+        doublePass: ['', Validators.required]
       }, {validator: this.confirmPass})
     });
   }
 
   confirmPass(group: FormGroup) {
-    if ((!group.touched || !group.dirty) ||
-      group.get('pass').value === group.get('doublePass').value) {
+    if (group.value.pass === group.value.doublePass) {
       return null;
     }
     return {confirmPass: 'Passwords are different'};
@@ -37,8 +36,7 @@ export class SignUpFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authService.register(this.signUpForm.get('login').value, this.signUpForm.get('passwords').get('pass').value,
-      this.signUpForm.get('passwords').get('doublePass').value);
+    this.authService.register(this.signUpForm.value.login, this.signUpForm.value.passwords.pass,
+      this.signUpForm.value.passwords.doublePass);
   }
-
 }

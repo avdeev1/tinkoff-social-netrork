@@ -20,6 +20,6 @@ export class SignInFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authService.login(this.signInForm.get('login').value, this.signInForm.get('pass').value);
+    this.authService.login(this.signInForm.value.login, this.signInForm.value.pass);
   }
 }

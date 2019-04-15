@@ -6,7 +6,7 @@
     <input class="pass" formControlName="pass" status="info" fullWidth fieldSize="medium" type="text" nbInput
            placeholder="Пароль">
     <div class="sign-in-button">
-      <button nbButton outline status="info" size="xsmall" [disabled]="!signInForm.valid">Вход</button>
+      <button nbButton outline status="info" size="xsmall" [disabled]="signInForm.invalid">Вход</button>
     </div>
   </form>
 </div>
