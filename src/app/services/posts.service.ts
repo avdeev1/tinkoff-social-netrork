@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {IPost, IUser} from './models';
+import {IPost, IUser} from '../models';
 import {UserService} from "./user.service";
 
 

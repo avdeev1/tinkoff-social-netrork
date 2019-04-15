@@ -16,7 +16,7 @@ import { RouterModule } from '@angular/router';
 import { ResolversModule } from './resolvers/resolvers.module';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
-import { HttpClientModule } from '@angular/common/http';
+import  {HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PostComponent } from './post/post.component';
 import { InfoPostLinksComponent } from './info-post-links/info-post-links.component';
 import { TagsComponent } from './tags/tags.component';
@@ -24,6 +24,7 @@ import { TextPostComponent } from './text-post/text-post.component';
 import { ProfileHeaderComponent } from './profile-header/profile-header.component';
 import { HeaderComponent } from './header/header.component';
 import { ShowPostsComponent } from './show-posts/show-posts.component';
+import { UserInterceptor } from "./services/user.interceptor";
 
 @NgModule({
   declarations: [
@@ -53,7 +54,15 @@ import { ShowPostsComponent } from './show-posts/show-posts.component';
     NbCardModule,
     NbSidebarModule.forRoot(),
   ],
-  providers: [AuthService, ResolversModule],
+  providers: [
+    AuthService,
+    ResolversModule,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: UserInterceptor,
+      multi: true
+    }
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
