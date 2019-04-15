@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent} from './app.component';
 import {ShowPostsComponent} from "./show-posts/show-posts.component";
 import {ProfileHeaderComponent} from "./profile-header/profile-header.component";
-import {PostWCommentsComponent} from './post-w-comments/post-w-comments.component';
+import {PostDetailComponent} from './post-detail/post-detail.component';
 const routes: Routes = [
   {
     path: '',
@@ -16,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: 'post',
-    component: PostWCommentsComponent
+    component: PostDetailComponent
   }
 ];
 

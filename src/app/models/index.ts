@@ -17,9 +17,8 @@ export interface IUser {
   postIds: number[];
 }
 
-
 export interface IComment {
   user: IUser;
-  date: string;
+  date: number;
   text: string;
 }

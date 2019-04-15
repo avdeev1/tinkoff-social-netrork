@@ -8,15 +8,15 @@ import {UserService} from "./user.service";
 })
 export class PostsService {
 
-  user: IUser;
+  user: IUser[];
 
   constructor(private userService: UserService) {
-    this.user = this.userService.user;
+    this.user = this.userService.users;
   }
 
   getPostsForProfilePage() {
     return this.posts.filter(post => {
-      return this.user.postIds.includes(post.postId);
+      return this.user[0].postIds.includes(post.postId);
     });
   }
 

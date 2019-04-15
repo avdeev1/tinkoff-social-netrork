@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import {IComment} from './models';
+import {Injectable} from '@angular/core';
+import {IUser} from './models';
 import {UserService} from './user.service';
 
 @Injectable({
@@ -7,24 +7,21 @@ import {UserService} from './user.service';
 })
 export class CommentsService {
 
-  private users = new UserService().users;
-  public comments: IComment[] = [{
-    user: this.users[0],
-    date: '24 апреля 2018 в 14:58',
-    text: 'Это невероятно!'
-  },
-  {
-    user: this.users[1],
-    date: '26 мая 2018 в 15:08',
-    text: 'Очень круто!'
-  }];
+  users: IUser[];
 
-  public emptyComment: IComment = {
-    user: this.users[0],
-    date: null,
-    text: null
-  };
+  constructor(private userService: UserService) {
+    this.users = this.userService.users;
+  }
 
-
-  constructor() { }
+  getCommentsForPost() {
+    return [{
+      user: this.users[1],
+      date: '24 апреля 2018 в 14:58',
+      text: 'Это невероятно!'
+    }, {
+      user: this.users[0],
+      date: '26 мая 2018 в 15:08',
+      text: 'Очень круто!'
+    }];
+  }
 }
