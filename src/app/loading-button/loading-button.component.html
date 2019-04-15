@@ -1,6 +1,6 @@
 <span>
     <input type="file" (change)="onNativeInputFileSelect($event)" #inputFile hidden />
-    <button nbButton outline status="info" size="small" (click)="selectFile()">
+    <button nbButton outline status="info" size="small" (click)="selectFile()" [ngStyle]="{'cursor':'pointer'}">
       Загрузите картинку
     </button>
 </span>
