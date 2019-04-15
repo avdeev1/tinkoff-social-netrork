@@ -1,7 +1,7 @@
 export const MENU_NAVBAR_LINK = [
   {
     title: 'Профиль',
-    link: '/',
+    link: '/profile',
     icon: 'fa fa-user',
     home: true
   },
