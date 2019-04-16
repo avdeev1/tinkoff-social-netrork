@@ -9,7 +9,7 @@ import {AuthService} from '../services/auth.service';
 })
 export class SignUpFormComponent implements OnInit {
 
-  private signUpForm: FormGroup;
+  signUpForm: FormGroup;
 
   constructor(private fb: FormBuilder, private authService: AuthService) {
   }
@@ -31,12 +31,15 @@ export class SignUpFormComponent implements OnInit {
     return {confirmPass: 'Passwords are different'};
   }
 
-  isError() {
-    return this.signUpForm.controls.passwords.hasError('confirmPass');
+  hasConfirmPassError() {
+    const isDirty = this.signUpForm.controls.passwords.dirty;
+    const hasError = this.signUpForm.controls.passwords.hasError('confirmPass');
+
+    return  isDirty && hasError;
   }
 
   onSubmit() {
-    this.authService.register(this.signUpForm.value.login, this.signUpForm.value.passwords.pass,
-      this.signUpForm.value.passwords.doublePass);
+    const {login, passwords: {pass, doublePass}} = this.signUpForm.value;
+    this.authService.register(login, pass, doublePass);
   }
 }

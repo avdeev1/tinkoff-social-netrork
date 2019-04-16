@@ -3,7 +3,7 @@
   <form [formGroup]="signInForm" (submit)="onSubmit()">
     <input class="login" formControlName="login" status="info" fullWidth fieldSize="medium" type="text" nbInput
            placeholder="Логин">
-    <input class="pass" formControlName="pass" status="info" fullWidth fieldSize="medium" type="text" nbInput
+    <input class="pass" formControlName="pass" status="info" fullWidth fieldSize="medium" type="password" nbInput
            placeholder="Пароль">
     <div class="sign-in-button">
       <button nbButton outline status="info" size="xsmall" [disabled]="signInForm.invalid">Вход</button>

@@ -6,17 +6,22 @@ import {NbDialogService} from '@nebular/theme';
 
 @Injectable()
 export class AuthService {
-  public isSignIn = false;
+  userName = new BehaviorSubject(!!localStorage.getItem('userName'));
+  isAuth = new BehaviorSubject(!!localStorage.getItem('isAuth'));
+  public isSignInForm = false;
+
+  constructor(private dialogService: NbDialogService) { }
+
   toggle() {
-    this.isSignIn = !this.isSignIn;
+    this.isSignInForm = !this.isSignInForm;
   }
   openSignInDialog() {
-    this.isSignIn = true;
+    this.isSignInForm = true;
     this.openForm();
   }
 
   openSignUpDialog() {
-    this.isSignIn = false;
+    this.isSignInForm = false;
     this.openForm();
   }
 
@@ -25,12 +30,8 @@ export class AuthService {
   }
 
   getIsSignIn() {
-    return this.isSignIn;
+    return this.isSignInForm;
   }
-
-  constructor(private dialogService: NbDialogService) { }
-  userName = new BehaviorSubject(!!localStorage.getItem('userName'));
-  isAuth = new BehaviorSubject(!!localStorage.getItem('isAuth'));
 
   login(login: string, password: string): Observable<boolean> {
     return of(login === '123' && password === '123')
@@ -49,6 +50,7 @@ export class AuthService {
   register(login: string, password: string, repeatPassword: string): boolean {
     return true;
   }
+
   logout(): Observable<boolean> {
     return of(true)
       .pipe(tap(() => {

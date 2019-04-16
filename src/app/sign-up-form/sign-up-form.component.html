@@ -5,12 +5,12 @@
            placeholder="Логин">
 
     <div formGroupName="passwords">
-      <input class="pass" formControlName="pass" fullWidth status="info" fieldSize="medium" type="text" nbInput
+      <input type="password" class="pass" formControlName="pass" fullWidth status="info" fieldSize="medium"  nbInput
              placeholder="Пароль">
 
-      <input class="doublePass" formControlName="doublePass" fullWidth status="info" fieldSize="medium" type="text"
+      <input type="password" class="doublePass" formControlName="doublePass" fullWidth status="info" fieldSize="medium"
              nbInput placeholder="Повторите пароль">
-      <div class="error" *ngIf="signUpForm.controls.passwords.dirty && isError()">
+      <div class="error" *ngIf="hasConfirmPassError()">
         Пароли не совпадают
       </div>
     </div>
