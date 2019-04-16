@@ -68,7 +68,7 @@ import { SwitcherForFormComponent } from './switcher-for-form/switcher-for-form.
   entryComponents: [
     SignInFormComponent,
     SignUpFormComponent,
-    SignFormComponent //
+    SignFormComponent
   ]
 })
 export class AppModule { }

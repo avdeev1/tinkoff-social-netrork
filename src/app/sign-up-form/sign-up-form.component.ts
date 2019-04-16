@@ -32,7 +32,7 @@ export class SignUpFormComponent implements OnInit {
   }
 
   isError() {
-    return this.signUpForm.get('passwords').hasError('confirmPass');
+    return this.signUpForm.controls.passwords.hasError('confirmPass');
   }
 
   onSubmit() {
