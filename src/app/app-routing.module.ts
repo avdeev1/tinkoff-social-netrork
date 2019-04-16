@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {ShowPostsComponent} from "./show-posts/show-posts.component";
 import {ProfileHeaderComponent} from "./profile-header/profile-header.component";
+import {ProfileComponent} from "./profile/profile.component";
 const routes: Routes = [
   {
     path: '',
@@ -10,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'profile/:id',
-    component: ProfileHeaderComponent
+    component: ProfileComponent
   }
 ];
 

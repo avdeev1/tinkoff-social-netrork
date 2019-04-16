@@ -25,6 +25,7 @@ import { ProfileHeaderComponent } from './profile-header/profile-header.componen
 import { HeaderComponent } from './header/header.component';
 import { ShowPostsComponent } from './show-posts/show-posts.component';
 import { UserInterceptor } from "./services/user.interceptor";
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { UserInterceptor } from "./services/user.interceptor";
     TextPostComponent,
     ProfileHeaderComponent,
     HeaderComponent,
-    ShowPostsComponent
+    ShowPostsComponent,
+    ProfileComponent
   ],
   imports: [
     FormsModule,

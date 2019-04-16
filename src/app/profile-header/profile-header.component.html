@@ -1,8 +1,8 @@
 <nb-card>
   <div class="img-container">
-    <img [src]="(user | async).avatar" alt="">
+    <img [src]="user.avatar" alt="">
     <div class="user-info">
-      <div class="user-name">{{(user | async).login}}</div>
+      <div class="user-name">{{user.login}}</div>
       <div class="count-div">В сервисе дней: 13</div>
     </div>
     <a class="img-edit" routerLink="editProfile">
@@ -10,7 +10,6 @@
     </a>
   </div>
   <div class="posts-and-likes">
-    ПОСТЫ: <span>{{(posts | async).length}}</span>  КОММЕНТАРИИ: <span>{{comments}}</span>
+    ПОСТЫ: <span>{{posts.length}}</span>  КОММЕНТАРИИ: <span>{{comments}}</span>
   </div>
 </nb-card>
-<app-post *ngFor="let post of (posts | async )" [post]="post"></app-post>
