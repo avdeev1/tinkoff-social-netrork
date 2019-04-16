@@ -9,10 +9,6 @@ const routes: Routes = [
     component: ShowPostsComponent,
   },
   {
-    path: 'profile',
-    component: ProfileHeaderComponent
-  },
-  {
     path: 'profile/:id',
     component: ProfileHeaderComponent
   }

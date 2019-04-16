@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {IPost, IUser} from '../models';
 import {UserService} from "./user.service";
+import {Observable} from "rxjs";
+import {of} from "rxjs/internal/observable/of";
 
 
 @Injectable({
@@ -241,13 +243,18 @@ export class PostsService {
     ];
   }
 
-  getPostsForProfilePage() {
-    return this.posts.filter(post => {
-      return this.user[0].postIds.includes(post.id);
-    });
+  getPostsForProfilePage(i: number): Observable<IPost[]> {
+    return of(this.posts.filter(post => {
+      return post.author.id === i;
+    }));
   }
 
-  getCountOfComments() {
-    return this.getPostsForProfilePage().reduce((sum, post) => sum + post.comments, 0);
+  getCountOfComments(i: number): number {
+    return 1;
+    // return this.getPostsForProfilePage(i).reduce((sum, post) => sum + post.comments, 0);
+  }
+
+  getPostsForMainPage(): Observable<IPost[]> {
+    return of(this.posts);
   }
 }
