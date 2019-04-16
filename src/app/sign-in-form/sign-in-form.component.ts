@@ -9,6 +9,7 @@ import {AuthService} from '../services/auth.service';
 })
 export class SignInFormComponent implements OnInit {
   private signInForm: FormGroup;
+
   constructor(private fb: FormBuilder, private authService: AuthService) {
   }
 
@@ -20,6 +21,8 @@ export class SignInFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authService.login(this.signInForm.value.login, this.signInForm.value.pass);
+    const {login, pass} = this.signInForm.value;
+
+    this.authService.login(login, pass).subscribe();
   }
 }

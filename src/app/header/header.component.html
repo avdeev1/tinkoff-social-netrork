@@ -8,7 +8,7 @@
   </div>
 
   <div
-    *ngIf="!isSignedIn; then unsignedButtons; else signedButtons">
+    *ngIf="isSignedIn | async; then signedButtons; else unsignedButtons">
   </div>
 
 

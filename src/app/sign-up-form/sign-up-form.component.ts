@@ -9,9 +9,14 @@ import {AuthService} from '../services/auth.service';
 })
 export class SignUpFormComponent implements OnInit {
 
+  constructor(private fb: FormBuilder, private authService: AuthService) {}
   signUpForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  static confirmPass(group: FormGroup) {
+    if (group.value.pass === group.value.doublePass) {
+      return null;
+    }
+    return {confirmPass: 'Passwords are different'};
   }
 
   ngOnInit() {
@@ -20,15 +25,8 @@ export class SignUpFormComponent implements OnInit {
       passwords: this.fb.group({
         pass: ['', Validators.required],
         doublePass: ['', Validators.required]
-      }, {validator: this.confirmPass})
+      }, {validator: SignUpFormComponent.confirmPass})
     });
-  }
-
-  confirmPass(group: FormGroup) {
-    if (group.value.pass === group.value.doublePass) {
-      return null;
-    }
-    return {confirmPass: 'Passwords are different'};
   }
 
   hasConfirmPassError() {
@@ -40,6 +38,7 @@ export class SignUpFormComponent implements OnInit {
 
   onSubmit() {
     const {login, passwords: {pass, doublePass}} = this.signUpForm.value;
+
     this.authService.register(login, pass, doublePass);
   }
 }

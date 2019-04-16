@@ -7,18 +7,18 @@ import {AuthService} from '../services/auth.service';
   styleUrls: ['./switcher-for-form.component.less']
 })
 export class SwitcherForFormComponent implements OnInit {
-  isSignInForm = this.autoService.isSignInForm;
+  get isSignInForm() {
+    return this.autoService.getIsSignInForm();
+  }
 
   constructor(private autoService: AuthService) {
   }
 
   ngOnInit() {
-    this.isSignInForm = this.autoService.getIsSignIn();
   }
 
   toggleForm() {
     this.autoService.toggle();
-    this.isSignInForm = this.autoService.getIsSignIn();
   }
 
 }

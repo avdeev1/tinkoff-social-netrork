@@ -7,7 +7,9 @@ import {AuthService} from '../services/auth.service';
   styleUrls: ['./header.component.less']
 })
 export class HeaderComponent implements OnInit {
-  isSignedInForm = this.service.isSignInForm;
+  get isSignedIn() {
+    return this.service.isAuth;
+  }
 
   constructor(private service: AuthService) {
   }
@@ -16,7 +18,7 @@ export class HeaderComponent implements OnInit {
   }
 
   handleClickExit() {
-    this.isSignedInForm = false;
+    this.service.logout().subscribe();
   }
 
   onSignInClick() {

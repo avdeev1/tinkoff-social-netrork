@@ -2,19 +2,21 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { delay, tap } from 'rxjs/internal/operators';
 import {SignFormComponent} from '../sign-form/sign-form.component';
-import {NbDialogService} from '@nebular/theme';
+import {NbDialogRef, NbDialogService} from '@nebular/theme';
 
 @Injectable()
 export class AuthService {
   userName = new BehaviorSubject(!!localStorage.getItem('userName'));
   isAuth = new BehaviorSubject(!!localStorage.getItem('isAuth'));
-  public isSignInForm = false;
+  private isSignInForm: boolean;
+  dialogRef: NbDialogRef<SignFormComponent>;
 
   constructor(private dialogService: NbDialogService) { }
 
   toggle() {
     this.isSignInForm = !this.isSignInForm;
   }
+
   openSignInDialog() {
     this.isSignInForm = true;
     this.openForm();
@@ -26,11 +28,15 @@ export class AuthService {
   }
 
   openForm() {
-    this.dialogService.open(SignFormComponent);
+    this.dialogRef = this.dialogService.open(SignFormComponent);
   }
 
-  getIsSignIn() {
+  getIsSignInForm() {
     return this.isSignInForm;
+  }
+
+  closeForm() {
+    this.dialogRef.close();
   }
 
   login(login: string, password: string): Observable<boolean> {
@@ -42,12 +48,14 @@ export class AuthService {
             localStorage.setItem('isAuth', 'true');
             localStorage.setItem('userName', login);
             this.isAuth.next(true);
+            this.closeForm();
           }
         })
       );
   }
 
   register(login: string, password: string, repeatPassword: string): boolean {
+    this.closeForm();
     return true;
   }
 
