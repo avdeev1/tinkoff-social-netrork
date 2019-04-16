@@ -1,18 +1,21 @@
 export interface IPost {
+  id: number;
   title: string;
   text: string;
+  createdAt: string;
   tags: string[];
-  user: string;
+  author?: IUser;
+  // login: string;
   profilePhotoSrc?: string;
+  image?: string;
   likes: number;
   comments: number;
-  date: string;
-  imgPostSrc?: string;
-  postId: number;
+  draft?: boolean;
 }
 
 export interface IUser {
-  user: string;
-  profilePhotoSrc?: string;
+  id: number;
+  login: string;
+  avatar?: string;
   postIds: number[];
 }

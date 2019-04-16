@@ -21,7 +21,7 @@ export class ProfileHeaderComponent implements OnInit {
   comments: number;
 
   ngOnInit() {
-    this.user = this.userService.user;
+    this.user = this.userService.getUserForProfilePage();
     this.posts = this.postService.getPostsForProfilePage();
     this.comments = this.postService.getCountOfComments();
   }

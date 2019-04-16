@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileHeaderComponent
+  },
+  {
+    path: 'profile/:id',
+    component: ProfileHeaderComponent
   }
 ];
 
