@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap, shareReplay } from 'rxjs/operators';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 interface User {
   login: string;
   token: string;
