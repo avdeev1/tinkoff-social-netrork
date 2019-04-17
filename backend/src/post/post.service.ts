@@ -36,7 +36,6 @@ export class PostService {
   }
 
   async getPostsForProfile(user: User): Promise<Post[] | null> {
-    console.log(user);
     return this.getPostsForUser(user.id);
   }
 }
