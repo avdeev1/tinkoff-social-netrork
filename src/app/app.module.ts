@@ -24,6 +24,7 @@ import { TextPostComponent } from './text-post/text-post.component';
 import { ProfileHeaderComponent } from './profile-header/profile-header.component';
 import { HeaderComponent } from './header/header.component';
 import { ShowPostsComponent } from './show-posts/show-posts.component';
+import { SettingComponent } from './setting/setting.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ShowPostsComponent } from './show-posts/show-posts.component';
     TextPostComponent,
     ProfileHeaderComponent,
     HeaderComponent,
-    ShowPostsComponent
+    ShowPostsComponent,
+    SettingComponent
   ],
   imports: [
     FormsModule,
@@ -53,7 +55,7 @@ import { ShowPostsComponent } from './show-posts/show-posts.component';
     NbCardModule,
     NbSidebarModule.forRoot(),
   ],
-  providers: [AuthService, ResolversModule],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

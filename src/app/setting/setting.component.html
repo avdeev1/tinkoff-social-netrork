@@ -1,0 +1,26 @@
+<form>
+<nb-card class="nb-card-user">
+  <div class="img-container">
+    <img [src]="user.profilePhotoSrc" alt="">
+    <div class="user-info">
+      <div class="user-name">{{user.user}}</div>
+
+      <div class="changeImage"><a [routerLink]='' ><i class="fa fa-pencil" aria-hidden="true"></i> Загрузить картинку</a></div>
+    </div>
+
+  </div>
+
+</nb-card>
+<nb-card>
+
+
+  <div class="about-user">
+    <span>О Себе:</span> <br>
+
+    <textarea nbInput fullWidth [value]="user.aboutMe" cols="130" rows="5"></textarea>
+  </div>
+  <input type="submit" class="sign-in header-btn" nbButton outline status="info" size="xsmall" value="Сохранить">
+
+</nb-card>
+</form>
+
