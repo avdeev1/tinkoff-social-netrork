@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { IUser } from './models';
+import {IUser} from './models';
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -12,5 +13,10 @@ export class UserService {
     postIds: [1, 4]
   };
 
-  constructor() { }
+  constructor(private http: HttpClient) {
+  }
+
+  getUserForUserPage(id) {
+    this.http.get<IUser>(`/user/${id}`);
+  }
 }

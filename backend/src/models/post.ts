@@ -32,5 +32,5 @@ export class Post {
   image: string;
 
   @Column()
-  draft: boolean = true;
+  draft: boolean = false;
 }

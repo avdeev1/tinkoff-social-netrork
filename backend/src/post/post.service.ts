@@ -24,4 +24,19 @@ export class PostService {
 
     return post;
   }
+
+  getPostsForUser(id): Promise<Post[]> {
+    return this.postRepo.find({relations: ['author'],
+      where: {
+        author: {
+          id: id,
+        }
+      }
+    });
+  }
+
+  async getPostsForProfile(user: User): Promise<Post[] | null> {
+    console.log(user);
+    return this.getPostsForUser(user.id);
+  }
 }

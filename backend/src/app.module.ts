@@ -9,6 +9,8 @@ import { Auth } from './models/auth';
 import { HttpStrategy } from './auth/http.strategy';
 import { PostController } from './post/post.controller';
 import { PostService } from './post/post.service';
+import { UserService } from "./user/user.service";
+import { UserController } from "./user/user.controller";
 import { PassportModule } from '@nestjs/passport';
 import { join } from 'path';
 import { UploadController } from './upload/upload.controller';
@@ -30,7 +32,7 @@ const options: ConnectionOptions = {
     PassportModule.register({ defaultStrategy: 'bearer', property: 'user' }),
     ConfigModule,
   ],
-  controllers: [AuthController, PostController, UploadController],
-  providers: [AuthService, HttpStrategy, PostService, UploadService],
+  controllers: [AuthController, PostController, UploadController, UserController],
+  providers: [AuthService, HttpStrategy, PostService, UploadService, UserService],
 })
 export class AppModule {}
