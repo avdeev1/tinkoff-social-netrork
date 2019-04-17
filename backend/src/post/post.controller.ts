@@ -23,19 +23,19 @@ export class PostController {
     return this.postService.getPosts();
   }
 
-  @Get('/:id')
-  async getForUser(@Param('id') id): Promise<PostModel[]> {
-    return await this.postService.getPostsForUser(id);
-}
-
   @Get('/profile')
   @UseInterceptors(ClassSerializerInterceptor)
   @UseGuards(AuthGuard())
-  async getForProfile(@Request() req): Promise<PostModel[]> {
-    return await this.postService.getPostsForProfile(req.user);
+  async getPostsForProfile(@Request() req): Promise<PostModel[]> {
+    return await this.postService.getPostsForUser(req.user.id);
   }
 
-  @Post('')
+  @Get('/user/:id')
+  async getPostsForUser(@Param('id') id): Promise<PostModel[]> {
+    return await this.postService.getPostsForUser(id);
+}
+
+  @Post()
   @UseInterceptors(ClassSerializerInterceptor)
   @UseGuards(AuthGuard())
   async create(@Body() postDto: PostModel, @Request() req): Promise<PostModel> {

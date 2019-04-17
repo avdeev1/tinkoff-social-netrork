@@ -34,8 +34,4 @@ export class PostService {
       }
     });
   }
-
-  async getPostsForProfile(user: User): Promise<Post[]> {
-    return this.getPostsForUser(user.id);
-  }
 }
