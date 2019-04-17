@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -6,16 +7,26 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./header.component.less']
 })
 export class HeaderComponent implements OnInit {
-  isSignedIn = false;
+  get isSignedIn() {
+    return this.service.isAuth;
+  }
 
-  constructor() {
+  constructor(private service: AuthService) {
   }
 
   ngOnInit() {
   }
 
   handleClickExit() {
-    this.isSignedIn = !this.isSignedIn;
+    this.service.logout().subscribe();
+  }
+
+  onSignInClick() {
+    this.service.openSignInDialog();
+  }
+
+  onSignUpClick() {
+    this.service.openSignUpDialog();
   }
 
 }
