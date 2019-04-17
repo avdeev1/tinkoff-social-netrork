@@ -10,7 +10,7 @@ const routes: Routes = [
     component: ShowPostsComponent,
   },
   {
-    path: 'profile/:name',
+    path: 'profile/:id',
     component: ProfileHeaderComponent,
     pathMatch: 'full',
   },

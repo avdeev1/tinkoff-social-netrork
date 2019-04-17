@@ -45,7 +45,8 @@ import { SwitcherForFormComponent } from './switcher-for-form/switcher-for-form.
     ProfileHeaderComponent,
     ShowPostsComponent,
     SignFormComponent,
-    SwitcherForFormComponent
+    SwitcherForFormComponent,
+    SettingComponent
   ],
   imports: [
     FormsModule,
