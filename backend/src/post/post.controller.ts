@@ -13,29 +13,29 @@ import { Post as PostModel } from '../models/post';
 import { PostService } from './post.service';
 import {AuthService} from "../auth/auth.service";
 
-@Controller()
+@Controller('posts')
 export class PostController {
   constructor(private readonly postService: PostService, private authService: AuthService) {}
 
-  @Get('posts')
+  @Get()
   @UseInterceptors(ClassSerializerInterceptor)
   async posts(): Promise<PostModel[]> {
     return this.postService.getPosts();
   }
 
-  @Get('posts/:id')
+  @Get('/:id')
   async getForUser(@Param('id') id): Promise<PostModel[]> {
-    return this.postService.getPostsForUser(id);
+    return await this.postService.getPostsForUser(id);
 }
 
-  @Get('profilePosts')
+  @Get('/profile')
   @UseInterceptors(ClassSerializerInterceptor)
   @UseGuards(AuthGuard())
   async getForProfile(@Request() req): Promise<PostModel[]> {
     return await this.postService.getPostsForProfile(req.user);
   }
 
-  @Post('posts')
+  @Post('')
   @UseInterceptors(ClassSerializerInterceptor)
   @UseGuards(AuthGuard())
   async create(@Body() postDto: PostModel, @Request() req): Promise<PostModel> {

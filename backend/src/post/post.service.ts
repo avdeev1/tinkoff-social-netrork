@@ -29,13 +29,13 @@ export class PostService {
     return this.postRepo.find({relations: ['author'],
       where: {
         author: {
-          id: id,
+          id
         }
       }
     });
   }
 
-  async getPostsForProfile(user: User): Promise<Post[] | null> {
+  async getPostsForProfile(user: User): Promise<Post[]> {
     return this.getPostsForUser(user.id);
   }
 }

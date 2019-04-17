@@ -17,7 +17,7 @@ export class PostsService {
   }
 
   getPostsForProfilePage(): Observable<IPost[]> {
-    return this.http.get<IPost[]>(`/profilePosts`);
+    return this.http.get<IPost[]>(`/posts/profile`);
   }
 
   getPostsForUserPage(id: string): Observable<IPost[]> {
