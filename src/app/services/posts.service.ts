@@ -3,6 +3,7 @@ import {IPost, IUser} from '../models';
 import {UserService} from "./user.service";
 import {Observable} from "rxjs";
 import {of} from "rxjs/internal/observable/of";
+import {HttpClient} from "@angular/common/http";
 
 
 @Injectable({
@@ -13,7 +14,7 @@ export class PostsService {
   user: IUser[];
   posts: IPost[];
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private http: HttpClient) {
     this.user = this.userService.getUsers();
     this.createPosts();
   }
@@ -251,10 +252,13 @@ export class PostsService {
 
   getCountOfComments(i: number): number {
     return 1;
-    // return this.getPostsForProfilePage(i).reduce((sum, post) => sum + post.comments, 0);
   }
 
   getPostsForMainPage(): Observable<IPost[]> {
     return of(this.posts);
+  }
+
+  getPostsFromDB(): Observable<IPost[]> {
+    return this.http.get<IPost[]>('/posts');
   }
 }

@@ -5,7 +5,6 @@ export interface IPost {
   createdAt: string;
   tags: string[];
   author?: IUser;
-  // login: string;
   profilePhotoSrc?: string;
   image?: string;
   likes: number;
@@ -15,6 +14,6 @@ export interface IPost {
 
 export interface IUser {
   id: number;
-  login: string;
+  name: string;
   avatar?: string;
 }

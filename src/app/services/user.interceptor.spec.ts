@@ -1,4 +1,4 @@
-import { User.Interceptor } from './login.interceptor';
+import { User.Interceptor } from './name.interceptor';
 
 describe('User.Interceptor', () => {
   it('should create an instance', () => {
