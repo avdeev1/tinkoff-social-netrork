@@ -1,0 +1,14 @@
+<div class="container">
+  <h1>Вход</h1>
+  <form [formGroup]="signInForm" (submit)="onSubmit()">
+    <input class="login" formControlName="login" status="info" fullWidth fieldSize="medium" type="text" nbInput
+           placeholder="Логин">
+    <input class="pass" formControlName="pass" status="info" fullWidth fieldSize="medium" type="password" nbInput
+           placeholder="Пароль">
+    <div class="sign-in-button">
+      <button type="submit" nbButton outline status="info" size="xsmall" [disabled]="signInForm.invalid">Вход</button>
+    </div>
+  </form>
+</div>
+
+

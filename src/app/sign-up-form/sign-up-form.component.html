@@ -1,0 +1,23 @@
+<div class="container">
+  <h1>Регистрация</h1>
+  <form [formGroup]="signUpForm" (submit)="onSubmit()">
+    <input class="login" formControlName="login" fullWidth status="info" fieldSize="medium" type="text" nbInput
+           placeholder="Логин">
+
+    <div formGroupName="passwords">
+      <input type="password" class="pass" formControlName="pass" fullWidth status="info" fieldSize="medium"  nbInput
+             placeholder="Пароль">
+
+      <input type="password" class="doublePass" formControlName="doublePass" fullWidth status="info" fieldSize="medium"
+             nbInput placeholder="Повторите пароль">
+      <div class="error" *ngIf="hasConfirmPassError()">
+        Пароли не совпадают
+      </div>
+    </div>
+    <div class="sign-up-button">
+      <button type="submit" nbButton outline status="info" size="xsmall" [disabled]="!signUpForm.valid">
+        Зарегистрироваться
+      </button>
+    </div>
+  </form>
+</div>
