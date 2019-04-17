@@ -24,6 +24,10 @@ export class PostsService {
     return this.getPostsForProfilePage().reduce((sum, post) => sum + post.comments, 0);
   }
 
+  createPost(headline: string, text: string, img: File, tags: string[]) {
+
+  }
+
   public posts: IPost[] = [{
     title: 'Слово мэра',
     text: 'Ну что сказать... Я вижу кто-то наступил на грабли.\n' +

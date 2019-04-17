@@ -8,13 +8,15 @@
   </div>
 
   <div
-    *ngIf="!isSignedIn; then unsignedButtons; else signedButtons">
+    *ngIf="isSignedIn | async; then signedButtons; else unsignedButtons">
   </div>
 
+
   <ng-template #unsignedButtons>
-    <button class="sign-in header-btn" nbButton outline status="info" size="xsmall" (click)="handleClickExit()">Вход
+    <button class="sign-in header-btn" nbButton outline status="info" size="xsmall" (click)="onSignInClick()">Вход
     </button>
-    <button class="sign-up header-btn" nbButton status="info" size="xsmall">Регистрация</button>
+    <button class="sign-up header-btn" nbButton status="info" size="xsmall" (click)="onSignUpClick()">Регистрация
+    </button>
   </ng-template>
 
   <ng-template #signedButtons>
