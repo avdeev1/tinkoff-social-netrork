@@ -1,0 +1,13 @@
+<ng-content *ngIf="isSignInForm; then signIn; else signUp"></ng-content>
+
+<span class="switcher">{{!isSignInForm ? 'Есть аккаунт? ' : 'Нет аккаунта? '}}
+  <a (click)="toggleForm()">{{!isSignInForm ? 'Войти' : 'Создать аккаунт'}}</a>
+</span>
+
+<ng-template #signIn>
+  <app-sign-in-form></app-sign-in-form>
+</ng-template>
+
+<ng-template #signUp>
+  <app-sign-up-form></app-sign-up-form>
+</ng-template>
