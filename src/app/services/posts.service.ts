@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {IPost, IUser} from './models';
 import {UserService} from "./user.service";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {IPost, IUser} from '../models';
 
 
 @Injectable({

@@ -17,7 +17,7 @@ export class AppComponent {
   isCompact = true;
 
   constructor(private sidebarService: NbSidebarService, private router: Router,
-              private AuthService: AuthService) {
+              private authService: AuthService) {
 
     }
 
@@ -26,12 +26,9 @@ export class AppComponent {
     this.sidebarService.toggle(true);
     return false;
   }
-  get isAuth(): Observable<boolean> {
-    return this.AuthService.isAuth;
-  }
 
   logout() {
-    this.AuthService.logout()
+    this.authService.logout()
       .subscribe(() => {
         this.router.navigateByUrl('/');
       });
