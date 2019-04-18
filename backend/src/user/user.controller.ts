@@ -8,6 +8,7 @@ import {
 import {UserService} from './user.service';
 import {User as UserModel} from "../models/user";
 import {AuthGuard} from '@nestjs/passport';
+import {log} from "util";
 
 @Controller('user')
 export class UserController {

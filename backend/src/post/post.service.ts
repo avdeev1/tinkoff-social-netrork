@@ -13,7 +13,12 @@ export class PostService {
   ) {}
 
   getPosts(): Promise<Post[]> {
-    return this.postRepo.find({ relations: ['author'] });
+    return this.postRepo
+      .createQueryBuilder('post')
+      .innerJoin("post.author", "author")
+      .addSelect(["author.login", "author.avatar", "author.id"])
+      .loadRelationCountAndMap('post.comments', 'post.comments')
+      .getMany();
   }
 
   async create(postDto: Post, user: User): Promise<Post> {
@@ -26,16 +31,22 @@ export class PostService {
   }
 
   async getPostsForUser(id: number): Promise<Post[]> {
-    return this.postRepo.find({relations: ['author'],
-      where: {
-        author: {
-          id
-        }
-      }
-    });
+    return this.postRepo
+      .createQueryBuilder('post')
+      .innerJoin('post.author', 'author')
+      .addSelect(['author.login', 'author.avatar', 'author.id'])
+      .where('post.authorId = :id', {id})
+      .loadRelationCountAndMap('post.comments', 'post.comments')
+      .getMany();
   }
 
   async getPostById(id: number) {
-    return this.postRepo.findOne(id, {relations: ['author']});
+    return this.postRepo
+      .createQueryBuilder('post')
+      .innerJoin('post.author', 'author')
+      .addSelect(['author.login', 'author.avatar', 'author.id'])
+      .where('post.id = :id', {id})
+      .loadRelationCountAndMap('post.comments', 'post.comments')
+      .getOne();
   }
 }

@@ -6,8 +6,8 @@ import {
   ManyToOne,
 } from 'typeorm';
 import { User } from './user';
+import { Comment } from "./comment";
 import { IsNotEmpty } from 'class-validator';
-import { Exclude } from 'class-transformer';
 
 @Entity()
 export class Post {
@@ -22,8 +22,8 @@ export class Post {
   @IsNotEmpty()
   text: string;
 
-  @Column()
-  createdAt: number = Date.now();
+  @Column({ default: () => 'strftime(\'%s\', \'now\')' })
+  createdAt: number;
 
   @ManyToOne(type => User, user => user.id)
   author: User;
@@ -31,6 +31,9 @@ export class Post {
   @Column({ nullable: true })
   image: string;
 
-  @Column()
-  draft: boolean = false;
+  @OneToMany(type => Comment, comment => comment.post)
+  comments: Comment[];
+
+  @Column({ default: false })
+  draft: boolean;
 }

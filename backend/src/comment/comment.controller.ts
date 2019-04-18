@@ -17,19 +17,9 @@ export class CommentController {
 
   constructor(private commentService: CommentService) {}
 
-  @Get('posts/:id')
+  @Get('post/:id')
   async comment(@Param('id') id): Promise<CommentModel[]> {
     return await this.commentService.getCommentsForPost(id);
-  }
-
-  @Get('/count')
-  async count(): Promise<any> {
-    return await this.commentService.count();
-  }
-
-  @Get('/count/:id')
-  async countForUser(@Param('id') id: number): Promise<number> {
-    return await this.commentService.countForUser(id);
   }
 
   @Get('/count/profile')
@@ -39,10 +29,17 @@ export class CommentController {
     return await this.commentService.countForUser(req.user.id);
   }
 
-  @Post('create')
+  @Get('/count/:id')
+  async countForUser(@Param('id') id: number): Promise<number> {
+    return await this.commentService.countForUser(id);
+  }
+
+  @Post('/create')
   @UseInterceptors(ClassSerializerInterceptor)
   @UseGuards(AuthGuard())
-  async create(@Body() commentDto: CommentModel, @Request() req): Promise<CommentModel> {
-    return await this.commentService.create(commentDto, req.user, req.post);
+  async create(@Body() data: any, @Request() req): Promise<CommentModel> {
+    const comment: CommentModel = data.com;
+    const postId: number = data.id;
+    return await this.commentService.create(comment, req.user, postId);
   }
 }

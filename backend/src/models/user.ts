@@ -14,8 +14,8 @@ export class User {
   @Exclude()
   password: string;
 
-  @Column()
-  registrationDate: number = Date.now();
+  @Column({ default: () => 'strftime(\'%s\', \'now\')' })
+  registrationDate: number;
 
   @Column({ nullable: true })
   description: string;

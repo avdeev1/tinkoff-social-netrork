@@ -10,8 +10,8 @@ export class UserService {
     @InjectRepository(User) private readonly userRepo: Repository<User>,
     private configService: ConfigService) {}
 
-  getUser(id: string): Promise<User> {
-    return this.userRepo.findOne(id);
+  getUser(id: number): Promise<User> {
+    return this.userRepo.findOne(id,{select: ["id", "avatar", "login", "description", "registrationDate"]});
   }
 }
 

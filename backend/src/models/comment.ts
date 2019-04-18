@@ -7,7 +7,6 @@ import {
 } from 'typeorm';
 import { User } from './user';
 import { IsNotEmpty } from 'class-validator';
-import { Exclude } from 'class-transformer';
 import { Post } from './post';
 
 @Entity()
@@ -19,8 +18,8 @@ export class Comment {
   @IsNotEmpty()
   text: string;
 
-  @Column()
-  createdAt: number = Date.now();
+  @Column({ default: () => 'strftime(\'%s\', \'now\')' })
+  createdAt: number;
 
   @ManyToOne(type => User, user => user.id)
   author: User;
