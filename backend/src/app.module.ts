@@ -4,6 +4,7 @@ import { ConnectionOptions } from 'typeorm';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './models/user';
 import { Post } from './models/post';
+import { Comment } from "./models/comment";
 import { AuthController } from './auth/auth.controller';
 import { Auth } from './models/auth';
 import { HttpStrategy } from './auth/http.strategy';
@@ -16,6 +17,8 @@ import { join } from 'path';
 import { UploadController } from './upload/upload.controller';
 import { UploadService } from './upload/upload.service';
 import { ConfigModule } from './config/config.module';
+import { CommentController } from "./comment/comment.controller";
+import { CommentService } from "./comment/comment.service";
 
 const options: ConnectionOptions = {
   type: 'sqlite',
@@ -28,11 +31,11 @@ const options: ConnectionOptions = {
 @Module({
   imports: [
     TypeOrmModule.forRoot(options),
-    TypeOrmModule.forFeature([User, Post, Auth]),
+    TypeOrmModule.forFeature([User, Post, Auth, Comment]),
     PassportModule.register({ defaultStrategy: 'bearer', property: 'user' }),
     ConfigModule,
   ],
-  controllers: [AuthController, PostController, UploadController, UserController],
-  providers: [AuthService, HttpStrategy, PostService, UploadService, UserService],
+  controllers: [AuthController, PostController, UploadController, UserController, CommentController],
+  providers: [AuthService, HttpStrategy, PostService, UploadService, UserService, CommentService],
 })
 export class AppModule {}

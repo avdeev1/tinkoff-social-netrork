@@ -25,7 +25,7 @@ export class PostService {
     return post;
   }
 
-  async getPostsForUser(id): Promise<Post[]> {
+  async getPostsForUser(id: number): Promise<Post[]> {
     return this.postRepo.find({relations: ['author'],
       where: {
         author: {
@@ -35,7 +35,7 @@ export class PostService {
     });
   }
 
-  async getPostById(id: any) {
+  async getPostById(id: number) {
     return this.postRepo.findOne(id, {relations: ['author']});
   }
 }
