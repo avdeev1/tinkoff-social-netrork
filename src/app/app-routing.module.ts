@@ -8,15 +8,47 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     component: ShowPostsComponent,
+    data: {}
   },
   {
-    path: 'profile/:id',
+    path: 'profile',
     component: ProfileHeaderComponent,
     pathMatch: 'full',
   },
   {
-    path: 'profile/:name/setting',
-    component: SettingComponent
+    path: 'profile/draft',
+    pathMatch: 'full',
+    component: ShowPostsComponent,
+  },
+  {
+    path: 'profile/setting',
+    component: SettingComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'user/:login',
+    component: ProfileHeaderComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'favorites',
+    component: ShowPostsComponent,
+    data: {}
+  },
+  {
+    path: 'post/:id',
+    component: ShowPostsComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'create',
+    component: ShowPostsComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'search',
+    component: ShowPostsComponent,
+    data: {}
   }
 ];
 

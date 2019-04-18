@@ -1,23 +1,23 @@
 export const MENU_NAVBAR_LINK = [
   {
     title: 'Профиль',
-    link: '/',
+    link: '/profile',
     icon: 'fa fa-user',
     home: true
   },
   {
     title: 'Написать пост',
-    link: '/',
+    link: '/create',
     icon: 'fa fa-pencil-square-o'
   },
   {
     title: 'Лайки',
-    link: '/',
+    link: '/favorites',
     icon: 'fa fa-heart NavbarLikeIcon'
   },
   {
     title: 'Черновик',
-    link: '/',
+    link: '/profile/draft',
     icon: 'fa fa-file-o'
   }
 ];
