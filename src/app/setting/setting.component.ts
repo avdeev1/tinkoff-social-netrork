@@ -4,11 +4,11 @@ import {PostsService} from '../services/posts.service';
 import {IPost, IUser} from '../models';
 
 @Component({
-  selector: 'app-profile-header',
-  templateUrl: './profile-header.component.html',
-  styleUrls: ['./profile-header.component.less']
+  selector: 'app-setting',
+  templateUrl: './setting.component.html',
+  styleUrls: ['./setting.component.less']
 })
-export class ProfileHeaderComponent implements OnInit {
+export class SettingComponent implements OnInit {
 
   constructor(
     private postService: PostsService,
