@@ -31,7 +31,7 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'favorites',
+    path: 'favourites',
     component: ShowPostsComponent,
     data: {}
   },

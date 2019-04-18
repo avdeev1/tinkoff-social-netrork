@@ -16,9 +16,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { ResolversModule } from './resolvers/resolvers.module';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PostComponent } from './post/post.component';
 import { InfoPostLinksComponent } from './info-post-links/info-post-links.component';
 import { TagsComponent } from './tags/tags.component';
@@ -31,6 +31,7 @@ import { ShowPostsComponent } from './show-posts/show-posts.component';
 import { SettingComponent } from './setting/setting.component';
 import { SignFormComponent } from './sign-form/sign-form.component';
 import { SwitcherForFormComponent } from './switcher-for-form/switcher-for-form.component';
+import { UserInterceptor } from "./services/user.interceptor";
 
 @NgModule({
   declarations: [
@@ -65,7 +66,16 @@ import { SwitcherForFormComponent } from './switcher-for-form/switcher-for-form.
     NbSidebarModule.forRoot(),
     ReactiveFormsModule
   ],
-  providers: [AuthService],
+  providers: [
+    NbDialogService,
+    AuthService,
+    ResolversModule,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: UserInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
   entryComponents: [
     SignInFormComponent,

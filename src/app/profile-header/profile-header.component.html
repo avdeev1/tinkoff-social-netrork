@@ -1,9 +1,9 @@
 
 <nb-card class="nb-card-user">
   <div class="img-container">
-    <img [src]="user.profilePhotoSrc" alt="">
+    <img [src]="user.avatar" alt="">
     <div class="user-info">
-      <div class="user-name">{{user.user}}</div>
+      <div class="user-name">{{user.login}}</div>
       <div class="count-div">В сервисе: 13 дней</div>
     </div>
     <a class="img-edit" routerLink="setting">
