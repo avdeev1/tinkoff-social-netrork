@@ -4,18 +4,15 @@ export interface IPost {
   text: string;
   createdAt: string;
   tags: string[];
-  author?: IUser;
-  // login: string;
-  profilePhotoSrc?: string;
+  author: IUser;
   image?: string;
-  likes: number;
   comments: number;
-  draft?: boolean;
+  draft: boolean;
 }
 
 export interface IUser {
   id: number;
-  login: string;
+  name: string;
   avatar?: string;
   postIds: number[];
   description?: string;

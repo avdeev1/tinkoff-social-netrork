@@ -9,9 +9,11 @@ import {IPost} from '../models';
 })
 export class PostComponent implements OnInit {
   @Input() post: IPost;
+  date: string;
 
 
   ngOnInit() {
+    this.date = new Date(this.post.createdAt).toDateString();
   }
 
   goToPostPage() {

@@ -20,11 +20,7 @@ export class ProfileHeaderComponent implements OnInit {
   posts: IPost[];
   comments: number;
 
-
   ngOnInit() {
-    this.user = this.userService.user;
-    this.posts = this.postService.getPostsForProfilePage();
-    this.comments = this.postService.getCountOfComments();
   }
 
 }

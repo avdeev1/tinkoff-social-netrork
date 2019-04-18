@@ -16,15 +16,18 @@ export class AppComponent {
   navbarLink = MENU_NAVBAR_LINK;
   isCompact = true;
 
-  constructor(private sidebarService: NbSidebarService, private router: Router,
-              private authService: AuthService) {
-
-    }
+  constructor(
+    private sidebarService: NbSidebarService,
+    private router: Router,
+    private authService: AuthService) {}
 
   toggle() {
     this.isCompact = !this.isCompact;
     this.sidebarService.toggle(true);
     return false;
+  }
+  get isAuth(): Observable<boolean> {
+    return this.AuthService.isAuth;
   }
 
   logout() {
@@ -33,8 +36,4 @@ export class AppComponent {
         this.router.navigateByUrl('/');
       });
   }
-
-
-
-
 }

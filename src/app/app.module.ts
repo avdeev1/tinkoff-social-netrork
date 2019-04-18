@@ -1,13 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {
-  NbButtonModule,
   NbCardModule,
   NbDialogModule,
   NbDialogService,
-  NbInputModule,
   NbLayoutModule,
   NbThemeModule,
+  NbButtonModule,
+  NbInputModule,
   NbMenuModule,
   NbSidebarModule
 } from '@nebular/theme';
@@ -29,9 +29,10 @@ import { SignInFormComponent } from './sign-in-form/sign-in-form.component';
 import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
 import { ShowPostsComponent } from './show-posts/show-posts.component';
 import { SettingComponent } from './setting/setting.component';
+import { UserInterceptor } from "./services/user.interceptor";
+import { ProfileComponent } from './profile/profile.component';
 import { SignFormComponent } from './sign-form/sign-form.component';
 import { SwitcherForFormComponent } from './switcher-for-form/switcher-for-form.component';
-import { UserInterceptor } from "./services/user.interceptor";
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { UserInterceptor } from "./services/user.interceptor";
     ShowPostsComponent,
     SignFormComponent,
     SwitcherForFormComponent,
-    SettingComponent
+    SettingComponent,
+    ProfileComponent
   ],
   imports: [
     FormsModule,
@@ -57,11 +59,13 @@ import { UserInterceptor } from "./services/user.interceptor";
     HttpClientModule,
     AppRoutingModule,
     NbThemeModule.forRoot(),
+    NbCardModule,
     NbLayoutModule,
     NbButtonModule,
     NbInputModule,
     NbDialogModule.forRoot(),
     NbMenuModule.forRoot(),
+    NbLayoutModule,
     NbCardModule,
     NbSidebarModule.forRoot(),
     ReactiveFormsModule
@@ -70,12 +74,14 @@ import { UserInterceptor } from "./services/user.interceptor";
     NbDialogService,
     AuthService,
     ResolversModule,
+    NbDialogService,
+    AuthService,
+    ResolversModule,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: UserInterceptor,
       multi: true
-    }
-  ],
+    }],
   bootstrap: [AppComponent],
   entryComponents: [
     SignInFormComponent,

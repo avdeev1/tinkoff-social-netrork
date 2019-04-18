@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PostsService} from '../services/posts.service';
 import {IPost} from '../models';
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-show-posts',
@@ -9,12 +10,14 @@ import {IPost} from '../models';
 })
 export class ShowPostsComponent implements OnInit {
 
-  posts: IPost[];
+  posts: Observable<IPost[]>;
+  postsDB: Observable<IPost[]>;
 
   constructor(private postService: PostsService) { }
 
   ngOnInit() {
-    this.posts = this.postService.posts;
+    this.posts = this.postService.getPostsForMainPage();
+    this.postsDB = this.postService.getPostsFromDB();
   }
 
 }

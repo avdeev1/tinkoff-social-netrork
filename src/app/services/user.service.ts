@@ -1,18 +1,16 @@
-import { Injectable } from '@angular/core';
-import { IUser } from '../models';
+import {Injectable} from '@angular/core';
+import {IUser} from '../models';
+import {ActivatedRoute} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  public user: IUser = {
-    id: 1,
-    login: '@norimyxxxo',
-    avatar: 'https://pbs.twimg.com/profile_images/1029031247073476610/trKYjiJ3_400x400.jpg',
-    postIds: [1, 4],
-    description: 'русскоязычный рэп-, грайм-, фристайл-исполнитель и исполнительный директор букинг-агентства «Booking Machine Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto assumenda delectus eius enim illo inventore maxime minus nemo nisi non nostrum perspiciatis, porro possimus qui sequi soluta sunt vero voluptatem.'
-  };
+  users: IUser[];
+  id: string;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) {
+  }
+
 }

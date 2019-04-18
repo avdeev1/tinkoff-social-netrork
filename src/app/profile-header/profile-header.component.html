@@ -1,17 +1,16 @@
-
-<nb-card class="nb-card-user">
+<nb-card>
   <div class="img-container">
     <img [src]="user.avatar" alt="">
     <div class="user-info">
-      <div class="user-name">{{user.login}}</div>
-      <div class="count-div">В сервисе: 13 дней</div>
+      <div class="user-name">{{user.name}}</div>
+      <div class="count-div">В сервисе дней: 13</div>
     </div>
     <a class="img-edit" routerLink="setting">
       <i class="fa fa-gear" aria-hidden="true"></i>
     </a>
   </div>
   <div class="posts-and-likes">
-    ПОСТЫ: <span>{{user.postIds.length}}</span>  КОММЕНТАРИИ: <span>{{comments}}</span>
+    ПОСТЫ: <span>{{posts.length}}</span>  КОММЕНТАРИИ: <span>{{comments}}</span>
   </div>
 
 </nb-card>
@@ -22,5 +21,4 @@
   </div>
 
 </nb-card>
-<app-post *ngFor="let post of posts" [post]="post"></app-post>
 
