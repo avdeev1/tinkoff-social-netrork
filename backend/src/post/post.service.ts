@@ -25,7 +25,7 @@ export class PostService {
     return post;
   }
 
-  getPostsForUser(id): Promise<Post[]> {
+  async getPostsForUser(id): Promise<Post[]> {
     return this.postRepo.find({relations: ['author'],
       where: {
         author: {

@@ -4,8 +4,7 @@ import {
   Get,
   Param,
   Headers,
-  UseInterceptors,
-  NotFoundException, HttpException
+  UseInterceptors, HttpException, Request
 } from '@nestjs/common';
 import {UserService} from './user.service';
 import {User as UserModel} from "../models/user";
@@ -18,8 +17,8 @@ export class UserController {
   }
 
   @Get('/profile')
-  async profile(@Headers('Authorization') tok: string): Promise<UserModel> {
-    return this.authService.getUserByToken(tok);
+  async profile(@Headers('authorization') tok: string): Promise<UserModel> {
+    return this.authService.getUserByToken(tok.split(' ')[1]);
   }
 
   @Get('/:id')
