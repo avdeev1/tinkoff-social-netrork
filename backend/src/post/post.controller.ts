@@ -6,16 +6,15 @@ import {
   UseInterceptors,
   Request,
   Post,
-  Body, Param, Headers,
+  Body, Param, HttpException,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Post as PostModel } from '../models/post';
 import { PostService } from './post.service';
-import {AuthService} from "../auth/auth.service";
 
 @Controller('posts')
 export class PostController {
-  constructor(private readonly postService: PostService, private authService: AuthService) {}
+  constructor(private readonly postService: PostService) {}
 
   @Get()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -28,6 +27,15 @@ export class PostController {
   @UseGuards(AuthGuard())
   async getPostsForProfile(@Request() req): Promise<PostModel[]> {
     return await this.postService.getPostsForUser(req.user.id);
+  }
+
+  @Get('/:id')
+  async getPostsById(@Param('id') id): Promise<PostModel | Object> {
+    const res = await this.postService.getPostById(id);
+    if (res) {
+      return res;
+    }
+    return new HttpException(`Post with id ${id} not found`, 404);
   }
 
   @Get('/user/:id')

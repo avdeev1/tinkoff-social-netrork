@@ -3,22 +3,23 @@ import {
   Controller,
   Get,
   Param,
-  Headers,
-  UseInterceptors, HttpException, Request
+  UseInterceptors, HttpException, Request, UseGuards
 } from '@nestjs/common';
 import {UserService} from './user.service';
 import {User as UserModel} from "../models/user";
-import {AuthService} from "../auth/auth.service";
+import {AuthGuard} from '@nestjs/passport';
 
 @Controller('user')
 export class UserController {
 
-  constructor(private userService: UserService, private authService: AuthService) {
+  constructor(private userService: UserService) {
   }
 
   @Get('/profile')
-  async profile(@Headers('authorization') tok: string): Promise<UserModel> {
-    return this.authService.getUserByToken(tok.split(' ')[1]);
+  @UseInterceptors(ClassSerializerInterceptor)
+  @UseGuards(AuthGuard())
+  async profile(@Request() req): Promise<UserModel> {
+    return req.user;
   }
 
   @Get('/:id')

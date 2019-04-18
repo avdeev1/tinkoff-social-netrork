@@ -34,4 +34,8 @@ export class PostService {
       }
     });
   }
+
+  async getPostById(id: any) {
+    return this.postRepo.findOne(id, {relations: ['author']});
+  }
 }
