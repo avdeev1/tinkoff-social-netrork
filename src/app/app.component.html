@@ -5,11 +5,7 @@
   <nb-layout-column class="nav-bar" [class.notCompact]=!isCompact>
     <nb-sidebar state="compacted">
       <a href="#" (click)="toggle()"><i class="fa fa-bars"></i></a>
-      <nb-card>
-        <nb-card-body>
           <nb-menu [items]="navbarLink"> </nb-menu>
-        </nb-card-body>
-      </nb-card>
     </nb-sidebar>
   </nb-layout-column>
   <nb-layout-column class="main-content-container">

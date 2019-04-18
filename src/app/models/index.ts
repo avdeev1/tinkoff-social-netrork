@@ -18,4 +18,5 @@ export interface IUser {
   login: string;
   avatar?: string;
   postIds: number[];
+  description?: string;
 }

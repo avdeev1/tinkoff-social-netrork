@@ -28,6 +28,7 @@ import { HeaderComponent } from './header/header.component';
 import { SignInFormComponent } from './sign-in-form/sign-in-form.component';
 import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
 import { ShowPostsComponent } from './show-posts/show-posts.component';
+import { SettingComponent } from './setting/setting.component';
 import { SignFormComponent } from './sign-form/sign-form.component';
 import { SwitcherForFormComponent } from './switcher-for-form/switcher-for-form.component';
 import { UserInterceptor } from "./services/user.interceptor";
@@ -45,7 +46,8 @@ import { UserInterceptor } from "./services/user.interceptor";
     ProfileHeaderComponent,
     ShowPostsComponent,
     SignFormComponent,
-    SwitcherForFormComponent
+    SwitcherForFormComponent,
+    SettingComponent
   ],
   imports: [
     FormsModule,
