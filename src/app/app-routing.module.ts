@@ -26,7 +26,7 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'user/:login',
+    path: 'user/:id',
     component: ProfileHeaderComponent,
     pathMatch: 'full',
   },
