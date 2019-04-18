@@ -11,7 +11,12 @@ export class UserService {
     private configService: ConfigService) {}
 
   getUser(id: number): Promise<User> {
-    return this.userRepo.findOne(id,{select: ["id", "avatar", "login", "description", "registrationDate"]});
+    return this.userRepo
+      .createQueryBuilder('user')
+      .select(['user.id', 'user.login','user.avatar', 'user.description', 'user.registrationDate'])
+      .where({id})
+      .loadRelationCountAndMap('user.comments', 'user.comments')
+      .getOne();
   }
 }
 

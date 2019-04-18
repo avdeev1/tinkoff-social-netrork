@@ -8,7 +8,6 @@ import {
 import {UserService} from './user.service';
 import {User as UserModel} from "../models/user";
 import {AuthGuard} from '@nestjs/passport';
-import {log} from "util";
 
 @Controller('user')
 export class UserController {
@@ -20,7 +19,7 @@ export class UserController {
   @UseInterceptors(ClassSerializerInterceptor)
   @UseGuards(AuthGuard())
   async profile(@Request() req): Promise<UserModel> {
-    return req.user;
+    return this.userService.getUser(req.user.id);
   }
 
   @Get('/:id')

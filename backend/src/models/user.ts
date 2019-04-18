@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany} from 'typeorm';
 import { Exclude, Expose } from 'class-transformer';
+import {Comment} from "./comment";
 
 @Entity()
 export class User {
@@ -19,6 +20,9 @@ export class User {
 
   @Column({ nullable: true })
   description: string;
+
+  @OneToMany(type => Comment, comment => comment.author)
+  comments: Comment[];
 
   @Column({ nullable: true })
   avatar: string;
