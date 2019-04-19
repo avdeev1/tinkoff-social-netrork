@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from '../services/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,14 +8,22 @@ import {AuthService} from '../services/auth.service';
   styleUrls: ['./header.component.less']
 })
 export class HeaderComponent implements OnInit {
+
+  @ViewChild('search')
+  search: ElementRef;
+
   get isSignedIn() {
     return this.service.isAuth;
   }
 
-  constructor(private service: AuthService) {
+  constructor(private service: AuthService, private router: Router) {
   }
 
   ngOnInit() {
+  }
+
+  handleSearch() {
+    this.router.navigate( ['search', this.search.nativeElement.value]);
   }
 
   handleClickExit() {
@@ -28,5 +37,4 @@ export class HeaderComponent implements OnInit {
   onSignUpClick() {
     this.service.openSignUpDialog();
   }
-
 }

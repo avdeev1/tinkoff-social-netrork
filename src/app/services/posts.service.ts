@@ -243,6 +243,9 @@ export class PostsService {
     });
   }
 
+  getPostsForSearch(str: string) {
+  }
+
   getCountOfComments() {
     return this.getPostsForProfilePage().reduce((sum, post) => sum + post.comments, 0);
   }

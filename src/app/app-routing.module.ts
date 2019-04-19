@@ -46,7 +46,7 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'search',
+    path: 'search/:searchWord',
     component: ShowPostsComponent,
     data: {}
   }

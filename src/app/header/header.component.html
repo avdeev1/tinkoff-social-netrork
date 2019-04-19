@@ -4,7 +4,7 @@
   </div>
 
   <div class="search">
-    <input class="search-input" status="info" fieldSize="small" type="text" nbInput placeholder="Поиск">
+    <input (keyup.enter)="handleSearch()" #search class="search-input" status="info" fieldSize="small" type="text" nbInput placeholder="Поиск">
   </div>
 
   <div
