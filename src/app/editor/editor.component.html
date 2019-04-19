@@ -2,9 +2,11 @@
   <nb-card-header>Публикация</nb-card-header>
   <nb-card-body>
     <form [formGroup]="editorForm" (submit)="onSubmit()">
-      <input formControlName="headline" id="input_header" class="add-margin-bottom" type="text" nbInput fullWidth status="info" maxlength="100"
+      <input formControlName="headline" id="input_header" class="add-margin-bottom" type="text" nbInput fullWidth
+             status="info" maxlength="100"
              placeholder="Заголовок">
-      <textarea formControlName="text" id="input_text" class="add-margin-bottom" nbInput fullWidth status="info" maxlength="2000"
+      <textarea #textarea formControlName="text" id="input_text" class="add-margin-bottom" nbInput fullWidth
+                status="info" maxlength="2000"
                 placeholder="Текст" rows="10"></textarea>
 
       <app-loading-button (onFileSelect)="handlerEditor($event)"></app-loading-button>
@@ -19,7 +21,10 @@
                  placeholder="Выберите метки">
         <nb-option *ngFor="let tag of tags" [value]="tag.id">{{tag.name}}</nb-option>
       </nb-select>
-      <button type="submit" nbButton class="add-margin-right" status="info" [disabled]="!editorForm.valid">Опубликовать</button>
+      <button type="submit" nbButton class="add-margin-right" status="info" [disabled]="!editorForm.valid">
+        Опубликовать
+      </button>
     </form>
   </nb-card-body>
 </nb-card>
+

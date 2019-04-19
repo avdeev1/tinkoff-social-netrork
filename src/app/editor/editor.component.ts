@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PostsService} from '../posts.service';
+import * as SimpleMDE from 'simplemde';
 
 @Component({
   selector: 'app-editor',
@@ -17,8 +18,12 @@ export class EditorComponent implements OnInit {
     {name: 'Романтика', id: 3},
     {name: 'Историческое', id: 4}
   ];
+  @ViewChild('textarea')
+  textarea: ElementRef;
+  simplemde: SimpleMDE;
 
-  constructor(private fb: FormBuilder, private postService: PostsService) { }
+  constructor(private fb: FormBuilder, private postService: PostsService) {
+  }
 
   ngOnInit() {
     this.editorForm = this.fb.group({
@@ -26,9 +31,15 @@ export class EditorComponent implements OnInit {
       text: ['', Validators.required],
       tags: ['']
     });
+    this.simplemde = new SimpleMDE({
+      element: this.textarea.nativeElement,
+      spellChecker: false
+    });
   }
 
-  isFile() { return !!this.file; }
+  isFile() {
+    return !!this.file;
+  }
 
   handlerEditor(file: File) {
     this.file = file;
@@ -46,5 +57,6 @@ export class EditorComponent implements OnInit {
     const {headline, text} = this.editorForm.value;
     const tags = this.makeStringFromTags();
     this.postService.createPost(headline, text, this.file, tags);
+    console.log(text);
   }
 }
