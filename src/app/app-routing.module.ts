@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import {ShowPostsComponent} from "./show-posts/show-posts.component";
 import {SettingComponent} from './setting/setting.component';
 import {ProfileComponent} from "./profile/profile.component";
+import {ProfileHeaderComponent} from "./profile-header/profile-header.component";
+import {PostDetailComponent} from './post-detail/post-detail.component';
 const routes: Routes = [
   {
     path: '',

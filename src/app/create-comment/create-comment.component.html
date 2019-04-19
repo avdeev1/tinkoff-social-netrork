@@ -1,0 +1,25 @@
+<nb-card>
+  <nb-card-header>
+    <div class="info-block-container">
+      Оставьте комментарий
+    </div>
+  </nb-card-header>
+  <div *ngIf="isAuth; then makeComment; else notAuth">
+  </div>
+
+  <ng-template #makeComment>
+    <nb-card-body>
+      <input type="text" id="input_text" nbInput status="info" fullWidth maxlength="100" value="" placeholder="Введите комментарий" rows="1">
+      <button nbButton class="submit-button" status="info" size="xsmall" (click)="submitted()">
+        Отправить
+      </button>
+    </nb-card-body>
+  </ng-template>
+
+  <ng-template #notAuth>
+    <nb-card-body>
+      <div>Зарегистрируйтесь</div>
+    </nb-card-body>
+  </ng-template>
+</nb-card>
+

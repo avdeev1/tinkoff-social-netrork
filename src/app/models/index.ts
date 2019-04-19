@@ -26,3 +26,9 @@ export interface IComment {
   author: IUser;
   post: IPost;
 }
+
+export interface IComment {
+  user: IUser;
+  date: number;
+  text: string;
+}
