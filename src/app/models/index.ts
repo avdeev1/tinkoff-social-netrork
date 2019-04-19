@@ -16,6 +16,7 @@ export interface IUser {
   description?: string;
   posts: IPost[];
   comments: IComment[];
+  registrationDate: number;
 }
 
 export interface IComment {

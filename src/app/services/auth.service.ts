@@ -66,7 +66,6 @@ export class AuthService {
           this.closeForm();
         }),
         shareReplay());
-
   }
 
   getToken(): string {
@@ -84,7 +83,6 @@ export class AuthService {
         localStorage.removeItem('isAuth');
         localStorage.removeItem('userName');
         this.isAuth.next(false);
-        this.closeForm();
       }));
   }
 }

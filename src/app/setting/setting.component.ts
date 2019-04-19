@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../services/user.service';
 import {PostsService} from '../services/posts.service';
-import {IPost, IUser} from '../models';
-import {HttpClient} from "@angular/common/http";
+import {IUser} from '../models';
 
 @Component({
   selector: 'app-setting',
@@ -11,26 +10,21 @@ import {HttpClient} from "@angular/common/http";
 })
 export class SettingComponent implements OnInit {
 
-  constructor(
-    private postService: PostsService,
-    private userService: UserService,
-    private http: HttpClient
-  ) {
-    this.http.get<IUser>('api/user/profile').subscribe(res => {
-      this.user = res;
-      this.isLoad = true;
-    });
-  }
 
   user: IUser;
   isLoad: boolean = false;
   avatar: string = 'https://faucethub.io/assets/img/avatars/3523614_1531331166.jpg';
 
+  constructor(
+    private postService: PostsService,
+    private userService: UserService,
+  ) {}
+
 
   ngOnInit() {
-  }
-
-  getLoad() {
-    return this.isLoad;
+    this.userService.getProfile().subscribe(res => {
+      this.user = res;
+      this.isLoad = true;
+    });
   }
 }

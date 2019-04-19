@@ -3,7 +3,7 @@
     <img [src]="user.avatar || avatar" alt="">
     <div class="user-info">
       <div class="user-name">{{user.login}}</div>
-      <div class="count-div">В сервисе дней: 13</div>
+      <div class="count-div">В сервисе дней: {{dayss}}</div>
     </div>
     <a *ngIf="isProfile" class="img-edit" routerLink="setting">
       <i class="fa fa-gear" aria-hidden="true"></i>
