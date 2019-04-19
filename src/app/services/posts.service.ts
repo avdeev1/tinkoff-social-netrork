@@ -27,4 +27,8 @@ export class PostsService {
   getPostsForMainPage(): Observable<IPost[]> {
     return this.http.get<IPost[]>('api/posts');
   }
+
+  getPostById(id: string): Observable<IPost> {
+    return this.http.get<IPost>(`api/posts/${id}`);
+  }
 }

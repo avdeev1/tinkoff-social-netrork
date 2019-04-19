@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {IComment, IPost} from "../models";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {CommentsService} from "../services/comments.service";
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-create-comment',
@@ -7,14 +11,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateCommentComponent implements OnInit {
 
-  isAuth() {
-    return true;
-  }
+  @Input() post: IPost;
+  constructor(private fb: FormBuilder, private authService: AuthService, private commentService: CommentsService) { }
 
-  constructor() { }
+  private commentForm: FormGroup;
+  @Output() refresh: EventEmitter<IComment> = new EventEmitter();
+
+  get isAuth(): boolean {
+    return !!(this.authService.getToken());
+  }
 
   ngOnInit() {
+    this.commentForm = this.fb.group({
+      comment: ['', [Validators.required]]
+    });
   }
 
-  submitted() {}
+  leaveComment() {
+    const comment = { text: this.commentForm.value.comment };
+    this.commentService.leaveComment(this.post, comment).subscribe( res => {
+      this.refresh.emit(res);
+    });
+    this.commentForm.reset();
+  }
 }

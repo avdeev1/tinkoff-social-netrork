@@ -35,8 +35,9 @@ import { UserInterceptor } from "./services/user.interceptor";
 import { ProfileComponent } from './profile/profile.component';
 import { SignFormComponent } from './sign-form/sign-form.component';
 import { SwitcherForFormComponent } from './switcher-for-form/switcher-for-form.component';
-import {CommentsService} from './comments.service';
-import {PostsService} from './posts.service';
+import { CommentsService } from './services/comments.service';
+import { PostsService } from "./services/posts.service";
+import { UserService } from "./services/user.service";
 
 @NgModule({
   declarations: [
@@ -57,7 +58,7 @@ import {PostsService} from './posts.service';
     HeaderComponent,
     ShowPostsComponent,
     CreateCommentComponent,
-    PostDetailComponent
+    PostDetailComponent,
   ],
   imports: [
     FormsModule,
@@ -86,6 +87,7 @@ import {PostsService} from './posts.service';
     ResolversModule,
     CommentsService,
     PostsService,
+    UserService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: UserInterceptor,

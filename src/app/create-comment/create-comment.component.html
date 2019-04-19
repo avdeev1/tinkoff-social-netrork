@@ -9,10 +9,13 @@
 
   <ng-template #makeComment>
     <nb-card-body>
-      <input type="text" id="input_text" nbInput status="info" fullWidth maxlength="100" value="" placeholder="Введите комментарий" rows="1">
-      <button nbButton class="submit-button" status="info" size="xsmall" (click)="submitted()">
-        Отправить
-      </button>
+      <form [formGroup]="commentForm">
+        <input type="text" id="input_text" formControlName="comment" nbInput status="info" fullWidth maxlength="100" value=""
+               placeholder="Введите комментарий" rows="1">
+        <button nbButton class="submit-button" status="info" size="xsmall" (click)="leaveComment()">
+          Отправить
+        </button>
+      </form>
     </nb-card-body>
   </ng-template>
 

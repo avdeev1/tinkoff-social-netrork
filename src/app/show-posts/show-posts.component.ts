@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PostsService} from '../services/posts.service';
 import {IPost} from '../models';
-import {forkJoin} from "rxjs";
-import {delay} from "rxjs/operators";
 
 @Component({
   selector: 'app-show-posts',
@@ -12,16 +10,21 @@ import {delay} from "rxjs/operators";
 export class ShowPostsComponent implements OnInit {
 
   posts: IPost[];
-  isLoad: boolean = false;
+  isLoadData: boolean = false;
 
   constructor(private postService: PostsService) {
   }
 
+  get isLoad(): boolean {
+    return this.isLoadData;
+  }
+
 
   ngOnInit() {
-    this.postService.getPostsForMainPage().subscribe(res => {
+    this.postService.getPostsForMainPage()
+      .subscribe(res => {
       this.posts = res;
-      this.isLoad = true;
+      this.isLoadData = true;
     });
   }
 }

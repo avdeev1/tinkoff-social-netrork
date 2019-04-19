@@ -1,13 +1,14 @@
 <app-post [post]="post"></app-post>
-<nb-card *ngFor="let comm of comments">
+<h1>КОММЕНТАРИИ</h1>
+<nb-card *ngFor="let comment of comments; let i = index">
   <nb-card-header>
     <div class="info-block-container">
-      <app-info-post-links [text]="comm.user.login" [image]="comm.user.avatar" class="block"></app-info-post-links>
-      <app-info-post-links [text]="comm.date" icon="calendar-o" class="block"></app-info-post-links>
+      <app-info-post-links [text]="comment.author.login" [image]="comment.author.avatar" [id]="comment.author.id" class="block"></app-info-post-links>
+      <app-info-post-links [text]="dates[i]" icon="calendar-o" class="block"></app-info-post-links>
     </div>
   </nb-card-header>
   <nb-card-body>
-    {{comm.text}}
+    {{comment.text}}
   </nb-card-body>
 </nb-card>
-<app-create-comment></app-create-comment>
+<app-create-comment [post]="post" (refresh)="refresh($event)"></app-create-comment>

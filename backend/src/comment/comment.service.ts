@@ -5,14 +5,13 @@ import {Comment} from "../models/comment";
 import {Injectable} from "@nestjs/common";
 import {User} from "../models/user";
 import {Post} from "../models/post";
-import {PostService} from "../post/post.service";
 
 @Injectable()
 export class CommentService {
 
   constructor(
     @InjectRepository(Comment) private readonly commentRepo: Repository<Comment>,
-    private configService: ConfigService, private postSevice: PostService) {
+    private configService: ConfigService) {
   }
 
   async getCommentsForPost(id): Promise<Comment[]> {
@@ -24,24 +23,13 @@ export class CommentService {
       .getMany();
   }
 
-  async create(commentDto: Comment, user: User, postId: number): Promise<Comment> {
+  async create(commentDto: Comment, user: User, post: Post): Promise<Comment> {
 
     const comment = this.commentRepo.create(commentDto);
     comment.author = user;
-    comment.post = await this.postSevice.getPostById(postId);
+    comment.post = post;
 
     await this.commentRepo.save(comment);
     return comment;
-  }
-
-  async countForUser(id: number): Promise<number> {
-    return this.commentRepo.count({
-      relations: ['author'],
-      where: {
-        author: {
-          id
-        }
-      }
-    });
   }
 }
