@@ -10,21 +10,16 @@ import {IPost} from '../models';
 export class ShowPostsComponent implements OnInit {
 
   posts: IPost[];
-  isLoadData: boolean = false;
+  isDataLoaded: boolean = false;
 
   constructor(private postService: PostsService) {
   }
 
-  get isLoad(): boolean {
-    return this.isLoadData;
-  }
-
-
   ngOnInit() {
     this.postService.getPostsForMainPage()
       .subscribe(res => {
-      this.posts = res;
-      this.isLoadData = true;
-    });
+        this.posts = res;
+        this.isDataLoaded = true;
+      });
   }
 }

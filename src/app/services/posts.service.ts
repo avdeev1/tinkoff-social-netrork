@@ -10,9 +10,6 @@ import {IPost, IUser} from "../models";
 })
 export class PostsService {
 
-  user: IUser;
-  posts: IPost[];
-
   constructor(private userService: UserService, private http: HttpClient) {
   }
 
