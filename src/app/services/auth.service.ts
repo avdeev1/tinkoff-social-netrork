@@ -46,16 +46,17 @@ export class AuthService {
   }
 
   register(login: string, password: string, confirmPassword: string) {
-    return this.http.post<User>('/auth/register', {login, password, confirmPassword}).pipe(tap(data => {
+    return this.http.post<User>('/api/auth/register', {login, password, confirmPassword}).pipe(tap(data => {
       localStorage.setItem('token', data.token);
       localStorage.setItem('isAuth', 'true');
       localStorage.setItem('userName', login);
       this.isAuth.next(true);
+      this.closeForm()
     }), shareReplay());
   }
 
   login(login: string, password: string ) {
-    return this.http.post<User>('/auth/', {login, password})
+    return this.http.post<User>('/api/auth/', {login, password})
       .pipe(
         tap( data => {
           localStorage.setItem('token', data.token);
@@ -67,9 +68,15 @@ export class AuthService {
         shareReplay());
 
   }
+
   getToken(): string {
       return localStorage.getItem('token');
   }
+
+  getUserName(): string {
+    return localStorage.getItem('userName');
+  }
+
   logout(): Observable<boolean> {
     return of(true)
       .pipe(tap(() => {

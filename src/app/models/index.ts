@@ -2,18 +2,26 @@ export interface IPost {
   id: number;
   title: string;
   text: string;
-  createdAt: string;
-  tags: string[];
+  createdAt: number;
   author: IUser;
   image?: string;
-  comments: number;
+  comments: IComment[];
   draft: boolean;
 }
 
 export interface IUser {
   id: number;
-  name: string;
+  login: string;
   avatar?: string;
-  postIds: number[];
   description?: string;
+  posts: IPost[];
+  comments: IComment[];
+}
+
+export interface IComment {
+  id: number;
+  text: string;
+  createdAt: number;
+  author: IUser;
+  post: IPost;
 }

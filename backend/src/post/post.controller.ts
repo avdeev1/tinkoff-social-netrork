@@ -12,7 +12,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { Post as PostModel } from '../models/post';
 import { PostService } from './post.service';
 
-@Controller('posts')
+@Controller('api/posts')
 export class PostController {
   constructor(private readonly postService: PostService) {}
 

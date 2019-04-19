@@ -7,7 +7,7 @@ import {Component, Input, OnInit } from '@angular/core';
 })
 export class InfoPostLinksComponent implements OnInit {
 
-  @Input() id: number = -1;
+  @Input() id: number;
   @Input() text: string;
   @Input() image: string;
   @Input() icon: string;

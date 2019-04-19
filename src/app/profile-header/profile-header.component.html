@@ -1,16 +1,16 @@
-<nb-card>
+<nb-card class="profile-header">
   <div class="img-container">
-    <img [src]="user.avatar" alt="">
+    <img [src]="user.avatar || avatar" alt="">
     <div class="user-info">
-      <div class="user-name">{{user.name}}</div>
+      <div class="user-name">{{user.login}}</div>
       <div class="count-div">В сервисе дней: 13</div>
     </div>
-    <a class="img-edit" routerLink="setting">
+    <a *ngIf="isProfile" class="img-edit" routerLink="setting">
       <i class="fa fa-gear" aria-hidden="true"></i>
     </a>
   </div>
   <div class="posts-and-likes">
-    ПОСТЫ: <span>{{posts.length}}</span>  КОММЕНТАРИИ: <span>{{comments}}</span>
+    ПОСТЫ: <span>{{user.posts}}</span>  КОММЕНТАРИИ: <span>{{user.comments}}</span>
   </div>
 
 </nb-card>

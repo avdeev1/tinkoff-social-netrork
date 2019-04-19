@@ -11,13 +11,11 @@ import {Observable} from "rxjs";
 export class ShowPostsComponent implements OnInit {
 
   posts: Observable<IPost[]>;
-  postsDB: Observable<IPost[]>;
 
   constructor(private postService: PostsService) { }
 
   ngOnInit() {
     this.posts = this.postService.getPostsForMainPage();
-    this.postsDB = this.postService.getPostsFromDB();
   }
 
 }

@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {ShowPostsComponent} from "./show-posts/show-posts.component";
-import {ProfileHeaderComponent} from "./profile-header/profile-header.component";
-import {ProfileComponent} from "./profile/profile.component";
 import {SettingComponent} from './setting/setting.component';
+import {ProfileComponent} from "./profile/profile.component";
 const routes: Routes = [
   {
     path: '',
@@ -13,7 +12,7 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    component: ProfileHeaderComponent,
+    component: ProfileComponent,
     pathMatch: 'full',
   },
   {
@@ -28,7 +27,7 @@ const routes: Routes = [
   },
   {
     path: 'user/:id',
-    component: ProfileHeaderComponent,
+    component: ProfileComponent,
     pathMatch: 'full',
   },
   {

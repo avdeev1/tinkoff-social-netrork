@@ -16,6 +16,7 @@ export class UserService {
       .select(['user.id', 'user.login','user.avatar', 'user.description', 'user.registrationDate'])
       .where({id})
       .loadRelationCountAndMap('user.comments', 'user.comments')
+      .loadRelationCountAndMap('user.posts', 'user.posts')
       .getOne();
   }
 }

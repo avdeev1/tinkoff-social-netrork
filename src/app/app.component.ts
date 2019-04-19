@@ -1,9 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { MENU_NAVBAR_LINK } from './menu-service-items';
 import { NbSidebarService } from '@nebular/theme';
-import { AuthService } from './services/auth.service';
-import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -17,23 +14,11 @@ export class AppComponent {
   isCompact = true;
 
   constructor(
-    private sidebarService: NbSidebarService,
-    private router: Router,
-    private authService: AuthService) {}
+    private sidebarService: NbSidebarService) {}
 
   toggle() {
     this.isCompact = !this.isCompact;
     this.sidebarService.toggle(true);
     return false;
-  }
-  get isAuth(): Observable<boolean> {
-    return this.AuthService.isAuth;
-  }
-
-  logout() {
-    this.authService.logout()
-      .subscribe(() => {
-        this.router.navigateByUrl('/');
-      });
   }
 }

@@ -1,6 +1,7 @@
 import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany} from 'typeorm';
 import { Exclude, Expose } from 'class-transformer';
 import {Comment} from "./comment";
+import {Post} from "./post";
 
 @Entity()
 export class User {
@@ -8,7 +9,6 @@ export class User {
   id: number;
 
   @Column()
-  @Expose({ name: 'name' })
   login: string;
 
   @Column()
@@ -23,6 +23,9 @@ export class User {
 
   @OneToMany(type => Comment, comment => comment.author)
   comments: Comment[];
+
+  @OneToMany(type => Post, post => post.author)
+  posts: Post[];
 
   @Column({ nullable: true })
   avatar: string;

@@ -12,10 +12,9 @@ import {UserService} from "../services/user.service";
 })
 export class ProfileComponent implements OnInit {
 
-  user: Observable<IUser>;
+  user: IUser;
   posts: Observable<IPost[]>;
-  id: number;
-  comments: number;
+  isLoad = false;
 
   constructor(
     private router: ActivatedRoute,
@@ -24,10 +23,20 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.id = parseInt(this.router.snapshot.paramMap.get('id'));
-    this.user = this.userService.getUserForProfilePage(this.id);
-    this.posts = this.postService.getPostsForProfilePage(this.id);
-    this.comments = this.postService.getCountOfComments(this.id);
+    const id = this.router.snapshot.paramMap.get('id');
+    if (id) {
+      this.posts = this.postService.getPostsForUserPage(id);
+      this.userService.getUserById(id).subscribe(res => {
+        this.user = res;
+        this.isLoad = true;
+      });
+    } else {
+      this.posts = this.postService.getPostsForProfilePage();
+      this.userService.getProfile().subscribe(res => {
+        this.user = res;
+        this.isLoad = true;
+      });
+    }
   }
 
 }

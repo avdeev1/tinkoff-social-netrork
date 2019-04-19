@@ -1,9 +1,9 @@
  <nb-card class="post-container" (click)="goToPostPage()">
    <nb-card-header>
      <div class="info-block-container">
-       <app-info-post-links [text]="post.author.name" [image]="post.author.avatar" class="block" [id]="post.author.id"></app-info-post-links>
+       <app-info-post-links [text]="post.author.login" [image]="post.author.avatar" class="block" [id]="post.author.id"></app-info-post-links>
        <app-info-post-links [text]="1" icon="heart" class="block"></app-info-post-links>
-       <app-info-post-links [text]="1" icon="commenting-o" class="block"></app-info-post-links>
+       <app-info-post-links [text]="post.comments.toString()" icon="commenting-o" class="block"></app-info-post-links>
        <app-info-post-links [text]="date" icon="calendar-o" class="block"></app-info-post-links>
      </div>
      <h2>{{post.title}}</h2>

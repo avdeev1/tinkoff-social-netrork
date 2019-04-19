@@ -12,7 +12,7 @@ import { Comment as CommentModel } from "../models/comment";
 import {CommentService} from "./comment.service";
 import {AuthGuard} from "@nestjs/passport";
 
-@Controller('comments')
+@Controller('api/comments')
 export class CommentController {
 
   constructor(private commentService: CommentService) {}
@@ -20,18 +20,6 @@ export class CommentController {
   @Get('post/:id')
   async comment(@Param('id') id): Promise<CommentModel[]> {
     return await this.commentService.getCommentsForPost(id);
-  }
-
-  @Get('/count/profile')
-  @UseInterceptors(ClassSerializerInterceptor)
-  @UseGuards(AuthGuard())
-  async countForProfile(@Request() req): Promise<number> {
-    return await this.commentService.countForUser(req.user.id);
-  }
-
-  @Get('/count/:id')
-  async countForUser(@Param('id') id: number): Promise<number> {
-    return await this.commentService.countForUser(id);
   }
 
   @Post('/create')

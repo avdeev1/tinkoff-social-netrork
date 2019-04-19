@@ -1,9 +1,9 @@
-<form>
+<form *ngIf="getLoad()">
 <nb-card class="nb-card-user">
   <div class="img-container">
-    <img [src]="user.profilePhotoSrc" alt="">
+    <img [src]="user.avatar || avatar" alt="">
     <div class="user-info">
-      <div class="user-name">{{user.user}}</div>
+      <div class="user-name">{{user.login}}</div>
 
       <div class="changeImage"><a [routerLink]='' ><i class="fa fa-pencil" aria-hidden="true"></i> Загрузить картинку</a></div>
     </div>
