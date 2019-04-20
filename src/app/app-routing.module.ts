@@ -1,11 +1,12 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { AppComponent} from './app.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {EditorComponent} from './editor/editor.component';
+import {PostDetailComponent} from './post-detail/post-detail.component';
+import {ProfileComponent} from './profile/profile.component';
+import {SettingComponent} from './setting/setting.component';
 
 import {ShowPostsComponent} from './show-posts/show-posts.component';
-import {ProfileHeaderComponent} from './profile-header/profile-header.component';
-import {SettingComponent} from './setting/setting.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -15,38 +16,35 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    component: ProfileHeaderComponent,
-    pathMatch: 'full',
+    component: ProfileComponent,
+    data: {
+      profile: true
+    }
   },
   {
     path: 'profile/draft',
-    pathMatch: 'full',
     component: ShowPostsComponent,
   },
   {
     path: 'profile/setting',
     component: SettingComponent,
-    pathMatch: 'full',
   },
   {
-    path: 'user/:login',
-    component: ProfileHeaderComponent,
-    pathMatch: 'full',
+    path: 'user/:id',
+    component: ProfileComponent,
   },
   {
-    path: 'favorites',
+    path: 'favourites',
     component: ShowPostsComponent,
     data: {}
   },
   {
     path: 'post/:id',
-    component: ShowPostsComponent,
-    pathMatch: 'full'
+    component: PostDetailComponent,
   },
   {
     path: 'create',
-    component: EditorComponent,
-    pathMatch: 'full',
+    component: EditorComponent
   },
   {
     path: 'search/:searchWord',
@@ -59,4 +57,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

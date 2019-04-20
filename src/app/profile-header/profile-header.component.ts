@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {UserService} from '../services/user.service';
-import {PostsService} from '../services/posts.service';
-import {IPost, IUser} from '../models';
+import {Component, Input, OnInit} from '@angular/core';
+import {IUser} from '../models';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-profile-header',
@@ -10,21 +9,14 @@ import {IPost, IUser} from '../models';
 })
 export class ProfileHeaderComponent implements OnInit {
 
-  constructor(
-    private postService: PostsService,
-    private userService: UserService
-  ) {
+  @Input() user: IUser;
+  defaultAvatar: string = 'https://faucethub.io/assets/img/avatars/3523614_1531331166.jpg';
+  isProfile: boolean;
+
+  constructor(private activatedRoute: ActivatedRoute) {
   }
-
-  user: IUser;
-  posts: IPost[];
-  comments: number;
-
 
   ngOnInit() {
-    this.user = this.userService.user;
-    this.posts = this.postService.getPostsForProfilePage();
-    this.comments = this.postService.getCountOfComments();
+    this.isProfile = this.activatedRoute.snapshot.data.profile;
   }
-
 }

@@ -1,26 +1,23 @@
-
-<nb-card class="nb-card-user">
+<nb-card class="profile-header">
   <div class="img-container">
-    <img [src]="user.profilePhotoSrc" alt="">
+    <img [src]="user.avatar || defaultAvatar" alt="">
     <div class="user-info">
-      <div class="user-name">{{user.user}}</div>
-      <div class="count-div">В сервисе: 13 дней</div>
+      <div class="user-name">{{user.login}}</div>
+      <div class="count-div">В сервисе дней: {{user.registrationDate | getDiffDateFromNow}}</div>
     </div>
-    <a class="img-edit" routerLink="setting">
+    <a *ngIf="isProfile" class="img-edit" routerLink="setting">
       <i class="fa fa-gear" aria-hidden="true"></i>
     </a>
   </div>
   <div class="posts-and-likes">
-    ПОСТЫ: <span>{{user.postIds.length}}</span>  КОММЕНТАРИИ: <span>{{comments}}</span>
+    ПОСТЫ: <span>{{user.posts}}</span>  КОММЕНТАРИИ: <span>{{user.comments}}</span>
   </div>
-
 </nb-card>
+
 <nb-card>
   <div class="about-user">
     <span>О Себе:</span> <br>
     <span>{{user.description}}</span>
   </div>
-
 </nb-card>
-<app-post *ngFor="let post of posts" [post]="post"></app-post>
 

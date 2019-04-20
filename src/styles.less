@@ -22,6 +22,11 @@
   overflow: inherit;
   padding: 0;
 }
+
+.nb-theme-default nb-card {
+  box-shadow: none;
+}
+
 .menu-title{
  padding-top: 0.4rem;
 }
@@ -36,6 +41,10 @@
 
 .nb-theme-default nb-sidebar.compacted nb-menu .menu-items>.menu-item i, .nb-theme-default nb-menu .menu-item .menu-icon {
   margin: 0;
+}
+
+.nb-theme-default nb-sidebar.compacted nb-menu .menu-item a.active::before {
+  background-color: #47a4ff;
 }
 
 .nb-theme-default nb-menu .menu-item a {
