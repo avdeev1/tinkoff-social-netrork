@@ -1,23 +1,35 @@
- <nb-card class="post-container" (click)="goToPostPage()">
-   <nb-card-header>
-     <div class="info-block-container">
-       <app-info-post-links [text]="post.author.login" [image]="post.author.avatar" class="block" [id]="post.author.id"></app-info-post-links>
-       <app-info-post-links [text]="1" icon="heart" class="block"></app-info-post-links>
-       <app-info-post-links [text]="post.comments.toString()" icon="commenting-o" class="block"></app-info-post-links>
-       <app-info-post-links [text]="post.createdAt | formatDate" icon="calendar-o" class="block"></app-info-post-links>
-     </div>
-     <h2>{{post.title}}</h2>
-     <div class="tags-links">
-       <app-tags [tags]="[1, 2]" class="tags"></app-tags>
-     </div>
-   </nb-card-header>
-   <nb-card-body>
-     <div *ngIf="post.image" class="div-img">
-       <img [src]="post.image" alt="">
-     </div>
-     <span class="postText">
-       <app-text-post [text]="post.text" [extendable]="extendable"></app-text-post>
+<nb-card (click)="goToPostPage()" class="post-container">
+  <nb-card-header>
+    <div class="info-block-container">
+      <app-info-post-links [id]="post.author.id" [image]="post.author.avatar" [text]="post.author.login"
+                           class="block"></app-info-post-links>
+      <app-info-post-links [text]="1" class="block" icon="heart"></app-info-post-links>
+      <app-info-post-links [text]="post.comments.toString()" class="block" icon="commenting-o"></app-info-post-links>
+      <app-info-post-links [text]="post.createdAt | formatDate" class="block" icon="calendar-o"></app-info-post-links>
+    </div>
+    <h2>{{post.title}}</h2>
+    <div class="tags-links">
+      <app-tags [tags]="[1, 2]" class="tags"></app-tags>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <div *ngIf="post.image" class="div-img">
+      <img [src]="post.image" alt="">
+    </div>
+    <span class="postText">
+       <ng-container *ngIf="extendable; then notExtend; else extend">
+       </ng-container>
+
+       <ng-template #notExtend>
+         <app-text-post [text]="post.text"></app-text-post>
+       </ng-template>
+
+       <ng-template #extend>
+         <span>
+          {{post.text}}
+         </span>
+       </ng-template>
      </span>
-   </nb-card-body>
- </nb-card>
+  </nb-card-body>
+</nb-card>
 

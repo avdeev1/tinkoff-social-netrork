@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from '../services/user.service';
 import {PostsService} from '../services/posts.service';
 import {IUser} from '../models';
+import {finalize} from "rxjs/operators";
 
 @Component({
   selector: 'app-setting',
@@ -22,9 +23,12 @@ export class SettingComponent implements OnInit {
 
 
   ngOnInit() {
-    this.userService.getProfile().subscribe(res => {
-      this.user = res;
-      this.isLoad = true;
+    this.userService.getProfile()
+      .pipe(finalize(() => {
+        this.isLoad = true;
+      }))
+      .subscribe(res => {
+        this.user = res;
     });
   }
 }

@@ -17,8 +17,6 @@ export class ProfileHeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe(data => {
-      this.isProfile = data.profile;
-    });
+    this.isProfile = this.activatedRoute.snapshot.data.profile;
   }
 }

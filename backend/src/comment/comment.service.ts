@@ -4,6 +4,7 @@ import {Comment} from "../models/comment";
 import {Injectable} from "@nestjs/common";
 import {User} from "../models/user";
 import {PostService} from "../post/post.service";
+import {CommentDto} from "./dto/comment.dto";
 
 @Injectable()
 export class CommentService {
@@ -22,11 +23,13 @@ export class CommentService {
       .getMany();
   }
 
-  async create(commentDto: Comment, user: User, postId: number): Promise<Comment> {
+  async create(commentDto: CommentDto, user: User): Promise<Comment> {
 
-    const comment = this.commentRepo.create(commentDto);
+    const comment = this.commentRepo.create({
+      text: commentDto.comment,
+    });
     comment.author = user;
-    comment.post = await this.postService.getPostById(postId);
+    comment.post = await this.postService.getPostById(commentDto.postId);
 
     await this.commentRepo.save(comment);
     return comment;

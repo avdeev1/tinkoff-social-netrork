@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PostsService} from '../services/posts.service';
 import {IPost} from '../models';
+import {finalize} from "rxjs/operators";
 
 @Component({
   selector: 'app-show-posts',
@@ -17,9 +18,11 @@ export class ShowPostsComponent implements OnInit {
 
   ngOnInit() {
     this.postService.getPostsForMainPage()
+      .pipe(finalize(() => {
+        this.isDataLoaded = true;
+      }))
       .subscribe(res => {
         this.posts = res;
-        this.isDataLoaded = true;
       });
   }
 }

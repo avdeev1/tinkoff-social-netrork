@@ -15,7 +15,7 @@ export class CommentsService {
     return this.http.get<IComment[]>(`api/comments/post/${id}`);
   }
 
-  createComment(postId: string, comment: Object): Observable<IComment> {
-    return this.http.post<IComment>('api/comments/create', {postId, comment});
+  createComment(postId: number, comment: string): Observable<IComment> {
+    return this.http.post<IComment>('api/comments/create', {comment, postId});
   }
 }

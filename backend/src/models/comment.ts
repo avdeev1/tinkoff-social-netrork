@@ -1,13 +1,7 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  OneToMany,
-  ManyToOne,
-} from 'typeorm';
-import { User } from './user';
-import { IsNotEmpty } from 'class-validator';
-import { Post } from './post';
+import {Column, Entity, ManyToOne, PrimaryGeneratedColumn,} from 'typeorm';
+import {User} from './user';
+import {IsNotEmpty} from 'class-validator';
+import {Post} from './post';
 
 @Entity()
 export class Comment {

@@ -4,14 +4,14 @@
       Оставьте комментарий
     </div>
   </nb-card-header>
-  <div *ngIf="isAuth; then makeComment; else notAuth">
-  </div>
+  <ng-container *ngIf="isAuth; then makeComment; else notAuth">
+  </ng-container>
 
   <ng-template #makeComment>
     <nb-card-body>
       <form [formGroup]="commentForm">
         <input type="text" id="input_text" formControlName="comment" nbInput status="info" fullWidth maxlength="100" value=""
-               placeholder="Введите комментарий" rows="1">
+               autocomplete="off" placeholder="Введите комментарий" rows="1">
         <button nbButton class="submit-button" status="info" size="xsmall" (click)="createComment()">
           Отправить
         </button>

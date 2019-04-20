@@ -34,8 +34,7 @@ export class CreateCommentComponent implements OnInit {
   }
 
   createComment() {
-    const comment = { text: this.commentForm.value.comment };
-    this.commentService.createComment(this.id, comment).subscribe(res => {
+    this.commentService.createComment(parseInt(this.id), this.commentForm.value.comment).subscribe(res => {
       this.refresh.emit(res);
     });
     this.commentForm.reset();

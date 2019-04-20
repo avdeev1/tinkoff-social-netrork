@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {forkJoin} from "rxjs";
 import {IPost, IUser} from "../models";
 import {ActivatedRoute} from "@angular/router";
 import {PostsService} from "../services/posts.service";
 import {UserService} from "../services/user.service";
+import {finalize} from "rxjs/operators";
 
 @Component({
   selector: 'app-profile',
@@ -24,10 +25,12 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getData().subscribe(([posts, user]) => {
+    this.getData().pipe(finalize(() => {
+      this.isDataLoad = true;
+    })).subscribe(([posts, user]) => {
       this.posts = posts;
       this.user = user;
-      this.isDataLoad = true;
+
     })
   }
 
