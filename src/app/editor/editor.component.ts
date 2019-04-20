@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {PostsService} from '../posts.service';
 import * as SimpleMDE from 'simplemde';
+import {PostsService} from '../services/posts.service';
 
 @Component({
   selector: 'app-editor',
@@ -37,26 +37,17 @@ export class EditorComponent implements OnInit {
     });
   }
 
-  isFile() {
+  get isFile() {
     return !!this.file;
   }
 
-  handlerEditor(file: File) {
+  onFileSelect(file: File) {
     this.file = file;
   }
 
-  makeStringFromTags(): string[] {
-    const tagsM: string[] = [];
-    for (const tag of this.tags) {
-      tagsM.push(tag.name);
-    }
-    return tagsM;
-  }
-
   onSubmit() {
-    const {headline, text} = this.editorForm.value;
-    const tags = this.makeStringFromTags();
+    const {headline, text, tags} = this.editorForm.value;
+    console.log(tags);
     this.postService.createPost(headline, text, this.file, tags);
-    console.log(text);
   }
 }

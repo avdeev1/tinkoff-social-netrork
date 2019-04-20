@@ -15,4 +15,5 @@ export interface IUser {
   user: string;
   profilePhotoSrc?: string;
   postIds: number[];
+  description?: string;
 }

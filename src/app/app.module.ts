@@ -16,7 +16,7 @@ import {
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EditorComponent } from './editor/editor.component';
-import { LoadingButtonComponent } from './loading-button/loading-button.component';
+import { UploadingButtonComponent } from './uploading-button/uploading-button.component';
 import { RouterModule } from '@angular/router';
 import { ResolversModule } from './resolvers/resolvers.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -31,6 +31,7 @@ import { HeaderComponent } from './header/header.component';
 import { SignInFormComponent } from './sign-in-form/sign-in-form.component';
 import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
 import { ShowPostsComponent } from './show-posts/show-posts.component';
+import { SettingComponent } from './setting/setting.component';
 import { SignFormComponent } from './sign-form/sign-form.component';
 import { SwitcherForFormComponent } from './switcher-for-form/switcher-for-form.component';
 
@@ -41,7 +42,7 @@ import { SwitcherForFormComponent } from './switcher-for-form/switcher-for-form.
     SignInFormComponent,
     SignUpFormComponent,
     EditorComponent,
-    LoadingButtonComponent,
+    UploadingButtonComponent,
     PostComponent,
     InfoPostLinksComponent,
     TagsComponent,
@@ -49,7 +50,8 @@ import { SwitcherForFormComponent } from './switcher-for-form/switcher-for-form.
     ProfileHeaderComponent,
     ShowPostsComponent,
     SignFormComponent,
-    SwitcherForFormComponent
+    SwitcherForFormComponent,
+    SettingComponent
   ],
   imports: [
     FormsModule,
@@ -71,7 +73,7 @@ import { SwitcherForFormComponent } from './switcher-for-form/switcher-for-form.
     NbSelectModule,
     ReactiveFormsModule
   ],
-  providers: [NbDialogService, AuthService, ResolversModule],
+  providers: [AuthService],
   bootstrap: [AppComponent],
   entryComponents: [
     SignInFormComponent,

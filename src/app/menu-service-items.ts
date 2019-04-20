@@ -12,12 +12,12 @@ export const MENU_NAVBAR_LINK = [
   },
   {
     title: 'Лайки',
-    link: '/',
+    link: '/favorites',
     icon: 'fa fa-heart NavbarLikeIcon'
   },
   {
     title: 'Черновик',
-    link: '/',
+    link: '/profile/draft',
     icon: 'fa fa-file-o'
   }
 ];

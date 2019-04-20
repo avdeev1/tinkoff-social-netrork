@@ -9,10 +9,8 @@
                 status="info" maxlength="2000"
                 placeholder="Текст" rows="10"></textarea>
 
-      <app-loading-button (onFileSelect)="handlerEditor($event)"></app-loading-button>
-      <span *ngIf="isFile(); then fileSelected else fileNotSelected"></span>
-      <ng-template #fileSelected>{{file[0].name}}</ng-template>
-      <ng-template #fileNotSelected>Файл не выбран</ng-template>
+      <app-uploading-button (onFileSelect)="onFileSelect($event)"></app-uploading-button>
+      <span>{{isFile ? file.name : 'Файл не выбран'}}</span>
 
       <label for="multiple_select">
         <h4>Метки</h4>

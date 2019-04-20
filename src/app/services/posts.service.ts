@@ -8,11 +8,12 @@ import {UserService} from './user.service';
 })
 export class PostsService {
 
+  user: IUser;
+
   constructor(private userService: UserService) {
     this.user = this.userService.user;
   }
 
-  user: IUser;
 
   public posts: IPost[] = [{
     title: 'Слово мэра',
@@ -243,13 +244,11 @@ export class PostsService {
     });
   }
 
-  getPostsForSearch(str: string) {
-  }
-
   getCountOfComments() {
     return this.getPostsForProfilePage().reduce((sum, post) => sum + post.comments, 0);
   }
-
+  getPostsForSearch(str: string) {
+  }
   createPost(headline: string, text: string, img: File, tags: string[]) {
 
   }

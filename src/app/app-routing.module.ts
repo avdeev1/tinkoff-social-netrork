@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent} from './app.component';
-import {ShowPostsComponent} from "./show-posts/show-posts.component";
-import {ProfileHeaderComponent} from "./profile-header/profile-header.component";
 import {EditorComponent} from './editor/editor.component';
 
+import {ShowPostsComponent} from './show-posts/show-posts.component';
+import {ProfileHeaderComponent} from './profile-header/profile-header.component';
+import {SettingComponent} from './setting/setting.component';
 const routes: Routes = [
   {
     path: '',
@@ -44,7 +45,7 @@ const routes: Routes = [
   },
   {
     path: 'create',
-    component: ShowPostsComponent,
+    component: EditorComponent,
     pathMatch: 'full',
   },
   {
