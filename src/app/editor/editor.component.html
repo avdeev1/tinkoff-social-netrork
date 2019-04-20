@@ -5,12 +5,18 @@
       <input formControlName="headline" id="input_header" class="add-margin-bottom" type="text" nbInput fullWidth
              status="info" maxlength="100"
              placeholder="Заголовок">
-      <textarea #textarea formControlName="text" id="input_text" class="add-margin-bottom" nbInput fullWidth
-                status="info" maxlength="2000"
-                placeholder="Текст" rows="10"></textarea>
+      <textarea #textarea
+                formControlName="text"
+                id="input_text"
+                class="add-margin-bottom"
+                nbInput
+                fullWidth
+                status="info"
+                placeholder="Текст"
+                rows="10"></textarea>
 
       <app-uploading-button (onFileSelect)="onFileSelect($event)"></app-uploading-button>
-      <span>{{isFile ? file.name : 'Файл не выбран'}}</span>
+      <span>{{file ? file.name : 'Файл не выбран'}}</span>
 
       <label for="multiple_select">
         <h4>Метки</h4>

@@ -17,3 +17,8 @@ export interface IUser {
   postIds: number[];
   description?: string;
 }
+
+export interface IUploadResponse {
+  success: boolean;
+  url: string;
+}

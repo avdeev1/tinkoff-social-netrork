@@ -13,6 +13,7 @@ export class UploadingButtonComponent {
 
   onNativeInputFileSelect($event) {
     this.onFileSelect.emit($event.target.files[0]);
+    $event.target.value = '';
   }
 
   selectFile() {

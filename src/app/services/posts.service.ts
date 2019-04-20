@@ -1,5 +1,8 @@
-import { Injectable } from '@angular/core';
-import {IPost, IUser} from '../models';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {IPost, IUploadResponse, IUser} from '../models';
 import {UserService} from './user.service';
 
 
@@ -10,7 +13,7 @@ export class PostsService {
 
   user: IUser;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private http: HttpClient) {
     this.user = this.userService.user;
   }
 
@@ -82,7 +85,7 @@ export class PostsService {
       'Учти, тебе на сей раз повезло! Карьера, здоровье, свобода - все цело. \n' +
       'Но, вот те слово мэра! Второго шанса нет! Короче, берегись -\n' +
       'Если снова дотронешься до моей дочери - Алисы!',
-    tags: [ 'Хип-хоп', 'По фактам' ],
+    tags: ['Хип-хоп', 'По фактам'],
     user: '@norimyxxxo',
     profilePhotoSrc: 'https://pbs.twimg.com/profile_images/1029031247073476610/trKYjiJ3_400x400.jpg',
     likes: 1234,
@@ -91,7 +94,7 @@ export class PostsService {
     imgPostSrc: 'https://avatars.yandex.net/get-music-content/38044/cd8c7557.a.3087311-1/400x400',
     postId: 1
   },
-  {
+    {
       title: 'Город под подошвой',
       text: 'Дон ли, Волга ли течет. Котомку - на плечо ' +
         'Боль в груди - там тайничок, открытый фомкой, не ключо ' +
@@ -165,7 +168,7 @@ export class PostsService {
         'Светофоры, госпошлины, сборы и таможни ' +
         'Я не знаю, вброд или на дно эта дорожка ' +
         'Ты живешь под каблуком, у меня - город под подошвой',
-      tags: [ 'Хип-хоп', 'Отец рэпа' ],
+      tags: ['Хип-хоп', 'Отец рэпа'],
       user: '@norimyxxxo',
       profilePhotoSrc: 'https://pbs.twimg.com/profile_images/1029031247073476610/trKYjiJ3_400x400.jpg',
       likes: 12345,
@@ -214,7 +217,7 @@ export class PostsService {
         'Let you back, let you back\n' +
         'Never gonna let you back\n' +
         'Let you back',
-      tags: [ 'Красивая музыка', 'Америка' ],
+      tags: ['Красивая музыка', 'Америка'],
       user: '@wherearetheavocados',
       profilePhotoSrc: 'https://scontent-arn2-1.cdninstagram.com/vp/e66f19d62b5a2a531ee80c7dcdc01700/5D425FC4/t51.2885-19/s320x320/50241673_369100297223490_7661710700984664064_n.jpg?_nc_ht=scontent-arn2-1.cdninstagram.com',
       likes: 99999,
@@ -229,7 +232,7 @@ export class PostsService {
         'Моногородок в платье серого сукна.' +
         'Моя родина - моя любовь. В каждом окне ' +
         'Солдаты трущоб улыбаются мне.',
-      tags: [ 'Патриотизм', 'Хаски' ],
+      tags: ['Патриотизм', 'Хаски'],
       user: '@papinomoloko',
       likes: 234,
       comments: 2,
@@ -247,9 +250,23 @@ export class PostsService {
   getCountOfComments() {
     return this.getPostsForProfilePage().reduce((sum, post) => sum + post.comments, 0);
   }
+
   getPostsForSearch(str: string) {
   }
+
   createPost(headline: string, text: string, img: File, tags: string[]) {
+
+  }
+
+  uploadImage(image: File): Observable<string> {
+    const form = new FormData();
+    form.append('file', image);
+
+    return this.http
+      .post<IUploadResponse>('/upload/post_image', form)
+      .pipe(
+        map(res => res.url)
+      );
 
   }
 }
