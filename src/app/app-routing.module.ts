@@ -10,14 +10,47 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     component: ShowPostsComponent,
+    data: {}
   },
   {
     path: 'profile',
-    component: ProfileHeaderComponent
+    component: ProfileHeaderComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'profile/draft',
+    pathMatch: 'full',
+    component: ShowPostsComponent,
+  },
+  {
+    path: 'profile/setting',
+    component: SettingComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'user/:login',
+    component: ProfileHeaderComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'favorites',
+    component: ShowPostsComponent,
+    data: {}
+  },
+  {
+    path: 'post/:id',
+    component: ShowPostsComponent,
+    pathMatch: 'full'
   },
   {
     path: 'create',
-    component: EditorComponent
+    component: ShowPostsComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'search/:searchWord',
+    component: ShowPostsComponent,
+    data: {}
   }
 ];
 
