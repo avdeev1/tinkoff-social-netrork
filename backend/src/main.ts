@@ -6,6 +6,7 @@ import { ConfigService } from './config/config.service';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  app.setGlobalPrefix('api');
   const configService = app.get(ConfigService);
   app.useGlobalPipes(new ValidationPipe());
   app.useStaticAssets(configService.get('PUBLIC_PATH'), {

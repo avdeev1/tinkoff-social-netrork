@@ -4,6 +4,7 @@ import { tap, shareReplay } from 'rxjs/operators';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import {SignFormComponent} from '../sign-form/sign-form.component';
 import {NbDialogRef, NbDialogService} from '@nebular/theme';
+import {Router} from "@angular/router";
 
 interface User {
   login: string;
@@ -11,7 +12,7 @@ interface User {
 }
 @Injectable()
 export class AuthService {
-  constructor(private http: HttpClient, private dialogService: NbDialogService) {
+  constructor(private http: HttpClient, private dialogService: NbDialogService, private router: Router) {
   }
 
   userName = new BehaviorSubject(!!localStorage.getItem('userName'));
@@ -46,16 +47,17 @@ export class AuthService {
   }
 
   register(login: string, password: string, confirmPassword: string) {
-    return this.http.post<User>('/auth/register', {login, password, confirmPassword}).pipe(tap(data => {
+    return this.http.post<User>('/api/auth/register', {login, password, confirmPassword}).pipe(tap(data => {
       localStorage.setItem('token', data.token);
       localStorage.setItem('isAuth', 'true');
       localStorage.setItem('userName', login);
       this.isAuth.next(true);
+      this.closeForm()
     }), shareReplay());
   }
 
   login(login: string, password: string ) {
-    return this.http.post<User>('/auth/', {login, password})
+    return this.http.post<User>('/api/auth/', {login, password})
       .pipe(
         tap( data => {
           localStorage.setItem('token', data.token);
@@ -65,11 +67,16 @@ export class AuthService {
           this.closeForm();
         }),
         shareReplay());
-
   }
+
   getToken(): string {
       return localStorage.getItem('token');
   }
+
+  getUserName(): string {
+    return localStorage.getItem('userName');
+  }
+
   logout(): Observable<boolean> {
     return of(true)
       .pipe(tap(() => {
@@ -77,7 +84,7 @@ export class AuthService {
         localStorage.removeItem('isAuth');
         localStorage.removeItem('userName');
         this.isAuth.next(false);
-        this.closeForm();
+        this.router.navigateByUrl('/');
       }));
   }
 }
