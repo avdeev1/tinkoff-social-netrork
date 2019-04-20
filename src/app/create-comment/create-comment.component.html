@@ -12,7 +12,7 @@
       <form [formGroup]="commentForm">
         <input type="text" id="input_text" formControlName="comment" nbInput status="info" fullWidth maxlength="100" value=""
                placeholder="Введите комментарий" rows="1">
-        <button nbButton class="submit-button" status="info" size="xsmall" (click)="leaveComment()">
+        <button nbButton class="submit-button" status="info" size="xsmall" (click)="createComment()">
           Отправить
         </button>
       </form>
@@ -21,7 +21,7 @@
 
   <ng-template #notAuth>
     <nb-card-body>
-      <div>Зарегистрируйтесь</div>
+      <div><a class="authorization" (click)="authorization()" tabindex="0">Авторизуйтесь</a>, чтобы оставить комментарий</div>
     </nb-card-body>
   </ng-template>
 </nb-card>

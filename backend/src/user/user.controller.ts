@@ -2,14 +2,17 @@ import {
   ClassSerializerInterceptor,
   Controller,
   Get,
+  HttpException,
   Param,
-  UseInterceptors, HttpException, Request, UseGuards
+  Request,
+  UseGuards,
+  UseInterceptors
 } from '@nestjs/common';
 import {UserService} from './user.service';
 import {User as UserModel} from "../models/user";
 import {AuthGuard} from '@nestjs/passport';
 
-@Controller('api/user')
+@Controller('user')
 export class UserController {
 
   constructor(private userService: UserService) {
@@ -23,11 +26,11 @@ export class UserController {
   }
 
   @Get('/:id')
-  async user(@Param('id') id): Promise<UserModel | Object> {
+  async user(@Param('id') id): Promise<UserModel> {
     const user = this.userService.getUser(id);
-    if (user) {
-      return user;
+    if (!user) {
+      throw new HttpException(`User with id ${id} not found`, 404);
     }
-    return new HttpException(`User with id ${id} not found`, 404);
+    return user;
   }
 }

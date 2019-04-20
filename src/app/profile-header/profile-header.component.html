@@ -1,6 +1,6 @@
 <nb-card class="profile-header">
   <div class="img-container">
-    <img [src]="user.avatar || avatar" alt="">
+    <img [src]="user.avatar || defaultAvatar" alt="">
     <div class="user-info">
       <div class="user-name">{{user.login}}</div>
       <div class="count-div">В сервисе дней: {{user.registrationDate | getDiffDateFromNow}}</div>
@@ -12,13 +12,12 @@
   <div class="posts-and-likes">
     ПОСТЫ: <span>{{user.posts}}</span>  КОММЕНТАРИИ: <span>{{user.comments}}</span>
   </div>
-
 </nb-card>
+
 <nb-card>
   <div class="about-user">
     <span>О Себе:</span> <br>
     <span>{{user.description}}</span>
   </div>
-
 </nb-card>
 

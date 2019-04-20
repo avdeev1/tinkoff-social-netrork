@@ -1,5 +1,5 @@
 <div *ngIf="isPostLoaded">
-  <app-post [post]="post"></app-post>
+  <app-post [post]="post" [extendable]="false"></app-post>
 </div>
 <h1>КОММЕНТАРИИ</h1>
 
@@ -17,4 +17,4 @@
     </nb-card-body>
   </nb-card>
 </div>
-<app-create-comment [post]="post" (refresh)="refresh($event)"></app-create-comment>
+<app-create-comment (refresh)="refresh($event)"></app-create-comment>

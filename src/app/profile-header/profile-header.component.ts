@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {IUser} from '../models';
-import {AuthService} from "../services/auth.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-profile-header',
@@ -11,15 +10,15 @@ import {Router} from "@angular/router";
 export class ProfileHeaderComponent implements OnInit {
 
   @Input() user: IUser;
-  avatar: string = 'https://faucethub.io/assets/img/avatars/3523614_1531331166.jpg';
+  defaultAvatar: string = 'https://faucethub.io/assets/img/avatars/3523614_1531331166.jpg';
   isProfile: boolean;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private activatedRoute: ActivatedRoute) {
   }
-
 
   ngOnInit() {
-    this.isProfile = this.router.url === '/profile';
+    this.activatedRoute.data.subscribe(data => {
+      this.isProfile = data.profile;
+    });
   }
-
 }

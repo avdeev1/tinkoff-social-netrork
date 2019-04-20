@@ -13,7 +13,7 @@ export const MENU_NAVBAR_LINK = [
   {
     title: 'Лайки',
     link: '/favourites',
-    icon: 'fa fa-heart NavbarLikeIcon'
+    icon: 'fa fa-heart'
   },
   {
     title: 'Черновик',

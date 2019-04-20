@@ -1,11 +1,7 @@
-<div *ngIf="isUserLoaded; else loading">
+<div *ngIf="isDataLoad; else loading">
   <app-profile-header [user]="user"></app-profile-header>
-</div>
-
-<div *ngIf="isPostsLoaded; else loading">
   <app-post *ngFor="let post of posts" [post]="post"></app-post>
 </div>
-
 
 <ng-template #loading>
   <div>Loading</div>

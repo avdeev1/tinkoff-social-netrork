@@ -1,9 +1,8 @@
-import {Component, OnInit, PipeTransform} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IComment, IPost} from '../models';
 import {CommentsService} from '../services/comments.service';
 import {PostsService} from "../services/posts.service";
 import {ActivatedRoute} from "@angular/router";
-import * as moment from "moment";
 
 
 @Component({
@@ -17,7 +16,7 @@ export class PostDetailComponent implements OnInit {
   post: IPost;
   isPostLoaded: boolean = false;
   isCommentsLoaded: boolean = false;
-  id = this.router.snapshot.paramMap.get('id');
+  private id = this.router.snapshot.paramMap.get('id');
 
   constructor(private postService: PostsService, private commentService: CommentsService, private router: ActivatedRoute) {}
 

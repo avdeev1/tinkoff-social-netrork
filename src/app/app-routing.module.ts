@@ -14,22 +14,21 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
-    pathMatch: 'full',
+    data: {
+      profile: true
+    }
   },
   {
     path: 'profile/draft',
-    pathMatch: 'full',
     component: ShowPostsComponent,
   },
   {
     path: 'profile/setting',
     component: SettingComponent,
-    pathMatch: 'full',
   },
   {
     path: 'user/:id',
     component: ProfileComponent,
-    pathMatch: 'full',
   },
   {
     path: 'favourites',
@@ -39,12 +38,10 @@ const routes: Routes = [
   {
     path: 'post/:id',
     component: PostDetailComponent,
-    pathMatch: 'full'
   },
   {
     path: 'create',
     component: ShowPostsComponent,
-    pathMatch: 'full',
   },
   {
     path: 'search',

@@ -4,6 +4,7 @@ import { tap, shareReplay } from 'rxjs/operators';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import {SignFormComponent} from '../sign-form/sign-form.component';
 import {NbDialogRef, NbDialogService} from '@nebular/theme';
+import {Router} from "@angular/router";
 
 interface User {
   login: string;
@@ -11,7 +12,7 @@ interface User {
 }
 @Injectable()
 export class AuthService {
-  constructor(private http: HttpClient, private dialogService: NbDialogService) {
+  constructor(private http: HttpClient, private dialogService: NbDialogService, private router: Router) {
   }
 
   userName = new BehaviorSubject(!!localStorage.getItem('userName'));
@@ -83,6 +84,7 @@ export class AuthService {
         localStorage.removeItem('isAuth');
         localStorage.removeItem('userName');
         this.isAuth.next(false);
+        this.router.navigateByUrl('/');
       }));
   }
 }

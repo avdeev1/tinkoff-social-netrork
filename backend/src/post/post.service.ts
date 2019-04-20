@@ -3,14 +3,10 @@ import { Post } from '../models/post';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../models/user';
-import { ConfigService } from '../config/config.service';
 
 @Injectable()
 export class PostService {
-  constructor(
-    @InjectRepository(Post) private readonly postRepo: Repository<Post>,
-    private configService: ConfigService,
-  ) {}
+  constructor(@InjectRepository(Post) private readonly postRepo: Repository<Post>) {}
 
   getPosts(): Promise<Post[]> {
     return this.postRepo

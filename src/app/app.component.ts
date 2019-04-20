@@ -1,11 +1,10 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 import { MENU_NAVBAR_LINK } from './menu-service-items';
 import { NbSidebarService } from '@nebular/theme';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  changeDetection: ChangeDetectionStrategy.Default,
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {

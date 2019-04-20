@@ -1,8 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {IComment, IPost} from "../models";
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {IComment} from "../models";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CommentsService} from "../services/comments.service";
 import {AuthService} from "../services/auth.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-create-comment',
@@ -11,8 +12,13 @@ import {AuthService} from "../services/auth.service";
 })
 export class CreateCommentComponent implements OnInit {
 
-  @Input() post: IPost;
-  constructor(private fb: FormBuilder, private authService: AuthService, private commentService: CommentsService) { }
+  private id: string = this.activateRouter.snapshot.paramMap.get('id');
+
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private commentService: CommentsService,
+    private activateRouter: ActivatedRoute) { }
 
   private commentForm: FormGroup;
   @Output() refresh: EventEmitter<IComment> = new EventEmitter();
@@ -27,11 +33,15 @@ export class CreateCommentComponent implements OnInit {
     });
   }
 
-  leaveComment() {
+  createComment() {
     const comment = { text: this.commentForm.value.comment };
-    this.commentService.leaveComment(this.post, comment).subscribe( res => {
+    this.commentService.createComment(this.id, comment).subscribe(res => {
       this.refresh.emit(res);
     });
     this.commentForm.reset();
+  }
+
+  authorization() {
+    this.authService.openSignInDialog();
   }
 }

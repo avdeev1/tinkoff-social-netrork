@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Observable} from "rxjs";
+import {forkJoin} from "rxjs";
 import {IPost, IUser} from "../models";
 import {ActivatedRoute} from "@angular/router";
 import {PostsService} from "../services/posts.service";
@@ -14,8 +14,7 @@ export class ProfileComponent implements OnInit {
 
   user: IUser;
   posts: IPost[];
-  isUserLoaded = false;
-  isPostsLoaded = false;
+  isDataLoad = false;
 
 
   constructor(
@@ -25,26 +24,19 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.getData().subscribe(([posts, user]) => {
+      this.posts = posts;
+      this.user = user;
+      this.isDataLoad = true;
+    })
+  }
+
+  getData() {
     const id = this.router.snapshot.paramMap.get('id');
     if (id) {
-      this.postService.getPostsForUserPage(id).subscribe(res => {
-        this.posts = res;
-        this.isPostsLoaded = true;
-      });
-      this.userService.getUserById(id).subscribe(res => {
-        this.user = res;
-        this.isUserLoaded = true;
-      });
-    } else {
-      this.postService.getPostsForProfilePage().subscribe(res => {
-        this.posts = res;
-        this.isPostsLoaded = true;
-      });
-      this.userService.getProfile().subscribe(res => {
-        this.user = res;
-        this.isUserLoaded = true;
-      });
+      return forkJoin(this.postService.getPostsForUserPage(id), this.userService.getUserById(id));
     }
+    return forkJoin(this.postService.getPostsForProfilePage(), this.userService.getProfile());
   }
 
 }
