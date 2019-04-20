@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {UserService} from "./user.service";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {IPost, IUser} from "../models";
+import {IPost} from "../models";
 
 
 @Injectable({
@@ -27,5 +27,9 @@ export class PostsService {
 
   getPostById(id: string): Observable<IPost> {
     return this.http.get<IPost>(`api/posts/${id}`);
+  }
+
+  getPostsByTag(id: string): Observable<IPost[]> {
+    return this.http.get<IPost[]>(`/api/posts/tag/${id}`);
   }
 }

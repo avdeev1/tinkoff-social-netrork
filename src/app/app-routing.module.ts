@@ -1,9 +1,10 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {ShowPostsComponent} from "./show-posts/show-posts.component";
 import {SettingComponent} from './setting/setting.component';
 import {ProfileComponent} from "./profile/profile.component";
 import {PostDetailComponent} from './post-detail/post-detail.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -41,6 +42,10 @@ const routes: Routes = [
   },
   {
     path: 'create',
+    component: ShowPostsComponent,
+  },
+  {
+    path: 'find/tag/:id',
     component: ShowPostsComponent,
   },
   {

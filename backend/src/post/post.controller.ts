@@ -1,22 +1,23 @@
 import {
+  Body,
   ClassSerializerInterceptor,
   Controller,
   Get,
+  HttpException,
+  Param,
+  Post,
+  Request,
   UseGuards,
   UseInterceptors,
-  Request,
-  Post,
-  Body,
-  Param,
-  HttpException,
 } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
-import { Post as PostModel } from '../models/post';
-import { PostService } from './post.service';
+import {AuthGuard} from '@nestjs/passport';
+import {Post as PostModel} from '../models/post';
+import {PostService} from './post.service';
 
 @Controller('posts')
 export class PostController {
-  constructor(private readonly postService: PostService) {}
+  constructor(private readonly postService: PostService) {
+  }
 
   @Get()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -43,7 +44,12 @@ export class PostController {
   @Get('/user/:id')
   async getPostsForUser(@Param('id') id): Promise<PostModel[]> {
     return await this.postService.getPostsForUser(id);
-}
+  }
+
+  @Get('tag/:id')
+  async getPostsWithTag(@Param('id') id): Promise<PostModel[]> {
+    return await this.postService.findPostsByTag(id);
+  }
 
   @Post()
   @UseInterceptors(ClassSerializerInterceptor)
