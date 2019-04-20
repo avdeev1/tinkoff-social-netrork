@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {IComment} from '../models';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

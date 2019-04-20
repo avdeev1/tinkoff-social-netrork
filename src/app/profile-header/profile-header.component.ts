@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {IUser} from '../models';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-profile-header',
@@ -10,7 +10,7 @@ import {ActivatedRoute} from "@angular/router";
 export class ProfileHeaderComponent implements OnInit {
 
   @Input() user: IUser;
-  defaultAvatar: string = 'https://faucethub.io/assets/img/avatars/3523614_1531331166.jpg';
+  defaultAvatar = 'https://faucethub.io/assets/img/avatars/3523614_1531331166.jpg';
   isProfile: boolean;
 
   constructor(private activatedRoute: ActivatedRoute) {

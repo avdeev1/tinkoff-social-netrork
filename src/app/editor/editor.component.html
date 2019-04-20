@@ -15,7 +15,7 @@
                 placeholder="Текст"
                 rows="10"></textarea>
 
-      <app-uploading-button (onFileSelect)="onFileSelect($event)"></app-uploading-button>
+      <app-uploading-button (fileSelect)="onFileSelect($event)"></app-uploading-button>
       <span>{{file ? file.name : 'Файл не выбран'}}</span>
 
       <label for="multiple_select">

@@ -1,7 +1,7 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany} from 'typeorm';
-import { Exclude, Expose } from 'class-transformer';
-import {Comment} from "./comment";
-import {Post} from "./post";
+import {Exclude} from 'class-transformer';
+import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
+import {Comment} from './comment';
+import {Post} from './post';
 
 @Entity()
 export class User {

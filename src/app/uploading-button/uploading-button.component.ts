@@ -7,12 +7,12 @@ import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@an
 })
 export class UploadingButtonComponent {
   @Input() accept: string;
-  @Output() onFileSelect: EventEmitter<File> = new EventEmitter();
+  @Output() fileSelect: EventEmitter<File> = new EventEmitter();
 
   @ViewChild('inputFile') nativeInputFile: ElementRef;
 
   onNativeInputFileSelect($event) {
-    this.onFileSelect.emit($event.target.files[0]);
+    this.fileSelect.emit($event.target.files[0]);
     $event.target.value = '';
   }
 

@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {forkJoin} from "rxjs";
-import {IPost, IUser} from "../models";
-import {ActivatedRoute} from "@angular/router";
-import {PostsService} from "../services/posts.service";
-import {UserService} from "../services/user.service";
-import {finalize} from "rxjs/operators";
+import {forkJoin} from 'rxjs';
+import {IPost, IUser} from '../models';
+import {ActivatedRoute} from '@angular/router';
+import {PostsService} from '../services/posts.service';
+import {UserService} from '../services/user.service';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile',
@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
       this.posts = posts;
       this.user = user;
 
-    })
+    });
   }
 
   getData() {

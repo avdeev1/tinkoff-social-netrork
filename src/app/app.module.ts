@@ -1,48 +1,48 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {NgModule} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {BrowserModule} from '@angular/platform-browser';
+import {RouterModule} from '@angular/router';
 import {
+  NbButtonModule,
   NbCardModule,
   NbDialogModule,
   NbDialogService,
-  NbLayoutModule,
-  NbThemeModule,
-  NbButtonModule,
   NbInputModule,
+  NbLayoutModule,
   NbMenuModule,
   NbSelectModule,
-  NbSidebarModule
+  NbSidebarModule,
+  NbThemeModule
 } from '@nebular/theme';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { EditorComponent } from './editor/editor.component';
-import { UploadingButtonComponent } from './uploading-button/uploading-button.component';
-import { RouterModule } from '@angular/router';
-import { ResolversModule } from './resolvers/resolvers.module';
-import {FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from './services/auth.service';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { PostComponent } from './post/post.component';
-import { InfoPostLinksComponent } from './info-post-links/info-post-links.component';
-import { TagsComponent } from './tags/tags.component';
-import { TextPostComponent } from './text-post/text-post.component';
-import { ProfileHeaderComponent } from './profile-header/profile-header.component';
-import { CreateCommentComponent } from './create-comment/create-comment.component';
-import { PostDetailComponent } from './post-detail/post-detail.component';
-import { HeaderComponent } from './header/header.component';
-import { SignInFormComponent } from './sign-in-form/sign-in-form.component';
-import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
-import { ShowPostsComponent } from './show-posts/show-posts.component';
-import { SettingComponent } from './setting/setting.component';
-import { UserInterceptor } from "./services/user.interceptor";
-import { ProfileComponent } from './profile/profile.component';
-import { SignFormComponent } from './sign-form/sign-form.component';
-import { SwitcherForFormComponent } from './switcher-for-form/switcher-for-form.component';
-import { CommentsService } from './services/comments.service';
-import { PostsService } from "./services/posts.service";
-import { UserService } from "./services/user.service";
-import { FormatDatePipe } from './format-date.pipe';
-import { GetDiffDateFromNowPipe } from './get-diff-date-from-now.pipe';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {CreateCommentComponent} from './create-comment/create-comment.component';
+import {EditorComponent} from './editor/editor.component';
+import {FormatDatePipe} from './format-date.pipe';
+import {GetDiffDateFromNowPipe} from './get-diff-date-from-now.pipe';
+import {HeaderComponent} from './header/header.component';
+import {InfoPostLinksComponent} from './info-post-links/info-post-links.component';
+import {PostDetailComponent} from './post-detail/post-detail.component';
+import {PostComponent} from './post/post.component';
+import {ProfileHeaderComponent} from './profile-header/profile-header.component';
+import {ProfileComponent} from './profile/profile.component';
+import {ResolversModule} from './resolvers/resolvers.module';
+import {AuthService} from './services/auth.service';
+import {CommentsService} from './services/comments.service';
+import {PostsService} from './services/posts.service';
+import {UserInterceptor} from './services/user.interceptor';
+import {UserService} from './services/user.service';
+import {SettingComponent} from './setting/setting.component';
+import {ShowPostsComponent} from './show-posts/show-posts.component';
+import {SignFormComponent} from './sign-form/sign-form.component';
+import {SignInFormComponent} from './sign-in-form/sign-in-form.component';
+import {SignUpFormComponent} from './sign-up-form/sign-up-form.component';
+import {SwitcherForFormComponent} from './switcher-for-form/switcher-for-form.component';
+import {TagsComponent} from './tags/tags.component';
+import {TextPostComponent} from './text-post/text-post.component';
+import {UploadingButtonComponent} from './uploading-button/uploading-button.component';
 
 @NgModule({
   declarations: [
@@ -111,4 +111,5 @@ import { GetDiffDateFromNowPipe } from './get-diff-date-from-now.pipe';
     SignFormComponent
   ]
 })
-export class AppModule { }
+export class AppModule {
+}

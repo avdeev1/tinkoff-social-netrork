@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {IComment, IPost} from '../models';
 import {CommentsService} from '../services/comments.service';
-import {PostsService} from "../services/posts.service";
-import {ActivatedRoute} from "@angular/router";
+import {PostsService} from '../services/posts.service';
+import {ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -14,8 +14,8 @@ export class PostDetailComponent implements OnInit {
 
   comments: IComment[];
   post: IPost;
-  isPostLoaded: boolean = false;
-  isCommentsLoaded: boolean = false;
+  isPostLoaded = false;
+  isCommentsLoaded = false;
   private id = this.router.snapshot.paramMap.get('id');
 
   constructor(private postService: PostsService, private commentService: CommentsService, private router: ActivatedRoute) {}
