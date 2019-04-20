@@ -1,6 +1,7 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../services/auth.service';
 import {Router} from '@angular/router';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-header',
@@ -9,8 +10,7 @@ import {Router} from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  @ViewChild('search')
-  search: ElementRef;
+  search = new FormControl();
 
   get isSignedIn() {
     return this.service.isAuth;
@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
   }
 
   handleSearch() {
-    this.router.navigate( ['search', this.search.nativeElement.value]);
+    this.router.navigate( ['search'], {queryParams: {searchWord: this.search.value}});
   }
 
   handleClickExit() {
