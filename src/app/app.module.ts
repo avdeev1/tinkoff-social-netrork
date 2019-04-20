@@ -38,6 +38,8 @@ import { SwitcherForFormComponent } from './switcher-for-form/switcher-for-form.
 import { CommentsService } from './services/comments.service';
 import { PostsService } from "./services/posts.service";
 import { UserService } from "./services/user.service";
+import { FormatDatePipe } from './format-date.pipe';
+import { GetDiffDateFromNowPipe } from './get-diff-date-from-now.pipe';
 
 @NgModule({
   declarations: [
@@ -59,6 +61,8 @@ import { UserService } from "./services/user.service";
     ShowPostsComponent,
     CreateCommentComponent,
     PostDetailComponent,
+    FormatDatePipe,
+    GetDiffDateFromNowPipe,
   ],
   imports: [
     FormsModule,

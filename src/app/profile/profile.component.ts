@@ -13,8 +13,10 @@ import {UserService} from "../services/user.service";
 export class ProfileComponent implements OnInit {
 
   user: IUser;
-  posts: Observable<IPost[]>;
-  isLoad = false;
+  posts: IPost[];
+  isUserLoaded = false;
+  isPostsLoaded = false;
+
 
   constructor(
     private router: ActivatedRoute,
@@ -25,16 +27,22 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     const id = this.router.snapshot.paramMap.get('id');
     if (id) {
-      this.posts = this.postService.getPostsForUserPage(id);
+      this.postService.getPostsForUserPage(id).subscribe(res => {
+        this.posts = res;
+        this.isPostsLoaded = true;
+      });
       this.userService.getUserById(id).subscribe(res => {
         this.user = res;
-        this.isLoad = true;
+        this.isUserLoaded = true;
       });
     } else {
-      this.posts = this.postService.getPostsForProfilePage();
+      this.postService.getPostsForProfilePage().subscribe(res => {
+        this.posts = res;
+        this.isPostsLoaded = true;
+      });
       this.userService.getProfile().subscribe(res => {
         this.user = res;
-        this.isLoad = true;
+        this.isUserLoaded = true;
       });
     }
   }

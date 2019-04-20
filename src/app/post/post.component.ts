@@ -11,12 +11,10 @@ import * as moment from "moment";
 })
 export class PostComponent implements OnInit {
   @Input() post: IPost;
-  date: string;
 
   constructor(private router: Router) {}
 
   ngOnInit() {
-    this.date = moment(this.post.createdAt * 1000).locale('ru').format('DD MMMM YYYY г. в HH:mm');
   }
 
   goToPostPage() {

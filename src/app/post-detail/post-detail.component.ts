@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, PipeTransform} from '@angular/core';
 import {IComment, IPost} from '../models';
 import {CommentsService} from '../services/comments.service';
 import {PostsService} from "../services/posts.service";
 import {ActivatedRoute} from "@angular/router";
 import * as moment from "moment";
+
 
 @Component({
   selector: 'app-post-detail',
@@ -14,7 +15,8 @@ export class PostDetailComponent implements OnInit {
 
   comments: IComment[];
   post: IPost;
-  dates: string[] = [];
+  isPostLoaded: boolean = false;
+  isCommentsLoaded: boolean = false;
   id = this.router.snapshot.paramMap.get('id');
 
   constructor(private postService: PostsService, private commentService: CommentsService, private router: ActivatedRoute) {}
@@ -31,15 +33,14 @@ export class PostDetailComponent implements OnInit {
   private getComments() {
     this.commentService.getCommentsForPost(this.id).subscribe(res => {
       this.comments = res;
-      this.comments.forEach((comment, index) => {
-        this.dates[index] = moment(comment.createdAt * 1000).locale('ru').format('DD MMMM YYYY г. в HH:mm');
-      })
+      this.isCommentsLoaded = true;
     });
   }
 
   private getPost() {
     this.postService.getPostById(this.id).subscribe(res => {
       this.post = res;
+      this.isPostLoaded = true;
     });
   }
 }

@@ -5,7 +5,7 @@ import { NbSidebarService } from '@nebular/theme';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default,
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
