@@ -16,20 +16,16 @@
     <div *ngIf="post.image" class="div-img">
       <img [src]="post.image" alt="">
     </div>
-    <span class="postText">
-       <ng-container *ngIf="extendable; then notExtend; else extend">
-       </ng-container>
+    <span *ngIf="extendable; then notExtend; else extend" class="postText">
+    </span>
 
        <ng-template #notExtend>
          <app-text-post [text]="post.text"></app-text-post>
        </ng-template>
 
        <ng-template #extend>
-         <span>
           {{post.text}}
-         </span>
        </ng-template>
-     </span>
   </nb-card-body>
 </nb-card>
 
