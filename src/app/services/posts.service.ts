@@ -25,6 +25,10 @@ export class PostsService {
     return this.http.get<IPost[]>('api/posts');
   }
 
+  getPostsForFavPage(): Observable<IPost[]> {
+    return this.http.get<IPost[]>('api/posts/favourites');
+  }
+
   getPostById(id: string): Observable<IPost> {
     return this.http.get<IPost>(`api/posts/${id}`);
   }

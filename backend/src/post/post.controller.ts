@@ -32,6 +32,11 @@ export class PostController {
     return await this.postService.getPostsForUser(req.user.id);
   }
 
+  @Get('/favourites')
+  async getPostsForFavourites(@Request() req): Promise<PostModel[]> {
+    return await this.postService.getPostsForFavourite();
+  }
+
   @Get('/:id')
   async getPostsById(@Param('id') id: number): Promise<PostModel> {
     const res = await this.postService.getPostById(id);

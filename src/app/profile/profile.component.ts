@@ -22,7 +22,8 @@ export class ProfileComponent implements OnInit {
     private router: ActivatedRoute,
     private postService: PostsService,
     private userService: UserService
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.getData().pipe(finalize(() => {
@@ -30,7 +31,6 @@ export class ProfileComponent implements OnInit {
     })).subscribe(([posts, user]) => {
       this.posts = posts;
       this.user = user;
-
     })
   }
 

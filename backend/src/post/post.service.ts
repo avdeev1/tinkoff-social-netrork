@@ -6,7 +6,8 @@ import {User} from '../models/user';
 
 @Injectable()
 export class PostService {
-  constructor(@InjectRepository(Post) private readonly postRepo: Repository<Post>) {}
+  constructor(@InjectRepository(Post) private readonly postRepo: Repository<Post>) {
+  }
 
   getPosts(): Promise<Post[]> {
     return this.postRepo
@@ -49,27 +50,33 @@ export class PostService {
       .getOne();
   }
 
-  async findPostsByTag(id: string): Promise<Post[]> {
-    const postIds = await this.getPostIds(id);
+  getPostsForFavourite(): Promise<Post[]> {
     return this.postRepo
       .createQueryBuilder('post')
       .innerJoin("post.author", "author")
       .addSelect(["author.login", "author.avatar", "author.id"])
       .leftJoinAndSelect('post.tags', 'tags')
       .loadRelationCountAndMap('post.comments', 'post.comments')
-      .whereInIds(postIds)
+      .orderBy('post.createdAt', 'DESC')
       .getMany();
   }
 
-  private async getPostIds(id: string) {
-    const posts: Post[] = await this.postRepo
+  async findPostsByTag(id: string): Promise<Post[]> {
+    return this.postRepo
       .createQueryBuilder('post')
-      .select('post.id')
       .innerJoin("post.author", "author")
+      .addSelect(["author.login", "author.avatar", "author.id"])
       .leftJoinAndSelect('post.tags', 'tags')
-      .where('tags.id = :id', {id})
+      .loadRelationCountAndMap('post.comments', 'post.comments')
+      .where(qb => {
+        const subQuery = qb.subQuery()
+          .select('post.id')
+          .from(Post, 'post')
+          .leftJoin('post.tags', 'tags')
+          .where('tags.id = :id', {id})
+          .getQuery();
+        return `post.id IN ${subQuery}`;
+      })
       .getMany();
-
-    return posts.map(post => post.id);
   }
 }
