@@ -3,13 +3,17 @@ import {Post} from '../models/post';
 import {InjectRepository} from '@nestjs/typeorm';
 import {Repository} from 'typeorm';
 import {User} from '../models/user';
+import {TagsService} from "../tags/tags.service";
+import {PostDto} from "./dto/post.dto";
 
 @Injectable()
 export class PostService {
-  constructor(@InjectRepository(Post) private readonly postRepo: Repository<Post>) {
+  constructor(
+    @InjectRepository(Post) private readonly postRepo: Repository<Post>,
+    private tagsService: TagsService) {
   }
 
-  getPosts(): Promise<Post[]> {
+  async getPosts(): Promise<Post[]> {
     return this.postRepo
       .createQueryBuilder('post')
       .innerJoin("post.author", "author")
@@ -19,7 +23,8 @@ export class PostService {
       .getMany();
   }
 
-  async create(postDto: Post, user: User): Promise<Post> {
+  async create(postDto: PostDto, user: User): Promise<Post> {
+    postDto.tags = await this.tagsService.getTags(postDto.tags);
     const post = this.postRepo.create(postDto);
 
     post.author = user;
@@ -50,7 +55,7 @@ export class PostService {
       .getOne();
   }
 
-  getPostsForFavourite(): Promise<Post[]> {
+  async getPostsForFavourite(): Promise<Post[]> {
     return this.postRepo
       .createQueryBuilder('post')
       .innerJoin("post.author", "author")

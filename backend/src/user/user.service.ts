@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
-import { User } from '../models/user';
-import { InjectRepository } from '@nestjs/typeorm';
+import {Injectable} from '@nestjs/common';
+import {Repository} from 'typeorm';
+import {User} from '../models/user';
+import {InjectRepository} from '@nestjs/typeorm';
+import {UserDto} from "./dto/user.dto";
 
 @Injectable()
 export class UserService {
@@ -15,6 +16,15 @@ export class UserService {
       .loadRelationCountAndMap('user.comments', 'user.comments')
       .loadRelationCountAndMap('user.posts', 'user.posts')
       .getOne();
+  }
+
+  async edit(userDto: UserDto, us: User): Promise<User> {
+    const user = await this.userRepo.findOne(us.id);
+    user.avatar = userDto.avatar;
+    user.description = userDto.description;
+    await this.userRepo.save(user);
+
+    return user;
   }
 }
 

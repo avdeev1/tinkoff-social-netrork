@@ -13,6 +13,7 @@ import {
 import {AuthGuard} from '@nestjs/passport';
 import {Post as PostModel} from '../models/post';
 import {PostService} from './post.service';
+import {PostDto} from "./dto/post.dto";
 
 @Controller('posts')
 export class PostController {
@@ -22,7 +23,7 @@ export class PostController {
   @Get()
   @UseInterceptors(ClassSerializerInterceptor)
   async posts(): Promise<PostModel[]> {
-    return this.postService.getPosts();
+    return await this.postService.getPosts();
   }
 
   @Get('/profile')
@@ -51,15 +52,15 @@ export class PostController {
     return await this.postService.getPostsForUser(id);
   }
 
-  @Get('tag/:id')
+  @Get('/tag/:id')
   async getPostsWithTag(@Param('id') id): Promise<PostModel[]> {
     return await this.postService.findPostsByTag(id);
   }
 
-  @Post()
+  @Post('/create')
   @UseInterceptors(ClassSerializerInterceptor)
   @UseGuards(AuthGuard())
-  async create(@Body() postDto: PostModel, @Request() req): Promise<PostModel> {
+  async create(@Body() postDto: PostDto, @Request() req): Promise<PostModel> {
     return await this.postService.create(postDto, req.user);
   }
 }
