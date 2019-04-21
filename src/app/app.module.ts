@@ -39,6 +39,7 @@ import {PostsService} from "./services/posts.service";
 import {UserService} from "./services/user.service";
 import {FormatDatePipe} from './format-date.pipe';
 import {GetDiffDateFromNowPipe} from './get-diff-date-from-now.pipe';
+import {AuthGuard} from "./guards/auth.guard";
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import {GetDiffDateFromNowPipe} from './get-diff-date-from-now.pipe';
     CommentsService,
     PostsService,
     UserService,
+    AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: UserInterceptor,

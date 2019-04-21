@@ -16,6 +16,7 @@ export class ProfileComponent implements OnInit {
   user: IUser;
   posts: IPost[];
   isDataLoad = false;
+  isProfile: boolean = false;
 
 
   constructor(
@@ -39,6 +40,7 @@ export class ProfileComponent implements OnInit {
     if (id) {
       return forkJoin(this.postService.getPostsForUserPage(id), this.userService.getUserById(id));
     }
+    this.isProfile = true;
     return forkJoin(this.postService.getPostsForProfilePage(), this.userService.getProfile());
   }
 
