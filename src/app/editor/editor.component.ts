@@ -2,6 +2,7 @@ import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angu
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import * as SimpleMDE from 'simplemde';
 import {PostsService} from '../services/posts.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-editor',
@@ -22,7 +23,10 @@ export class EditorComponent implements OnInit {
   textarea: ElementRef;
   simplemde: SimpleMDE;
 
-  constructor(private fb: FormBuilder, private postService: PostsService, private changeDetectorRef: ChangeDetectorRef) {
+  constructor(private fb: FormBuilder,
+              private postService: PostsService,
+              private changeDetectorRef: ChangeDetectorRef,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -55,6 +59,6 @@ export class EditorComponent implements OnInit {
 
   onSubmit() {
     const { headline, text, tags } = this.editorForm.value;
-    this.postService.createPost(headline, text, this.file, tags);
+    this.postService.createPost(headline, text, this.editorForm.value.url, tags).subscribe(() => this.router.navigateByUrl('/'));
   }
 }

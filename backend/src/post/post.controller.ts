@@ -45,7 +45,7 @@ export class PostController {
     return await this.postService.getPostsForUser(id);
 }
 
-  @Post()
+  @Post('/create')
   @UseInterceptors(ClassSerializerInterceptor)
   @UseGuards(AuthGuard())
   async create(@Body() postDto: PostModel, @Request() req): Promise<PostModel> {

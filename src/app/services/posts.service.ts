@@ -33,8 +33,12 @@ export class PostsService {
   getPostsForSearch(str: string) {
   }
 
-  createPost(headline: string, text: string, img: File, tags: string[]) {
-
+  createPost(headline: string, textPost: string, img: string, tags: string[]): Observable<IPost> {
+    return this.http.post<IPost>('api/posts/create', {
+      title: headline,
+      text: textPost,
+      image: img
+    });
   }
 
   uploadImage(image: File): Observable<string> {
@@ -42,7 +46,7 @@ export class PostsService {
     form.append('file', image);
 
     return this.http
-      .post<IUploadResponse>('/upload/post_image', form)
+      .post<IUploadResponse>('api/upload/post_image', form)
       .pipe(
         map(res => res.url)
       );
