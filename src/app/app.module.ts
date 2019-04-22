@@ -42,7 +42,6 @@ import {FormatDatePipe} from './format-date.pipe';
 import {GetDiffDateFromNowPipe} from './get-diff-date-from-now.pipe';
 import {AuthGuard} from "./guards/auth.guard";
 import {EditorComponent} from './editor/editor.component';
-// import {TagsComponent} from './tags/tags.component';
 import {UploadingButtonComponent} from './uploading-button/uploading-button.component';
 
 @NgModule({
@@ -55,7 +54,6 @@ import {UploadingButtonComponent} from './uploading-button/uploading-button.comp
     PostComponent,
     UploadingButtonComponent,
     InfoPostLinksComponent,
-    // TagsComponent,
     TextPostComponent,
     ProfileHeaderComponent,
     ShowPostsComponent,
