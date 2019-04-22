@@ -70,8 +70,12 @@ export class PostController {
   @UseInterceptors(ClassSerializerInterceptor)
   @UseGuards(AuthGuard())
   async like(@Body() data: any, @Request() req) {
-    console.log(data);
-    console.log(req.user);
-    return await this.postService.like(data.id, req.user.id);
+      await this.postService.like(data.id, req.user.id);
+  }
+  @Post('/delete')
+  @UseInterceptors(ClassSerializerInterceptor)
+  @UseGuards(AuthGuard())
+  async delete(@Body() data: any, @Request() req) {
+     return await this.postService.delete(data.id, req.user.id);
   }
 }

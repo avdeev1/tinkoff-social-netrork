@@ -3,7 +3,7 @@
     <div class="info-block-container">
       <app-info-post-links [id]="post.author.id" [image]="post.author.avatar" [text]="post.author.login"
                            class="block"></app-info-post-links>
-      <app-info-post-links [text]="post.likes.toString()" class="block" icon="heart" (click)="likePost($event)"></app-info-post-links>
+      <app-info-post-links [text]="quantityLike" class="block" [icon]="isLike ? 'heart' : 'heart-o' " (click)="likePost($event)"></app-info-post-links>
       <app-info-post-links [text]="post.comments.toString()" class="block" icon="commenting-o"></app-info-post-links>
       <app-info-post-links [text]="post.createdAt | formatDate" class="block" icon="calendar-o"></app-info-post-links>
     </div>

@@ -40,7 +40,6 @@ export class ShowPostsComponent implements OnDestroy, OnInit {
       this.isDataLoaded = true;
     })).subscribe(res => {
       this.posts = res;
-      console.log(res);
     });
   }
 

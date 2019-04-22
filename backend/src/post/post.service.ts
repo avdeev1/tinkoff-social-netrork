@@ -3,8 +3,8 @@ import {Post} from '../models/post';
 import {InjectRepository} from '@nestjs/typeorm';
 import {Repository} from 'typeorm';
 import {User} from '../models/user';
-import {TagService} from "../tag/tag.service";
-import {PostDto} from "./dto/post.dto";
+import {TagService} from '../tag/tag.service';
+import {PostDto} from './dto/post.dto';
 
 @Injectable()
 export class PostService {
@@ -20,7 +20,8 @@ export class PostService {
       .addSelect(["author.login", "author.avatar", "author.id"])
       .leftJoinAndSelect('post.tags', 'tags')
       .loadRelationCountAndMap('post.comments', 'post.comments')
-      .loadRelationCountAndMap('post.likes', 'post.likes')
+      .leftJoinAndSelect('post.likes', 'likes')
+      // .loadRelationCountAndMap('post.likes', 'post.likes')
       // .addSelect(subQuery => {
       //   return subQuery
       //     .select('user.likes', 'like')
@@ -29,6 +30,7 @@ export class PostService {
       // //     .where('post.id = 1')
       //     .limit(1);
       // }, 'name')
+
       .getMany();
   }
 
@@ -38,7 +40,7 @@ export class PostService {
       text: postDto.text,
       title: postDto.title,
       image: postDto.image,
-      tags: tags,
+      tags,
       author: user,
     };
     const post = this.postRepo.create(postModel);
@@ -73,8 +75,8 @@ export class PostService {
   async getPostsForFavourite(): Promise<Post[]> {
     return this.postRepo
       .createQueryBuilder('post')
-      .innerJoin("post.author", "author")
-      .addSelect(["author.login", "author.avatar", "author.id"])
+      .innerJoin('post.author', 'author')
+      .addSelect(['author.login', 'author.avatar', 'author.id'])
       .leftJoinAndSelect('post.tags', 'tags')
       .loadRelationCountAndMap('post.comments', 'post.comments')
       .orderBy('post.createdAt', 'DESC')
@@ -84,8 +86,8 @@ export class PostService {
   async findPostsByTag(id: string): Promise<Post[]> {
     return this.postRepo
       .createQueryBuilder('post')
-      .innerJoin("post.author", "author")
-      .addSelect(["author.login", "author.avatar", "author.id"])
+      .innerJoin('post.author', 'author')
+      .addSelect(['author.login', 'author.avatar', 'author.id'])
       .leftJoinAndSelect('post.tags', 'tags')
       .loadRelationCountAndMap('post.comments', 'post.comments')
       .where(qb => {
@@ -106,11 +108,17 @@ export class PostService {
   //   return await this.postRepo.create(user);
   // }
   async like(postid: number, userId: number) {
-    return this.postRepo.createQueryBuilder('post')
-      .relation(User, "likes")
-      .of(1)
-      .add(1);
+    return await this.postRepo.createQueryBuilder('post')
+      .relation(Post, 'likes')
+      .of(postid)
+      .add(userId);
   }
 
+  async delete(postid: number, userId: number) {
+   return await this.postRepo.createQueryBuilder('post')
+      .relation(Post, 'likes')
+      .of(postid)
+      .remove(userId);
+  }
 
 }

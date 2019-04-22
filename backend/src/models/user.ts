@@ -1,4 +1,4 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, ManyToMany} from 'typeorm';
+import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, ManyToMany, JoinTable} from 'typeorm';
 import { Exclude, Expose } from 'class-transformer';
 import {Comment} from "./comment";
 import {Post} from "./post";
@@ -30,6 +30,9 @@ export class User {
   @Column({ nullable: true })
   avatar: string;
 
-  @ManyToMany(type => Post, post => post.id)
-  likes: User[];
+  // @ManyToMany(type => Post, post => post.id)
+  // @JoinTable()
+  // likes: User[];
+  @ManyToMany(type => Post, post => post.likes)
+  postsLike: User[];
 }
