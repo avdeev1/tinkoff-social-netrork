@@ -1,13 +1,8 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  OneToMany,
-  ManyToOne,
-} from 'typeorm';
-import { User } from './user';
-import { Comment } from "./comment";
-import { IsNotEmpty } from 'class-validator';
+import {Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn,} from 'typeorm';
+import {User} from './user';
+import {Comment} from "./comment";
+import {IsNotEmpty} from 'class-validator';
+import {Tag} from "./tag";
 
 @Entity()
 export class Post {
@@ -33,6 +28,10 @@ export class Post {
 
   @OneToMany(type => Comment, comment => comment.post)
   comments: Comment[];
+
+  @ManyToMany(type => Tag, tags => tags.posts)
+  @JoinTable()
+  tags: Tag[];
 
   @Column({ default: false })
   draft: boolean;

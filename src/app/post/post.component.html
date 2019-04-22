@@ -9,7 +9,8 @@
     </div>
     <h2>{{post.title}}</h2>
     <div class="tags-links">
-      <app-tags [tags]="[1, 2]" class="tags"></app-tags>
+      <a (click)="findTag()" *ngFor="let tag of post.tags" [routerLink]="['/', 'find', 'tag', tag.id]"
+         class="tags">#{{tag.tag}}</a>
     </div>
   </nb-card-header>
   <nb-card-body>

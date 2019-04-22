@@ -3,6 +3,10 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import * as SimpleMDE from 'simplemde';
 import {PostsService} from '../services/posts.service';
 import {Router} from '@angular/router';
+import {IPost, ITag} from "../models";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-editor',
@@ -13,12 +17,8 @@ export class EditorComponent implements OnInit {
 
   file: File;
   editorForm: FormGroup;
-  tags = [
-    { name: 'Фантастика', id: 1 },
-    { name: 'Драма', id: 2 },
-    { name: 'Романтика', id: 3 },
-    { name: 'Историческое', id: 4 }
-  ];
+
+  tags: ITag[];
   @ViewChild('textarea')
   textarea: ElementRef;
   simplemde: SimpleMDE;
@@ -26,10 +26,18 @@ export class EditorComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private postService: PostsService,
               private changeDetectorRef: ChangeDetectorRef,
-              private router: Router) {
+              private router: Router,
+              private http: HttpClient) {
+  }
+
+  getTags(): Observable<ITag[]> {
+    return this.http.get<ITag[]>('api/tags');
   }
 
   ngOnInit() {
+    this.http.get<ITag[]>('api/tags').subscribe(data => {
+      this.tags = data;
+    });
     this.editorForm = this.fb.group({
       title: ['', Validators.required],
       text: ['', Validators.required],
@@ -59,6 +67,7 @@ export class EditorComponent implements OnInit {
 
   onSubmit() {
     let { title, text, tags, url } = this.editorForm.value;
+    console.log(tags);
     if (tags === '') {
       tags = [];
     }

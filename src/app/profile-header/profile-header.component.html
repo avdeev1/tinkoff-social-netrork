@@ -14,7 +14,7 @@
   </div>
 </nb-card>
 
-<nb-card>
+<nb-card *ngIf="user.description">
   <div class="about-user">
     <span>О Себе:</span> <br>
     <span>{{user.description}}</span>

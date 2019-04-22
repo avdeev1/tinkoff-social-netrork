@@ -1,4 +1,4 @@
-import {IsNotEmpty, IsNumber, IsString} from 'class-validator';
+import {IsNotEmpty, IsOptional, IsString} from "class-validator";
 
 export class PostDto {
   @IsNotEmpty()
@@ -10,8 +10,8 @@ export class PostDto {
   text: string;
 
   @IsString()
-  image: string;
+  @IsOptional()
+  image?: string;
 
-  @IsNumber()
   tags: number[];
 }

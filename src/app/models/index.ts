@@ -6,6 +6,7 @@ export interface IPost {
   author: IUser;
   image?: string;
   comments: IComment[];
+  tags: ITag[];
   draft: boolean;
 }
 
@@ -37,5 +38,10 @@ export interface IComment {
   createdAt: number;
   author: IUser;
   post: IPost;
+}
+
+export interface ITag {
+  id: number;
+  tag: string;
 }
 

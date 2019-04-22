@@ -23,7 +23,7 @@
       </label>
       <nb-select formControlName="tags" id="multiple_select" class="add-margin-bottom" multiple outline status="info"
                  placeholder="Выберите метки">
-        <nb-option *ngFor="let tag of tags" [value]="tag.id">{{tag.name}}</nb-option>
+        <nb-option *ngFor="let tag of tags | async" >{{tag.tag}}</nb-option>
       </nb-select>
       <button type="submit" nbButton class="add-margin-right" status="info" [disabled]="!editorForm.valid">
         Опубликовать
