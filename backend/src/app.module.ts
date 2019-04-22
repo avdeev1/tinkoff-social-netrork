@@ -19,7 +19,8 @@ import {UploadService} from './upload/upload.service';
 import {ConfigModule} from './config/config.module';
 import {CommentController} from "./comment/comment.controller";
 import {CommentService} from "./comment/comment.service";
-import {TagsService} from "./tags/tags.service";
+import {TagService} from "./tag/tag.service";
+import {TagController} from "./tag/tag.controller";
 import {Tag} from "./models/tag";
 
 const options: ConnectionOptions = {
@@ -37,7 +38,7 @@ const options: ConnectionOptions = {
     PassportModule.register({ defaultStrategy: 'bearer', property: 'user' }),
     ConfigModule,
   ],
-  controllers: [AuthController, PostController, UploadController, UserController, CommentController],
-  providers: [AuthService, HttpStrategy, PostService, UploadService, UserService, CommentService, TagsService],
+  controllers: [AuthController, PostController, UploadController, UserController, CommentController, TagController],
+  providers: [AuthService, HttpStrategy, PostService, UploadService, UserService, CommentService, TagService],
 })
 export class AppModule {}

@@ -34,6 +34,8 @@ export class PostController {
   }
 
   @Get('/favourites')
+  @UseInterceptors(ClassSerializerInterceptor)
+  @UseGuards(AuthGuard())
   async getPostsForFavourites(@Request() req): Promise<PostModel[]> {
     return await this.postService.getPostsForFavourite();
   }

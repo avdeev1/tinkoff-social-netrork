@@ -4,12 +4,17 @@ import {InjectRepository} from "@nestjs/typeorm";
 import {Tag} from "../models/tag";
 
 @Injectable()
-export class TagsService {
+export class TagService {
   constructor(@InjectRepository(Tag) private readonly tagRepo: Repository<Tag>) {
   }
 
-  async getTags(tagIds: number[]): Promise<Tag[]> {
-    return this.tagRepo.findByIds(tagIds);
+  async getTagByIds(tagIds: number[]): Promise<Tag[]> {
+    return await this.tagRepo.findByIds(tagIds);
+  }
+
+  async getTags(): Promise<Tag[]> {
+    return await this.tagRepo.createQueryBuilder('tags')
+      .getMany();
   }
 
 }
