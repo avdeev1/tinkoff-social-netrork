@@ -25,10 +25,15 @@ export class PostService {
 
   async create(postDto: PostDto, user: User): Promise<Post> {
     const tags = await this.tagService.getTagByIds(postDto.tags);
-    const post = this.postRepo.create({text: postDto.text, title: postDto.title, image: postDto.image});
+    const postModel = {
+      text: postDto.text,
+      title: postDto.title,
+      image: postDto.image,
+      tags: tags,
+      author: user,
+    };
+    const post = this.postRepo.create(postModel);
 
-    post.tags = tags;
-    post.author = user;
     await this.postRepo.save(post);
 
     return post;

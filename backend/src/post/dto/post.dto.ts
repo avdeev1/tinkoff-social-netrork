@@ -9,8 +9,7 @@ export class PostDto {
   @IsString()
   text: string;
 
-  @IsString()
-  image: string;
+  image?: string;
 
   tags: number[];
 }

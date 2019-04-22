@@ -13,8 +13,7 @@ export class TagService {
   }
 
   async getTags(): Promise<Tag[]> {
-    return await this.tagRepo.createQueryBuilder('tags')
-      .getMany();
+    return await this.tagRepo.find();
   }
 
 }
