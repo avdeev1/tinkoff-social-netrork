@@ -4,7 +4,9 @@
     <img [src]="user.avatar || avatar" alt="">
     <div class="user-info">
       <div class="user-name">{{user.login}}</div>
+
       <app-uploading-button (fileSelect)="onFileSelect($event)"></app-uploading-button>
+      <span>{{fileName ? fileName: 'Файл не выбран'}}</span>
 <!--      <div class="changeImage"><a [routerLink]='' ><i class="fa fa-pencil" aria-hidden="true"></i> Загрузить картинку</a></div>-->
     </div>
 
@@ -18,8 +20,9 @@
     <span>О Себе:</span> <br>
     <textarea formControlName="desc" nbInput fullWidth [value]="user.description" cols="130" rows="5"  #textarea
     ></textarea>
+
   </div>
-  <button type="submit" [disabled]="form.invalid || loading" nbButton status="info" size="xsmall" outline>Сохранить <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
+  <button type="submit"  nbButton status="info" size="xsmall" outline>Сохранить <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
 </nb-card>
 </form>
 

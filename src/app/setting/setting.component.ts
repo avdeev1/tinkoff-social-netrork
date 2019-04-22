@@ -15,6 +15,7 @@ export class SettingComponent implements OnInit {
   form: FormGroup;
   loading = false;
   user: IUser;
+  fileName: string;
   isLoad = false;
   avatar = 'https://faucethub.io/assets/img/avatars/3523614_1531331166.jpg';
   editorForm: FormGroup;
@@ -39,11 +40,30 @@ export class SettingComponent implements OnInit {
   }
   createForm() {
     this.form = this.fb.group({
-      desc: ['', Validators.required],
-      avatar: null
+      desc: '',
+      img: null
     });
   }
 
-  onFileSelect(file) {}
-  onSubmit() {}
-}
+  onFileSelect(file) {
+    this.fileName = file.name;
+    this.userService.uploadImage(file).subscribe(url => {
+      this.form.get('img').setValue(url);
+    });
+  }
+
+  onSubmit() {
+    this.loading = true;
+    const {desc, url } = this.form.value;
+    this.userService.editProfile(url, desc).subscribe(() => {
+      console.log('god');
+    });
+
+  }
+
+    // this.loading = true;
+    // const { headline, text, tags } = this.editorForm.value;
+    // this.userService.createPost(headline, text, this.editorForm.value.url, tags).subscribe(() =>  this.loading = false);
+
+
+  }
