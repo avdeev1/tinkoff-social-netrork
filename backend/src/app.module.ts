@@ -20,7 +20,7 @@ import {ConfigModule} from './config/config.module';
 import {CommentController} from "./comment/comment.controller";
 import {CommentService} from "./comment/comment.service";
 import {TagsService} from "./tags/tags.service";
-import {Tags} from "./models/tags";
+import {Tag} from "./models/tag";
 
 const options: ConnectionOptions = {
   type: 'sqlite',
@@ -33,7 +33,7 @@ const options: ConnectionOptions = {
 @Module({
   imports: [
     TypeOrmModule.forRoot(options),
-    TypeOrmModule.forFeature([User, Post, Auth, Comment, Tags]),
+    TypeOrmModule.forFeature([User, Post, Auth, Comment, Tag]),
     PassportModule.register({ defaultStrategy: 'bearer', property: 'user' }),
     ConfigModule,
   ],

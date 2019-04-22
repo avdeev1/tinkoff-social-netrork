@@ -2,7 +2,7 @@ import {Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGene
 import {User} from './user';
 import {Comment} from "./comment";
 import {IsNotEmpty} from 'class-validator';
-import {Tags} from "./tags";
+import {Tag} from "./tag";
 
 @Entity()
 export class Post {
@@ -29,9 +29,9 @@ export class Post {
   @OneToMany(type => Comment, comment => comment.post)
   comments: Comment[];
 
-  @ManyToMany(type => Tags, tags => tags.posts)
+  @ManyToMany(type => Tag, tags => tags.posts)
   @JoinTable()
-  tags: Tags[];
+  tags: Tag[];
 
   @Column({ default: false })
   draft: boolean;

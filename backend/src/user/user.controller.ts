@@ -37,10 +37,10 @@ export class UserController {
     return user;
   }
 
-  @Post('/edit')
+  @Post('/update')
   @UseInterceptors(ClassSerializerInterceptor)
   @UseGuards(AuthGuard())
-  async editProfile(@Body() user: UserDto, @Request() req): Promise<UserModel> {
-    return await this.userService.edit(user, req.user);
+  async editProfile(@Body() user: UserDto, @Request() req): Promise<{ [key: string]: boolean }> {
+    return await this.userService.update(user, req.user);
   }
 }

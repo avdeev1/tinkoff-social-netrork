@@ -5,6 +5,7 @@ import {ForShowPostComponent} from "../models/for-show-post-component.enum";
 import {finalize, takeUntil} from 'rxjs/operators';
 import {ActivatedRoute} from '@angular/router';
 import {Observable, Subject} from 'rxjs';
+import {of} from "rxjs/internal/observable/of";
 
 @Component({
   selector: 'app-show-posts',
@@ -53,14 +54,18 @@ export class ShowPostsComponent implements OnDestroy, OnInit {
         return this.postService.getPostsForFavPage();
 
       case ForShowPostComponent.DRAFTS:
-        return null;
+        return of([]);
 
       case ForShowPostComponent.TAG:
         const id = this.activatedRoute.snapshot.paramMap.get('id');
+
         return this.postService.getPostsByTag(id);
 
       case ForShowPostComponent.SEARCH:
-        return null;
+        return of([]);
+
+      default:
+        return of([]);
     }
   }
 }

@@ -4,7 +4,7 @@ import {IsNotEmpty} from "class-validator";
 import {Post} from "./post";
 
 @Entity()
-export class Tags {
+export class Tag {
   @PrimaryGeneratedColumn()
   id: number;
 

@@ -12,5 +12,5 @@ export class PostDto {
   @IsString()
   image: string;
 
-  tags: any[];
+  tags: number[];
 }

@@ -18,15 +18,16 @@ export class PostService {
       .createQueryBuilder('post')
       .innerJoin("post.author", "author")
       .addSelect(["author.login", "author.avatar", "author.id"])
-      .leftJoinAndSelect('post.tags', 'tags')
+      .leftJoinAndSelect('post.tag.ts', 'tag.ts')
       .loadRelationCountAndMap('post.comments', 'post.comments')
       .getMany();
   }
 
   async create(postDto: PostDto, user: User): Promise<Post> {
-    postDto.tags = await this.tagsService.getTags(postDto.tags);
-    const post = this.postRepo.create(postDto);
+    const tags = await this.tagsService.getTags(postDto.tags);
+    const post = this.postRepo.create({text: postDto.text, title: postDto.title, image: postDto.image});
 
+    post.tags = tags;
     post.author = user;
     await this.postRepo.save(post);
 
@@ -38,7 +39,7 @@ export class PostService {
       .createQueryBuilder('post')
       .innerJoin('post.author', 'author')
       .addSelect(['author.login', 'author.avatar', 'author.id'])
-      .leftJoinAndSelect('post.tags', 'tags')
+      .leftJoinAndSelect('post.tag.ts', 'tag.ts')
       .where('post.authorId = :id', {id})
       .loadRelationCountAndMap('post.comments', 'post.comments')
       .getMany();
@@ -49,7 +50,7 @@ export class PostService {
       .createQueryBuilder('post')
       .innerJoin('post.author', 'author')
       .addSelect(['author.login', 'author.avatar', 'author.id'])
-      .leftJoinAndSelect('post.tags', 'tags')
+      .leftJoinAndSelect('post.tag.ts', 'tag.ts')
       .where('post.id = :id', {id})
       .loadRelationCountAndMap('post.comments', 'post.comments')
       .getOne();
@@ -60,7 +61,7 @@ export class PostService {
       .createQueryBuilder('post')
       .innerJoin("post.author", "author")
       .addSelect(["author.login", "author.avatar", "author.id"])
-      .leftJoinAndSelect('post.tags', 'tags')
+      .leftJoinAndSelect('post.tag.ts', 'tag.ts')
       .loadRelationCountAndMap('post.comments', 'post.comments')
       .orderBy('post.createdAt', 'DESC')
       .getMany();
@@ -71,14 +72,14 @@ export class PostService {
       .createQueryBuilder('post')
       .innerJoin("post.author", "author")
       .addSelect(["author.login", "author.avatar", "author.id"])
-      .leftJoinAndSelect('post.tags', 'tags')
+      .leftJoinAndSelect('post.tag.ts', 'tag.ts')
       .loadRelationCountAndMap('post.comments', 'post.comments')
       .where(qb => {
         const subQuery = qb.subQuery()
           .select('post.id')
           .from(Post, 'post')
-          .leftJoin('post.tags', 'tags')
-          .where('tags.id = :id', {id})
+          .leftJoin('post.tag.ts', 'tag.ts')
+          .where('tag.ts.id = :id', {id})
           .getQuery();
         return `post.id IN ${subQuery}`;
       })
