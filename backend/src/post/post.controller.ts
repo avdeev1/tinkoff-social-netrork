@@ -1,27 +1,29 @@
 import {
+  Body,
   ClassSerializerInterceptor,
   Controller,
   Get,
+  HttpException,
+  Param,
+  Post,
+  Request,
   UseGuards,
   UseInterceptors,
-  Request,
-  Post,
-  Body,
-  Param,
-  HttpException,
 } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
-import { Post as PostModel } from '../models/post';
-import { PostService } from './post.service';
+import {AuthGuard} from '@nestjs/passport';
+import {Post as PostModel} from '../models/post';
+import {PostService} from './post.service';
+import {PostDto} from "./dto/post.dto";
 
 @Controller('posts')
 export class PostController {
-  constructor(private readonly postService: PostService) {}
+  constructor(private readonly postService: PostService) {
+  }
 
   @Get()
   @UseInterceptors(ClassSerializerInterceptor)
   async posts(): Promise<PostModel[]> {
-    return this.postService.getPosts();
+    return await this.postService.getPosts();
   }
 
   @Get('/profile')
@@ -29,6 +31,13 @@ export class PostController {
   @UseGuards(AuthGuard())
   async getPostsForProfile(@Request() req): Promise<PostModel[]> {
     return await this.postService.getPostsForUser(req.user.id);
+  }
+
+  @Get('/favourites')
+  @UseInterceptors(ClassSerializerInterceptor)
+  @UseGuards(AuthGuard())
+  async getPostsForFavourites(@Request() req): Promise<PostModel[]> {
+    return await this.postService.getPostsForFavourite();
   }
 
   @Get('/:id')
@@ -43,12 +52,17 @@ export class PostController {
   @Get('/user/:id')
   async getPostsForUser(@Param('id') id): Promise<PostModel[]> {
     return await this.postService.getPostsForUser(id);
-}
+  }
 
-  @Post()
+  @Get('/tag/:id')
+  async getPostsWithTag(@Param('id') id): Promise<PostModel[]> {
+    return await this.postService.findPostsByTag(id);
+  }
+
+  @Post('/create')
   @UseInterceptors(ClassSerializerInterceptor)
   @UseGuards(AuthGuard())
-  async create(@Body() postDto: PostModel, @Request() req): Promise<PostModel> {
+  async create(@Body() postDto: PostDto, @Request() req): Promise<PostModel> {
     return await this.postService.create(postDto, req.user);
   }
 }

@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {IUser, IUploadResponse} from "../models";
-import {map} from "rxjs/operators";
+import {ActivatedRoute} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {IUser, IUploadResponse} from '../models';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +31,9 @@ export class UserService {
       );
 
   }
-  editProfile(url: string, desc: string): Observable<boolean> {
-    return this.http.post<boolean>('api/posts/create', {
+  editProfile(url: string, desc: string): Observable<object> {
+    if ( url === '') { url = null; }
+    return this.http.post<object>('api/user/update', {
       description: desc,
       avatar: url,
     });

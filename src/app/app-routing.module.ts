@@ -1,15 +1,19 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {ShowPostsComponent} from "./show-posts/show-posts.component";
 import {SettingComponent} from './setting/setting.component';
 import {ProfileComponent} from "./profile/profile.component";
 import {PostDetailComponent} from './post-detail/post-detail.component';
+import {ForShowPostComponent} from "./models/for-show-post-component.enum";
+
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
     component: ShowPostsComponent,
-    data: {}
+    data: {
+      content: ForShowPostComponent.MAIN
+    }
   },
   {
     path: 'profile',
@@ -21,6 +25,9 @@ const routes: Routes = [
   {
     path: 'profile/draft',
     component: ShowPostsComponent,
+    data: {
+      content: ForShowPostComponent.DRAFTS
+    }
   },
   {
     path: 'profile/setting',
@@ -33,7 +40,9 @@ const routes: Routes = [
   {
     path: 'favourites',
     component: ShowPostsComponent,
-    data: {}
+    data: {
+      content: ForShowPostComponent.FAVOURITES
+    }
   },
   {
     path: 'post/:id',
@@ -44,9 +53,18 @@ const routes: Routes = [
     component: ShowPostsComponent,
   },
   {
+    path: 'find/tag/:id',
+    component: ShowPostsComponent,
+    data: {
+      content: ForShowPostComponent.TAG
+    }
+  },
+  {
     path: 'search',
     component: ShowPostsComponent,
-    data: {}
+    data: {
+      content: ForShowPostComponent.SEARCH
+    }
   }
 ];
 

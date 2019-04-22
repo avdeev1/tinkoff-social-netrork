@@ -18,6 +18,8 @@ export class SettingComponent implements OnInit {
   fileName: string;
   isLoad = false;
   avatar = 'https://faucethub.io/assets/img/avatars/3523614_1531331166.jpg';
+  av = null;
+  desc = null;
   editorForm: FormGroup;
   constructor(
     private postService: PostsService,
@@ -36,12 +38,18 @@ export class SettingComponent implements OnInit {
       }))
       .subscribe(res => {
         this.user = res;
-    });
+        if (res.description) {
+          this.desc = res.description;
+        }
+        if (res.avatar) {
+          this.av = res.avatar;
+        }
+      });
   }
   createForm() {
     this.form = this.fb.group({
-      desc: '',
-      img: null
+      desc: this.desc,
+      img: this.av
     });
   }
 
@@ -56,14 +64,10 @@ export class SettingComponent implements OnInit {
     this.loading = true;
     const {desc, url } = this.form.value;
     this.userService.editProfile(url, desc).subscribe(() => {
-      console.log('god');
+      this.loading = false;
     });
 
   }
-
-    // this.loading = true;
-    // const { headline, text, tags } = this.editorForm.value;
-    // this.userService.createPost(headline, text, this.editorForm.value.url, tags).subscribe(() =>  this.loading = false);
 
 
   }

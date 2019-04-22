@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {IPost} from '../models';
 import {Router} from "@angular/router";
 
@@ -19,5 +19,9 @@ export class PostComponent implements OnInit {
 
   goToPostPage() {
     this.router.navigateByUrl(`post/${this.post.id}`);
+  }
+
+  findTag() {
+    event.stopPropagation();
   }
 }

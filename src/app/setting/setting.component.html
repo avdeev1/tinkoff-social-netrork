@@ -7,7 +7,6 @@
 
       <app-uploading-button (fileSelect)="onFileSelect($event)"></app-uploading-button>
       <span>{{fileName ? fileName: 'Файл не выбран'}}</span>
-<!--      <div class="changeImage"><a [routerLink]='' ><i class="fa fa-pencil" aria-hidden="true"></i> Загрузить картинку</a></div>-->
     </div>
 
   </div>
@@ -18,7 +17,7 @@
 
   <div class="about-user">
     <span>О Себе:</span> <br>
-    <textarea formControlName="desc" nbInput fullWidth [value]="user.description" cols="130" rows="5"  #textarea
+      <textarea formControlName="desc" nbInput fullWidth [value]="user.description" cols="130" rows="5"  #textarea
     ></textarea>
 
   </div>

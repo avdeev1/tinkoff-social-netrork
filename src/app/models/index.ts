@@ -6,6 +6,7 @@ export interface IPost {
   author: IUser;
   image?: string;
   comments: IComment[];
+  tags: ITag[];
   draft: boolean;
 }
 
@@ -31,4 +32,9 @@ export interface IUploadResponse {
   url: string;
 }
 
+
+export interface ITag {
+  id: number;
+  tag: string;
+}
 
