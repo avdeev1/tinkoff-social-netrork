@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild} from '@angular/core';
 import {UserService} from '../services/user.service';
 import {PostsService} from '../services/posts.service';
 import {IUser} from '../models';
-import {finalize} from "rxjs/operators";
-
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {finalize} from 'rxjs/operators';
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-setting',
   templateUrl: './setting.component.html',
@@ -11,16 +12,21 @@ import {finalize} from "rxjs/operators";
 })
 export class SettingComponent implements OnInit {
 
-
+  form: FormGroup;
+  loading = false;
   user: IUser;
-  isLoad: boolean = false;
-  avatar: string = 'https://faucethub.io/assets/img/avatars/3523614_1531331166.jpg';
-
+  isLoad = false;
+  avatar = 'https://faucethub.io/assets/img/avatars/3523614_1531331166.jpg';
+  editorForm: FormGroup;
   constructor(
     private postService: PostsService,
     private userService: UserService,
-  ) {}
-
+    private fb: FormBuilder,
+    private changeDetectorRef: ChangeDetectorRef,
+  // private router: Router
+  ) {
+    this.createForm();
+  }
 
   ngOnInit() {
     this.userService.getProfile()
@@ -31,4 +37,13 @@ export class SettingComponent implements OnInit {
         this.user = res;
     });
   }
+  createForm() {
+    this.form = this.fb.group({
+      desc: ['', Validators.required],
+      avatar: null
+    });
+  }
+
+  onFileSelect(file) {}
+  onSubmit() {}
 }

@@ -40,6 +40,7 @@ import { PostsService } from "./services/posts.service";
 import { UserService } from "./services/user.service";
 import { FormatDatePipe } from './format-date.pipe';
 import { GetDiffDateFromNowPipe } from './get-diff-date-from-now.pipe';
+import { UploadingButtonComponent } from './uploading-button/uploading-button.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { GetDiffDateFromNowPipe } from './get-diff-date-from-now.pipe';
     PostDetailComponent,
     FormatDatePipe,
     GetDiffDateFromNowPipe,
+    UploadingButtonComponent,
   ],
   imports: [
     FormsModule,

@@ -1,10 +1,11 @@
-<form *ngIf="isLoad">
+<form *ngIf="isLoad" [formGroup]="form" (submit)="onSubmit()">
 <nb-card class="nb-card-user">
   <div class="img-container">
     <img [src]="user.avatar || avatar" alt="">
     <div class="user-info">
       <div class="user-name">{{user.login}}</div>
-      <div class="changeImage"><a [routerLink]='' ><i class="fa fa-pencil" aria-hidden="true"></i> Загрузить картинку</a></div>
+      <app-uploading-button (fileSelect)="onFileSelect($event)"></app-uploading-button>
+<!--      <div class="changeImage"><a [routerLink]='' ><i class="fa fa-pencil" aria-hidden="true"></i> Загрузить картинку</a></div>-->
     </div>
 
   </div>
@@ -15,10 +16,10 @@
 
   <div class="about-user">
     <span>О Себе:</span> <br>
-    <textarea nbInput fullWidth [value]="user.description" cols="130" rows="5"></textarea>
+    <textarea formControlName="desc" nbInput fullWidth [value]="user.description" cols="130" rows="5"  #textarea
+    ></textarea>
   </div>
-  <input type="submit" class="sign-in header-btn" nbButton outline status="info" size="xsmall" value="Сохранить">
-
+  <button type="submit" [disabled]="form.invalid || loading" nbButton status="info" size="xsmall" outline>Сохранить <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
 </nb-card>
 </form>
 
