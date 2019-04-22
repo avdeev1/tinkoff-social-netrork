@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
+import { NgxMdModule } from 'ngx-md';
 import {
   NbButtonModule,
   NbSelectModule,
@@ -71,6 +72,7 @@ import {UploadingButtonComponent} from './uploading-button/uploading-button.comp
   imports: [
     FormsModule,
     NbSelectModule,
+    NgxMdModule.forRoot(),
     RouterModule,
     BrowserModule,
     ResolversModule,
