@@ -65,4 +65,13 @@ export class PostController {
   async create(@Body() postDto: PostDto, @Request() req): Promise<PostModel> {
     return await this.postService.create(postDto, req.user);
   }
+
+  @Post('/like')
+  @UseInterceptors(ClassSerializerInterceptor)
+  @UseGuards(AuthGuard())
+  async like(@Body() data: any, @Request() req) {
+    console.log(data);
+    console.log(req.user);
+    return await this.postService.like(data.id, req.user.id);
+  }
 }

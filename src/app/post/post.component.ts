@@ -18,6 +18,8 @@ export class PostComponent implements OnInit {
 
   likePost(event) {
     event.stopPropagation();
+
+    this.likeService.likePost(this.post.id);
   }
   goToPostPage() {
     this.router.navigateByUrl(`post/${this.post.id}`);

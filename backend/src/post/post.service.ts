@@ -20,6 +20,15 @@ export class PostService {
       .addSelect(["author.login", "author.avatar", "author.id"])
       .leftJoinAndSelect('post.tags', 'tags')
       .loadRelationCountAndMap('post.comments', 'post.comments')
+      .loadRelationCountAndMap('post.likes', 'post.likes')
+      // .addSelect(subQuery => {
+      //   return subQuery
+      //     .select('user.likes', 'like')
+      //     .from(User, 'user')
+      //     .leftJoinAndSelect(, 'post')
+      // //     .where('post.id = 1')
+      //     .limit(1);
+      // }, 'name')
       .getMany();
   }
 
@@ -90,4 +99,18 @@ export class PostService {
       })
       .getMany();
   }
+  // async like(postid: number, user: User): {
+  //   const userNote = await this.userRepo.findOne(user.id);
+  //   const postNote = await this.postRepo.findOne(postid);
+  //   userNote.postLikes.push(postNote);
+  //   return await this.postRepo.create(user);
+  // }
+  async like(postid: number, userId: number) {
+    return this.postRepo.createQueryBuilder('post')
+      .relation(User, "likes")
+      .of(1)
+      .add(1);
+  }
+
+
 }

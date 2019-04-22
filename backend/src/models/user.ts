@@ -30,6 +30,6 @@ export class User {
   @Column({ nullable: true })
   avatar: string;
 
-  @ManyToMany(type => Post, post => post.user)
-  post: User[];
+  @ManyToMany(type => Post, post => post.id)
+  likes: User[];
 }
