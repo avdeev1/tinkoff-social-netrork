@@ -1,10 +1,9 @@
-import {Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from '../services/user.service';
 import {PostsService} from '../services/posts.service';
 import {IUser} from '../models';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {finalize} from 'rxjs/operators';
-import {Router} from "@angular/router";
 @Component({
   selector: 'app-setting',
   templateUrl: './setting.component.html',
@@ -18,15 +17,14 @@ export class SettingComponent implements OnInit {
   fileName: string;
   isLoad = false;
   avatar = 'https://faucethub.io/assets/img/avatars/3523614_1531331166.jpg';
-  av = null;
-  desc = null;
-  editorForm: FormGroup;
+  default = {
+    avatar: null,
+    desc: null
+  }
   constructor(
     private postService: PostsService,
     private userService: UserService,
     private fb: FormBuilder,
-    private changeDetectorRef: ChangeDetectorRef,
-  // private router: Router
   ) {
     this.createForm();
   }
@@ -39,17 +37,17 @@ export class SettingComponent implements OnInit {
       .subscribe(res => {
         this.user = res;
         if (res.description) {
-          this.desc = res.description;
+          this.default.desc = res.description;
         }
         if (res.avatar) {
-          this.av = res.avatar;
+          this.default.avatar = res.avatar;
         }
       });
   }
   createForm() {
     this.form = this.fb.group({
-      desc: this.desc,
-      img: this.av
+      desc: this.default.desc,
+      img:  this.default.avatar
     });
   }
 
@@ -62,8 +60,8 @@ export class SettingComponent implements OnInit {
 
   onSubmit() {
     this.loading = true;
-    const {desc, url } = this.form.value;
-    this.userService.editProfile(url, desc).subscribe(() => {
+    const {desc, img } = this.form.value;
+    this.userService.editProfile(img, desc).subscribe(() => {
       this.loading = false;
     });
 

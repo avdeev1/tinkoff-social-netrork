@@ -4,9 +4,10 @@
     <img [src]="user.avatar || avatar" alt="">
     <div class="user-info">
       <div class="user-name">{{user.login}}</div>
-
-      <app-uploading-button (fileSelect)="onFileSelect($event)"></app-uploading-button>
-      <span>{{fileName ? fileName: 'Файл не выбран'}}</span>
+      <div class="setPhoto">
+        <app-uploading-button (fileSelect)="onFileSelect($event)"></app-uploading-button>
+        <span>{{fileName ? fileName: 'Файл не выбран'}}</span>
+      </div>
     </div>
 
   </div>
@@ -21,7 +22,7 @@
     ></textarea>
 
   </div>
-  <button type="submit"  nbButton status="info" size="xsmall" outline>Сохранить <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
+  <button type="submit"  nbButton status="info" size="small" outline class="btnSave">Сохранить <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
 </nb-card>
 </form>
 
