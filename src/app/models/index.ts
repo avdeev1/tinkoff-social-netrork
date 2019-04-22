@@ -9,6 +9,13 @@ export interface IPost {
   draft: boolean;
 }
 
+export interface ICreatePost {
+  title: string;
+  text: string;
+  image?: string;
+  tags?: number[];
+}
+
 export interface IUser {
   id: number;
   login: string;

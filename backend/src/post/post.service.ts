@@ -3,6 +3,7 @@ import { Post } from '../models/post';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../models/user';
+import {PostDto} from './dto/post.dto';
 
 @Injectable()
 export class PostService {
@@ -17,7 +18,7 @@ export class PostService {
       .getMany();
   }
 
-  async create(postDto: Post, user: User): Promise<Post> {
+  async create(postDto: PostDto, user: User): Promise<Post> {
     const post = this.postRepo.create(postDto);
 
     post.author = user;

@@ -2,7 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {IPost, IUploadResponse} from '../models';
+import {ICreatePost, IPost, IUploadResponse} from '../models';
 import {UserService} from './user.service';
 
 
@@ -33,12 +33,8 @@ export class PostsService {
   getPostsForSearch(str: string) {
   }
 
-  createPost(headline: string, textPost: string, img: string, tags: string[]): Observable<IPost> {
-    return this.http.post<IPost>('api/posts/create', {
-      title: headline,
-      text: textPost,
-      image: img
-    });
+  createPost(post: ICreatePost): Observable<IPost> {
+    return this.http.post<IPost>('api/posts/create', post);
   }
 
   uploadImage(image: File): Observable<string> {

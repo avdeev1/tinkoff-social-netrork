@@ -2,7 +2,7 @@ import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angu
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import * as SimpleMDE from 'simplemde';
 import {PostsService} from '../services/posts.service';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-editor',
@@ -31,7 +31,7 @@ export class EditorComponent implements OnInit {
 
   ngOnInit() {
     this.editorForm = this.fb.group({
-      headline: ['', Validators.required],
+      title: ['', Validators.required],
       text: ['', Validators.required],
       tags: [''],
       url: ['']
@@ -58,7 +58,10 @@ export class EditorComponent implements OnInit {
   }
 
   onSubmit() {
-    const { headline, text, tags } = this.editorForm.value;
-    this.postService.createPost(headline, text, this.editorForm.value.url, tags).subscribe(() => this.router.navigateByUrl('/'));
+    let { title, text, tags, url } = this.editorForm.value;
+    if (tags === '') {
+      tags = [];
+    }
+    this.postService.createPost({title, text, image: url, tags}).subscribe(() => this.router.navigateByUrl('/'));
   }
 }

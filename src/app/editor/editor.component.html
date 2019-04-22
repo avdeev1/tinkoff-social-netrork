@@ -2,7 +2,7 @@
   <nb-card-header>Публикация</nb-card-header>
   <nb-card-body>
     <form [formGroup]="editorForm" (submit)="onSubmit()">
-      <input formControlName="headline" id="input_header" class="add-margin-bottom" type="text" nbInput fullWidth
+      <input formControlName="title" id="input_header" class="add-margin-bottom" type="text" nbInput fullWidth
              status="info" maxlength="100"
              placeholder="Заголовок">
       <textarea #textarea

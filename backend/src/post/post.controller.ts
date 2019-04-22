@@ -13,6 +13,7 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { Post as PostModel } from '../models/post';
 import { PostService } from './post.service';
+import {PostDto} from './dto/post.dto';
 
 @Controller('posts')
 export class PostController {
@@ -48,7 +49,7 @@ export class PostController {
   @Post('/create')
   @UseInterceptors(ClassSerializerInterceptor)
   @UseGuards(AuthGuard())
-  async create(@Body() postDto: PostModel, @Request() req): Promise<PostModel> {
+  async create(@Body() postDto: PostDto, @Request() req): Promise<PostModel> {
     return await this.postService.create(postDto, req.user);
   }
 }
