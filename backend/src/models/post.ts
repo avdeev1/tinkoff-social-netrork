@@ -35,4 +35,8 @@ export class Post {
 
   @Column({ default: false })
   draft: boolean;
+
+  @ManyToMany(type => User, user => user.post)
+  @JoinTable()
+  user: User[];
 }

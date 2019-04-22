@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {IPost} from '../models';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
+import {LikeService} from '../services/like.service';
 
 @Component({
   selector: 'app-post',
@@ -10,13 +11,14 @@ import {Router} from "@angular/router";
 })
 export class PostComponent implements OnInit {
   @Input() post: IPost;
-  @Input() extendable: boolean = true;
+  @Input() extendable = true;
+  constructor(private router: Router, private likeService: LikeService) {}
 
-  constructor(private router: Router) {}
+  ngOnInit() {}
 
-  ngOnInit() {
+  likePost(event) {
+    event.stopPropagation();
   }
-
   goToPostPage() {
     this.router.navigateByUrl(`post/${this.post.id}`);
   }

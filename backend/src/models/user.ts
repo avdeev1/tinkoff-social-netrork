@@ -1,4 +1,4 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany} from 'typeorm';
+import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, ManyToMany} from 'typeorm';
 import { Exclude, Expose } from 'class-transformer';
 import {Comment} from "./comment";
 import {Post} from "./post";
@@ -29,4 +29,7 @@ export class User {
 
   @Column({ nullable: true })
   avatar: string;
+
+  @ManyToMany(type => Post, post => post.user)
+  post: User[];
 }
