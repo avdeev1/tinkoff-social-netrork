@@ -30,10 +30,6 @@ export class EditorComponent implements OnInit {
               private http: HttpClient) {
   }
 
-  getTags(): Observable<ITag[]> {
-    return this.http.get<ITag[]>('api/tags');
-  }
-
   ngOnInit() {
     this.http.get<ITag[]>('api/tags').subscribe(data => {
       this.tags = data;
@@ -67,7 +63,6 @@ export class EditorComponent implements OnInit {
 
   onSubmit() {
     let { title, text, tags, url } = this.editorForm.value;
-    console.log(tags);
     if (tags === '') {
       tags = [];
     }

@@ -5,6 +5,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {
   NbButtonModule,
+  NbSelectModule,
   NbCardModule,
   NbDialogModule,
   NbDialogService,
@@ -71,6 +72,7 @@ import {UploadingButtonComponent} from './uploading-button/uploading-button.comp
   ],
   imports: [
     FormsModule,
+    NbSelectModule,
     RouterModule,
     BrowserModule,
     ResolversModule,
