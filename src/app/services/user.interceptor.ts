@@ -20,24 +20,6 @@ export class UserInterceptor implements HttpInterceptor {
       });
     }
     return next.handle(req).pipe(
-      // map((event: HttpEvent<any>) => {
-      //   console.log(event);
-      //   if (event instanceof HttpResponse ) {
-      //     if (event.status === 401) {
-      //       console.log(event.status);
-      //       this.authService.logout();
-      //     }
-      //   }
-      // }));
-      // catchError((error: HttpErrorResponse) => {
-      //   if (error instanceof HttpErrorResponse) {
-      //     console.log(error);
-      //     if (error.error.statusCode === 401) {
-      //       this.authService.logout();
-      //     }
-      //   }
-      //   return throwError('lol');
-      // })
       catchError((err: HttpErrorResponse) => {
         if (err.status == 401) {
           console.log('401');
