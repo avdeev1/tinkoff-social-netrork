@@ -43,7 +43,19 @@ export class EditorComponent implements OnInit {
     this.simplemde = new SimpleMDE({
       element: this.textarea.nativeElement,
       spellChecker: false,
-      forceSync: true
+      forceSync: true,
+      toolbar: ['bold', 'italic', 'heading', '|',
+        'quote', 'unordered-list', 'ordered-list', '|',
+        'preview', 'side-by-side', 'fullscreen', '|',
+        'guide', '|',
+        {
+        name: 'preview',
+        action: function customFunction(editor) {
+          editor.value(editor.value() + '\n<preview>\n');
+        },
+        className: 'fa fa-scissors',
+        title: 'Preview',
+      }]
     });
 
     // subscribe to simpleMDE data changes
