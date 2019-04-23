@@ -16,6 +16,8 @@ export class UserService {
       .where({id})
       .loadRelationCountAndMap('user.comments', 'user.comments')
       .loadRelationCountAndMap('user.posts', 'user.posts')
+      .loadRelationCountAndMap('user.followers', 'user.followers')
+      .loadRelationCountAndMap('user.subscriptions', 'user.subscriptions')
       .getOne();
   }
 

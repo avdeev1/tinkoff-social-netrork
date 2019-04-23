@@ -3,6 +3,7 @@ import {UserService} from "./user.service";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {IPost} from "../models";
+import {AuthService} from "./auth.service";
 
 
 @Injectable({
@@ -10,7 +11,7 @@ import {IPost} from "../models";
 })
 export class PostsService {
 
-  constructor(private userService: UserService, private http: HttpClient) {
+  constructor(private userService: UserService, private http: HttpClient, private authService: AuthService) {
   }
 
   getPostsForProfilePage(): Observable<IPost[]> {
@@ -22,7 +23,14 @@ export class PostsService {
   }
 
   getPostsForMainPage(): Observable<IPost[]> {
+    if (!this.authService.isAuth.value) {
+      return this.getPopularPostForMainPage();
+    }
     return this.http.get<IPost[]>('api/posts');
+  }
+
+  getPopularPostForMainPage(): Observable<IPost[]> {
+    return this.http.get<IPost[]>('api/posts/popular');
   }
 
   getPostsForFavPage(): Observable<IPost[]> {
