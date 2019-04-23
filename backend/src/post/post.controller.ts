@@ -5,7 +5,8 @@ import {
   Get,
   HttpException,
   Param,
-  Post, Query,
+  Post,
+  Query,
   Request,
   UseGuards,
   UseInterceptors
@@ -14,6 +15,7 @@ import {AuthGuard} from '@nestjs/passport';
 import {Post as PostModel} from '../models/post';
 import {PostService} from './post.service';
 import {PostDto} from "./dto/post.dto";
+import {LikeDto} from "../comment/dto/like.dto";
 
 @Controller('posts')
 export class PostController {
@@ -28,6 +30,7 @@ export class PostController {
   }
 
   @Get('/popular')
+  @UseInterceptors(ClassSerializerInterceptor)
   async popular(): Promise<PostModel[]> {
     return await this.postService.getPosts();
   }
@@ -48,7 +51,7 @@ export class PostController {
   @UseInterceptors(ClassSerializerInterceptor)
   @UseGuards(AuthGuard())
   async getPostsForFavourites(@Request() req): Promise<PostModel[]> {
-    return await this.postService.getPostsForFavourite();
+    return await this.postService.getPostsForFavourite(req.user.id);
   }
 
   @Get('/:id')
@@ -75,5 +78,19 @@ export class PostController {
   @UseGuards(AuthGuard())
   async create(@Body() postDto: PostDto, @Request() req): Promise<PostModel> {
     return await this.postService.create(postDto, req.user);
+  }
+
+  @Post('/like')
+  @UseInterceptors(ClassSerializerInterceptor)
+  @UseGuards(AuthGuard())
+  async like(@Body() likeDto: LikeDto, @Request() req): Promise<{ [key: string]: boolean }> {
+     return  await this.postService.like(likeDto.id, req.user.id);
+  }
+
+  @Post('/like/delete')
+  @UseInterceptors(ClassSerializerInterceptor)
+  @UseGuards(AuthGuard())
+  async delete(@Body() likeDto: LikeDto, @Request() req): Promise<{ [key: string]: boolean }> {
+     return await this.postService.deleteLike(likeDto.id, req.user.id);
   }
 }

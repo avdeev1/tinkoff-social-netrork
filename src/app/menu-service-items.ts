@@ -17,10 +17,5 @@ export const MENU_NAVBAR_LINK = [
     title: 'Лайки',
     link: '/favourites',
     icon: 'fa fa-heart'
-  },
-  {
-    title: 'Черновик',
-    link: '/profile/draft',
-    icon: 'fa fa-file-o'
   }
 ];

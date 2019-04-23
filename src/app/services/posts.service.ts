@@ -7,7 +7,6 @@ import {ICreatePost, IPost, IUploadResponse} from '../models';
 import {AuthService} from './auth.service';
 
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -48,8 +47,10 @@ export class PostsService {
   }
 
   getPostsForSearch(str: string): Observable<IPost[]> {
-    return this.http.get<IPost[]>(`api/posts/search`, {params:  new HttpParams()
-        .set('q', str)});
+    return this.http.get<IPost[]>(`api/posts/search`, {
+      params: new HttpParams()
+        .set('q', str)
+    });
   }
 
   createPost(post: ICreatePost): Observable<IPost> {

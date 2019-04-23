@@ -1,5 +1,5 @@
 import {Exclude} from 'class-transformer';
-import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
+import {Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
 import {Comment} from './comment';
 import {Post} from './post';
 import {Subscriber} from './subscriber';
@@ -30,6 +30,9 @@ export class User {
 
   @Column({ nullable: true })
   avatar: string;
+
+  @ManyToMany(type => Post, post => post.likes)
+  postsLike: Post[];
 
   @OneToMany(type => Subscriber, sub => sub.subscription)
   subscriptions: User[];
