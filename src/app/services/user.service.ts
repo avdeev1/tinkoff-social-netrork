@@ -1,9 +1,9 @@
+import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {IUser, IUploadResponse} from '../models';
 import {map} from 'rxjs/operators';
+import {ISubscriber, IUploadResponse, IUser} from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +21,19 @@ export class UserService {
     return this.http.get<IUser>(`api/user/profile`);
   }
 
+  getInfoAboutSubscribes(id: string): Observable<ISubscriber> {
+    return this.http.get<ISubscriber>(`api/subscribers/find/${id}`);
+  }
+
+  subscribe(id: number): Observable<ISubscriber> {
+    return this.http.post<ISubscriber>('api/subscribers/subscribe', { id });
+  }
+
+  unsubscribe(id: number): Observable<{ [key: string]: boolean }> {
+    return this.http.post<{ [key: string]: boolean }>('api/subscribers/unsubscribe', { id });
+  }
+
+
   uploadImage(image: File): Observable<string> {
     const form = new FormData();
     form.append('file', image);
@@ -32,6 +45,7 @@ export class UserService {
       );
 
   }
+
   editProfile(url: string = null, desc: string): Observable<object> {
     return this.http.post<object>('api/user/update', {
       description: desc,

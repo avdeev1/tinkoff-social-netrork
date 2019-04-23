@@ -1,10 +1,9 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
-import {IPost, IUser} from '../models';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {LikeService} from '../services/like.service';
+import {finalize} from 'rxjs/operators';
+import {IPost} from '../models';
 import {AuthService} from '../services/auth.service';
-import {finalize} from "rxjs/operators";
-import { ChangeDetectorRef} from "@angular/core";
+import {LikeService} from '../services/like.service';
 
 @Component({
   selector: 'app-post',
@@ -18,7 +17,8 @@ export class PostComponent implements OnInit {
   quantityLike = 0;
   isLike = false;
 
-  constructor(private router: Router, private likeService: LikeService, private authService: AuthService, private cd: ChangeDetectorRef) {}
+  constructor(private router: Router, private likeService: LikeService, private authService: AuthService, private cd: ChangeDetectorRef) {
+  }
 
   ngOnInit() {
     this.quantityLike = this.post.likes.length;
@@ -41,15 +41,16 @@ export class PostComponent implements OnInit {
     } else {
       this.likeService.likePost(this.post.id)
         .pipe(
-        finalize(() => {
-          this.isLike = true;
-          this.quantityLike++;
-          this.cd.markForCheck();
-        }))
+          finalize(() => {
+            this.isLike = true;
+            this.quantityLike++;
+            this.cd.markForCheck();
+          }))
         .subscribe();
     }
 
   }
+
   goToPostPage() {
     this.router.navigateByUrl(`post/${this.post.id}`);
   }

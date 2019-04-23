@@ -1,0 +1,34 @@
+<nb-card>
+  <nb-card-header>Публикация</nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="editorForm" (submit)="onSubmit()">
+      <input formControlName="title" id="input_header" class="add-margin-bottom" type="text" nbInput fullWidth
+             status="info" maxlength="100"
+             placeholder="Заголовок">
+      <textarea #textarea
+                formControlName="text"
+                id="input_text"
+                class="add-margin-bottom"
+                nbInput
+                fullWidth
+                status="info"
+                placeholder="Текст"
+                rows="10"></textarea>
+
+      <app-uploading-button (fileSelect)="onFileSelect($event)"></app-uploading-button>
+      <span>{{file ? file.name : 'Файл не выбран'}}</span>
+
+      <label for="multiple_select">
+        <h4>Метки</h4>
+      </label>
+      <nb-select formControlName="tags" id="multiple_select" class="add-margin-bottom" multiple outline status="info"
+                 placeholder="Выберите метки">
+        <nb-option *ngFor="let tag of tags" [value]="tag.id">{{tag.tag}}</nb-option>
+      </nb-select>
+      <button type="submit" nbButton class="add-margin-right" status="info" [disabled]="!editorForm.valid">
+        Опубликовать
+      </button>
+    </form>
+  </nb-card-body>
+</nb-card>
+

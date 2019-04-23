@@ -11,6 +11,13 @@ export interface IPost {
   likes: IUser[];
 }
 
+export interface ICreatePost {
+  title: string;
+  text: string;
+  image?: string;
+  tags?: number[];
+}
+
 export interface IUser {
   id: number;
   login: string;
@@ -19,6 +26,13 @@ export interface IUser {
   posts: IPost[];
   comments: IComment[];
   registrationDate: number;
+  subscriptions: number;
+  followers: number;
+}
+
+export interface IUploadResponse {
+  success: boolean;
+  url: string;
 }
 
 export interface IComment {
@@ -37,5 +51,11 @@ export interface IUploadResponse {
 export interface ITag {
   id: number;
   tag: string;
+}
+
+export interface ISubscriber {
+  id: number;
+  subscription: IUser[];
+  follower: IUser[];
 }
 

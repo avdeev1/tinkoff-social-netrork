@@ -18,6 +18,7 @@ nb-card {
   margin-bottom: 10px;
   display: flex;
   justify-content: flex-start;
+  min-height: 12vh;
   align-items: center;
   img {
     border: 2px solid white;
@@ -47,7 +48,10 @@ nb-card {
   justify-content: space-around;
 }
 
-.posts-and-likes {
+.user-activity {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
   line-height: 1.4rem;
   font-size: 0.9rem;
   color: #878a8c;
@@ -61,6 +65,20 @@ nb-card {
 .img-edit {
   align-self: flex-start;
   margin-left: auto;
+}
+
+.sub-btn {
+  align-self: flex-start;
+  font-size: 24px;
+  margin-left: auto;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.sub-btn:hover, .sub-btn:active, .sub-btn:focus{
+  text-decoration: underline;
+  color: white;
 }
 
 .user-name {

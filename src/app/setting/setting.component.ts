@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from '../services/user.service';
-import {PostsService} from '../services/posts.service';
-import {IUser} from '../models';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {finalize} from 'rxjs/operators';
+import {IUser} from '../models';
+import {PostsService} from '../services/posts.service';
+import {UserService} from '../services/user.service';
+
 @Component({
   selector: 'app-setting',
   templateUrl: './setting.component.html',
@@ -14,13 +15,15 @@ export class SettingComponent implements OnInit {
   form: FormGroup;
   loading = false;
   user: IUser;
-  fileName: string;
   isLoad = false;
   avatar = 'https://faucethub.io/assets/img/avatars/3523614_1531331166.jpg';
+
+  fileName: string;
   default = {
     avatar: null,
     desc: null
-  }
+  };
+
   constructor(
     private postService: PostsService,
     private userService: UserService,
@@ -44,10 +47,11 @@ export class SettingComponent implements OnInit {
         }
       });
   }
+
   createForm() {
     this.form = this.fb.group({
       desc: this.default.desc,
-      img:  this.default.avatar
+      img: this.default.avatar
     });
   }
 
@@ -60,12 +64,10 @@ export class SettingComponent implements OnInit {
 
   onSubmit() {
     this.loading = true;
-    const {desc, img } = this.form.value;
+    const { desc, img } = this.form.value;
     this.userService.editProfile(img, desc).subscribe(() => {
       this.loading = false;
     });
 
   }
-
-
-  }
+}

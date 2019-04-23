@@ -28,7 +28,8 @@
             ],
             "styles": [
               "node_modules/@nebular/theme/styles/prebuilt/default.css",
-              "src/styles.less"
+              "src/styles.less",
+              "node_modules/prismjs/themes/prism-okaidia.css"
             ],
             "scripts": [],
             "es5BrowserSupport": true

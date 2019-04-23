@@ -1,8 +1,10 @@
+import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {UserService} from "./user.service";
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {IPost} from "../models";
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {ICreatePost, IPost, IUploadResponse} from '../models';
+import {AuthService} from './auth.service';
+import {UserService} from './user.service';
 
 
 @Injectable({
@@ -10,7 +12,7 @@ import {IPost} from "../models";
 })
 export class PostsService {
 
-  constructor(private userService: UserService, private http: HttpClient) {
+  constructor(private userService: UserService, private http: HttpClient, private authService: AuthService) {
   }
 
   getPostsForProfilePage(): Observable<IPost[]> {
@@ -22,7 +24,14 @@ export class PostsService {
   }
 
   getPostsForMainPage(): Observable<IPost[]> {
+    if (!this.authService.isAuth.value) {
+      return this.getPopularPostForMainPage();
+    }
     return this.http.get<IPost[]>('api/posts');
+  }
+
+  getPopularPostForMainPage(): Observable<IPost[]> {
+    return this.http.get<IPost[]>('api/posts/popular');
   }
 
   getPostsForFavPage(): Observable<IPost[]> {
@@ -33,7 +42,26 @@ export class PostsService {
     return this.http.get<IPost>(`api/posts/${id}`);
   }
 
+  getPostsForSearch(str: string) {
+  }
+
   getPostsByTag(id: string): Observable<IPost[]> {
     return this.http.get<IPost[]>(`/api/posts/tag/${id}`);
+  }
+
+  createPost(post: ICreatePost): Observable<IPost> {
+    return this.http.post<IPost>('api/posts/create', post);
+  }
+
+  uploadImage(image: File): Observable<string> {
+    const form = new FormData();
+    form.append('file', image);
+
+    return this.http
+      .post<IUploadResponse>('api/upload/post_image', form)
+      .pipe(
+        map(res => res.url)
+      );
+
   }
 }

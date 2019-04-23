@@ -41,4 +41,5 @@ export class SignUpFormComponent implements OnInit {
 
     this.authService.register(login, pass, doublePass).subscribe();
   }
+
 }
