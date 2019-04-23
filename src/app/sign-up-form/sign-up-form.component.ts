@@ -39,6 +39,6 @@ export class SignUpFormComponent implements OnInit {
   onSubmit() {
     const {login, passwords: {pass, doublePass}} = this.signUpForm.value;
 
-    this.authService.register(login, pass, doublePass);
+    this.authService.register(login, pass, doublePass).subscribe();
   }
 }

@@ -1,54 +1,70 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import {ShowPostsComponent} from './show-posts/show-posts.component';
-import {ProfileHeaderComponent} from './profile-header/profile-header.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {ShowPostsComponent} from "./show-posts/show-posts.component";
 import {SettingComponent} from './setting/setting.component';
+import {ProfileComponent} from "./profile/profile.component";
+import {PostDetailComponent} from './post-detail/post-detail.component';
+import {ForShowPostComponent} from "./models/for-show-post-component.enum";
+
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
     component: ShowPostsComponent,
-    data: {}
+    data: {
+      content: ForShowPostComponent.MAIN
+    }
   },
   {
     path: 'profile',
-    component: ProfileHeaderComponent,
-    pathMatch: 'full',
+    component: ProfileComponent,
+    data: {
+      profile: true
+    }
   },
   {
     path: 'profile/draft',
-    pathMatch: 'full',
     component: ShowPostsComponent,
+    data: {
+      content: ForShowPostComponent.DRAFTS
+    }
   },
   {
     path: 'profile/setting',
     component: SettingComponent,
-    pathMatch: 'full',
   },
   {
-    path: 'user/:login',
-    component: ProfileHeaderComponent,
-    pathMatch: 'full',
+    path: 'user/:id',
+    component: ProfileComponent,
   },
   {
-    path: 'favorites',
+    path: 'favourites',
     component: ShowPostsComponent,
-    data: {}
+    data: {
+      content: ForShowPostComponent.FAVOURITES
+    }
   },
   {
     path: 'post/:id',
-    component: ShowPostsComponent,
-    pathMatch: 'full'
+    component: PostDetailComponent,
   },
   {
     path: 'create',
     component: ShowPostsComponent,
-    pathMatch: 'full',
+  },
+  {
+    path: 'find/tag/:id',
+    component: ShowPostsComponent,
+    data: {
+      content: ForShowPostComponent.TAG
+    }
   },
   {
     path: 'search',
     component: ShowPostsComponent,
-    data: {}
+    data: {
+      content: ForShowPostComponent.SEARCH
+    }
   }
 ];
 

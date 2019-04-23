@@ -1,17 +1,22 @@
-import { Injectable } from '@angular/core';
-import { IUser } from '../models';
+import {Injectable} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
+import {IUser} from "../models";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  public user: IUser = {
-    user: '@norimyxxxo',
-    profilePhotoSrc: 'https://pbs.twimg.com/profile_images/1029031247073476610/trKYjiJ3_400x400.jpg',
-    postIds: [1, 4],
-    description: 'русскоязычный рэп-, грайм-, фристайл-исполнитель и исполнительный директор букинг-агентства «Booking Machine Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto assumenda delectus eius enim illo inventore maxime minus nemo nisi non nostrum perspiciatis, porro possimus qui sequi soluta sunt vero voluptatem.'
-  };
+  constructor(private route: ActivatedRoute, private http: HttpClient) {
+  }
 
-  constructor() { }
+  getUserById(id: string): Observable<IUser> {
+    return this.http.get<IUser>(`api/user/${id}`);
+  }
+
+  getProfile(): Observable<IUser> {
+    return this.http.get<IUser>(`api/user/profile`);
+  }
 }

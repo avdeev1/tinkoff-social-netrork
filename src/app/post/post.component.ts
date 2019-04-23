@@ -1,5 +1,6 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {IPost} from '../models';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-post',
@@ -9,11 +10,18 @@ import {IPost} from '../models';
 })
 export class PostComponent implements OnInit {
   @Input() post: IPost;
+  @Input() extendable: boolean = true;
 
+  constructor(private router: Router) {}
 
   ngOnInit() {
   }
 
   goToPostPage() {
+    this.router.navigateByUrl(`post/${this.post.id}`);
+  }
+
+  findTag() {
+    event.stopPropagation();
   }
 }

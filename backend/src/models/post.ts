@@ -1,13 +1,8 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  OneToMany,
-  ManyToOne,
-} from 'typeorm';
-import { User } from './user';
-import { IsNotEmpty } from 'class-validator';
-import { Exclude } from 'class-transformer';
+import {Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn,} from 'typeorm';
+import {User} from './user';
+import {Comment} from "./comment";
+import {IsNotEmpty} from 'class-validator';
+import {Tag} from "./tag";
 
 @Entity()
 export class Post {
@@ -22,8 +17,8 @@ export class Post {
   @IsNotEmpty()
   text: string;
 
-  @Column()
-  createdAt: number = Date.now();
+  @Column({ default: () => 'strftime(\'%s\', \'now\')' })
+  createdAt: number;
 
   @ManyToOne(type => User, user => user.id)
   author: User;
@@ -31,6 +26,13 @@ export class Post {
   @Column({ nullable: true })
   image: string;
 
-  @Column()
-  draft: boolean = true;
+  @OneToMany(type => Comment, comment => comment.post)
+  comments: Comment[];
+
+  @ManyToMany(type => Tag, tags => tags.posts)
+  @JoinTable()
+  tags: Tag[];
+
+  @Column({ default: false })
+  draft: boolean;
 }

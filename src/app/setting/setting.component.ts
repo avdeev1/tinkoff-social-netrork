@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from '../services/user.service';
 import {PostsService} from '../services/posts.service';
-import {IPost, IUser} from '../models';
+import {IUser} from '../models';
+import {finalize} from "rxjs/operators";
 
 @Component({
   selector: 'app-setting',
@@ -10,21 +11,24 @@ import {IPost, IUser} from '../models';
 })
 export class SettingComponent implements OnInit {
 
-  constructor(
-    private postService: PostsService,
-    private userService: UserService
-  ) {
-  }
 
   user: IUser;
-  posts: IPost[];
-  comments: number;
+  isLoad: boolean = false;
+  avatar: string = 'https://faucethub.io/assets/img/avatars/3523614_1531331166.jpg';
+
+  constructor(
+    private postService: PostsService,
+    private userService: UserService,
+  ) {}
 
 
   ngOnInit() {
-    this.user = this.userService.user;
-    this.posts = this.postService.getPostsForProfilePage();
-    this.comments = this.postService.getCountOfComments();
+    this.userService.getProfile()
+      .pipe(finalize(() => {
+        this.isLoad = true;
+      }))
+      .subscribe(res => {
+        this.user = res;
+    });
   }
-
 }

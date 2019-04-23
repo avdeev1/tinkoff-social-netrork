@@ -1,0 +1,28 @@
+<nb-card>
+  <nb-card-header>
+    <div class="info-block-container">
+      Оставьте комментарий
+    </div>
+  </nb-card-header>
+  <ng-container *ngIf="isAuth; then makeComment; else notAuth">
+  </ng-container>
+
+  <ng-template #makeComment>
+    <nb-card-body>
+      <form [formGroup]="commentForm">
+        <input type="text" id="input_text" formControlName="comment" nbInput status="info" fullWidth maxlength="100" value=""
+               autocomplete="off" placeholder="Введите комментарий" rows="1">
+        <button nbButton class="submit-button" status="info" size="xsmall" (click)="createComment()">
+          Отправить
+        </button>
+      </form>
+    </nb-card-body>
+  </ng-template>
+
+  <ng-template #notAuth>
+    <nb-card-body>
+      <div><a class="authorization" (click)="authorization()" tabindex="0">Авторизуйтесь</a>, чтобы оставить комментарий</div>
+    </nb-card-body>
+  </ng-template>
+</nb-card>
+

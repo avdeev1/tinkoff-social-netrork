@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
     this.router.navigate( ['search'], {queryParams: {searchWord: this.search.value}});
   }
 
-  handleClickExit() {
+  logout() {
     this.service.logout().subscribe();
   }
 
@@ -37,4 +37,5 @@ export class HeaderComponent implements OnInit {
   onSignUpClick() {
     this.service.openSignUpDialog();
   }
+
 }
