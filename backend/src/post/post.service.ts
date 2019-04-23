@@ -47,7 +47,6 @@ export class PostService {
         .leftJoinAndSelect('post.tags', 'tags')
         .where('post.text like :str', {str: `%${query}%`})
         .loadRelationCountAndMap('post.comments', 'post.comments')
-        .printSql()
         .getMany();
   }
 

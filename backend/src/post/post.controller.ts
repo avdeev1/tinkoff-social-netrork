@@ -25,8 +25,9 @@ export class PostController {
   async posts(): Promise<PostModel[]> {
     return await this.postService.getPosts();
   }
-  @Get('search/q')
-  async getPostsForSearch(@Query() q): Promise<PostModel[]> {
+
+  @Get('search')
+  async getPostsForSearch(@Query('q') q: string): Promise<PostModel[]> {
     return await this.postService.getPostsForSearch(q);
   }
 

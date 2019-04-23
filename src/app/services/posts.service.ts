@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {UserService} from "./user.service";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {IPost} from "../models";
 
@@ -38,6 +38,7 @@ export class PostsService {
   }
 
   getPostsForSearch(str: string): Observable<IPost[]> {
-    return this.http.get<IPost[]>(`api/posts/search/${str}`);
+    return this.http.get<IPost[]>(`api/posts/search`, {params:  new HttpParams()
+        .set('q', str)});
   }
 }
