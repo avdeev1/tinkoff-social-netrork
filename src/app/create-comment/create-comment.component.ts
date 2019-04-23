@@ -1,9 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {IComment} from "../models";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {CommentsService} from "../services/comments.service";
-import {AuthService} from "../services/auth.service";
-import {ActivatedRoute} from "@angular/router";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {IComment} from '../models';
+import {AuthService} from '../services/auth.service';
+import {CommentsService} from '../services/comments.service';
 
 @Component({
   selector: 'app-create-comment',
@@ -18,7 +18,8 @@ export class CreateCommentComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private commentService: CommentsService,
-    private activateRouter: ActivatedRoute) { }
+    private activateRouter: ActivatedRoute) {
+  }
 
   private commentForm: FormGroup;
   @Output() refresh: EventEmitter<IComment> = new EventEmitter();
@@ -34,7 +35,7 @@ export class CreateCommentComponent implements OnInit {
   }
 
   createComment() {
-    this.commentService.createComment(parseInt(this.id), this.commentForm.value.comment).subscribe(res => {
+    this.commentService.createComment(parseInt(this.id, 10), this.commentForm.value.comment).subscribe(res => {
       this.refresh.emit(res);
     });
     this.commentForm.reset();

@@ -1,5 +1,12 @@
-<span>
-  {{short}}
-</span>
-<br *ngIf="isLong">
-<a *ngIf="isLong" (click)="showFull()" routerLink="#" class="show-full-post-button">Читать полностью</a>
+<ng-container *ngIf="isLong; else full">
+  <ngx-md>
+    {{short}}
+  </ngx-md>
+</ng-container>
+<a *ngIf="isLong" (click)="showFull()" tabindex="0" class="show-full-post-button">Читать полностью</a>
+
+<ng-template #full>
+  <ngx-md>
+    {{text}}
+  </ngx-md>
+</ng-template>

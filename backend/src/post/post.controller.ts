@@ -8,7 +8,7 @@ import {
   Post,
   Request,
   UseGuards,
-  UseInterceptors,
+  UseInterceptors
 } from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
 import {Post as PostModel} from '../models/post';
@@ -17,14 +17,21 @@ import {PostDto} from "./dto/post.dto";
 
 @Controller('posts')
 export class PostController {
-  constructor(private readonly postService: PostService) {
-  }
+  constructor(private readonly postService: PostService) {}
 
   @Get()
   @UseInterceptors(ClassSerializerInterceptor)
-  async posts(): Promise<PostModel[]> {
+  @UseGuards(AuthGuard())
+  @UseInterceptors(ClassSerializerInterceptor)
+  async posts(@Request() req): Promise<PostModel[]> {
+    return await this.postService.getSubscriberPosts(req.user);
+  }
+
+  @Get('/popular')
+  async popular(): Promise<PostModel[]> {
     return await this.postService.getPosts();
   }
+
 
   @Get('/profile')
   @UseInterceptors(ClassSerializerInterceptor)

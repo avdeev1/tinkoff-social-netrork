@@ -4,7 +4,7 @@ import { tap, shareReplay } from 'rxjs/operators';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import {SignFormComponent} from '../sign-form/sign-form.component';
 import {NbDialogRef, NbDialogService} from '@nebular/theme';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 interface User {
   login: string;
@@ -52,7 +52,7 @@ export class AuthService {
       localStorage.setItem('isAuth', 'true');
       localStorage.setItem('userName', login);
       this.isAuth.next(true);
-      this.closeForm()
+      this.closeForm();
     }), shareReplay());
   }
 

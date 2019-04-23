@@ -5,6 +5,7 @@ import {SettingComponent} from './setting/setting.component';
 import {ProfileComponent} from "./profile/profile.component";
 import {PostDetailComponent} from './post-detail/post-detail.component';
 import {ForShowPostComponent} from "./models/for-show-post-component.enum";
+import {EditorComponent} from './editor/editor.component';
 
 const routes: Routes = [
   {
@@ -50,20 +51,20 @@ const routes: Routes = [
   },
   {
     path: 'create',
-    component: ShowPostsComponent,
-  },
-  {
-    path: 'find/tag/:id',
-    component: ShowPostsComponent,
-    data: {
-      content: ForShowPostComponent.TAG
-    }
+    component: EditorComponent
   },
   {
     path: 'search',
     component: ShowPostsComponent,
     data: {
       content: ForShowPostComponent.SEARCH
+    }
+  },
+  {
+    path: 'find/tag/:id',
+    component: ShowPostsComponent,
+    data: {
+      content: ForShowPostComponent.TAG
     }
   }
 ];
