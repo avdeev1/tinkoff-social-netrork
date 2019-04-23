@@ -17,7 +17,6 @@ export class PostDetailComponent implements OnInit {
   comments: IComment[];
   post: IPost;
   isDataLoaded: boolean = false;
-  isCommentsLoaded: boolean = false;
   private id = this.router.snapshot.paramMap.get('id');
 
   constructor(private postService: PostsService, private commentService: CommentsService, private router: ActivatedRoute) {}
