@@ -1,4 +1,4 @@
-import { SliceTextPipe } from './slice-text.pipe';
+import {SliceTextPipe} from './slice-text.pipe';
 
 describe('SliceTextPipe', () => {
   it('create an instance', () => {

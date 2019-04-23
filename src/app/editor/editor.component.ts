@@ -3,10 +3,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import * as SimpleMDE from 'simplemde';
 import {PostsService} from '../services/posts.service';
 import {Router} from '@angular/router';
-import {IPost, ITag} from "../models";
+import {ITag} from "../models";
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-editor',
@@ -49,13 +47,13 @@ export class EditorComponent implements OnInit {
         'preview', 'side-by-side', 'fullscreen', '|',
         'guide', '|',
         {
-        name: 'preview',
-        action: function customFunction(editor) {
-          editor.value(editor.value() + '\n<preview>\n');
-        },
-        className: 'fa fa-scissors',
-        title: 'Preview',
-      }]
+          name: 'preview',
+          action: function customFunction(editor) {
+            editor.value(editor.value() + '\n<preview>\n');
+          },
+          className: 'fa fa-scissors',
+          title: 'Preview',
+        }]
     });
 
     // subscribe to simpleMDE data changes

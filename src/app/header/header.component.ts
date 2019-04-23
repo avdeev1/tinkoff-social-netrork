@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
   }
 
   handleSearch() {
-    this.router.navigate( ['search'], {queryParams: {q: this.search.value}});
+    this.router.navigate(['search'], {queryParams: {q: this.search.value}});
   }
 
   logout() {

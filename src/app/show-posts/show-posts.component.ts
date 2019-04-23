@@ -4,7 +4,7 @@ import {IPost} from '../models';
 import {ForShowPostComponent} from "../models/for-show-post-component.enum";
 import {finalize, takeUntil} from 'rxjs/operators';
 import {ActivatedRoute} from '@angular/router';
-import {combineLatest, Observable, race, Subject} from 'rxjs';
+import {combineLatest, Observable, Subject} from 'rxjs';
 import {of} from "rxjs/internal/observable/of";
 import {AuthService} from "../services/auth.service";
 
@@ -45,6 +45,7 @@ export class ShowPostsComponent implements OnDestroy, OnInit {
       this.posts = res;
     });
   }
+
   ngOnInit() {
     combineLatest(this.activatedRoute.url, this.activatedRoute.queryParams).pipe(
       takeUntil(this.destroy$)

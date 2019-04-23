@@ -8,6 +8,7 @@ export interface IPost {
   comments: IComment[];
   tags: ITag[];
   draft: boolean;
+  likes: IUser[];
 }
 
 export interface ICreatePost {

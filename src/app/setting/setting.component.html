@@ -18,11 +18,12 @@
 
   <div class="about-user">
     <span>О Себе:</span> <br>
-      <textarea formControlName="desc" nbInput fullWidth [value]="user.description" cols="130" rows="5" status="info"
+    <textarea [value]="user.description" cols="130" formControlName="desc" fullWidth nbInput rows="5" status="info"
     ></textarea>
 
   </div>
-  <button type="submit"  nbButton status="info" size="small" outline class="btnSave" [disabled]="loading">Сохранить <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading" ></i></button>
+  <button [disabled]="loading" class="btnSave" nbButton outline size="small" status="info" type="submit">Сохранить <i
+    *ngIf="loading" class="fa fa-spinner fa-spin fa-fw"></i></button>
 </nb-card>
 </form>
 

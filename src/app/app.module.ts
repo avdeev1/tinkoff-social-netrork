@@ -44,7 +44,7 @@ import {SignUpFormComponent} from './sign-up-form/sign-up-form.component';
 import {SwitcherForFormComponent} from './switcher-for-form/switcher-for-form.component';
 import {TextPostComponent} from './text-post/text-post.component';
 import {UploadingButtonComponent} from './uploading-button/uploading-button.component';
-import { SliceTextPipe } from './slice-text.pipe';
+import {SliceTextPipe} from './slice-text.pipe';
 
 @NgModule({
   declarations: [
