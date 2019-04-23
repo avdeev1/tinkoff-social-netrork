@@ -1,10 +1,10 @@
-import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {UserService} from "./user.service";
+import {HttpClient, HttpParams} from "@angular/common/http";
+import {Observable} from "rxjs";
 import {map} from 'rxjs/operators';
 import {ICreatePost, IPost, IUploadResponse} from '../models';
 import {AuthService} from './auth.service';
-import {UserService} from './user.service';
 
 
 @Injectable({
@@ -42,11 +42,15 @@ export class PostsService {
     return this.http.get<IPost>(`api/posts/${id}`);
   }
 
-  getPostsForSearch(str: string) {
-  }
-
   getPostsByTag(id: string): Observable<IPost[]> {
     return this.http.get<IPost[]>(`/api/posts/tag/${id}`);
+  }
+
+  getPostsForSearch(str: string): Observable<IPost[]> {
+    return this.http.get<IPost[]>(`api/posts/search`, {
+      params: new HttpParams()
+        .set('q', str)
+    });
   }
 
   createPost(post: ICreatePost): Observable<IPost> {

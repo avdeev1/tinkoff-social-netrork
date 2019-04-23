@@ -42,11 +42,6 @@ export interface IComment {
   author: IUser;
   post: IPost;
 }
-export interface IUploadResponse {
-  success: boolean;
-  url: string;
-}
-
 
 export interface ITag {
   id: number;

@@ -4,7 +4,7 @@ import {IPost} from '../models';
 import {ForShowPostComponent} from "../models/for-show-post-component.enum";
 import {finalize, takeUntil} from 'rxjs/operators';
 import {ActivatedRoute} from '@angular/router';
-import {Observable, Subject} from 'rxjs';
+import {combineLatest, Observable, Subject} from 'rxjs';
 import {of} from "rxjs/internal/observable/of";
 import {AuthService} from "../services/auth.service";
 
@@ -37,14 +37,6 @@ export class ShowPostsComponent implements OnDestroy, OnInit {
     this.destroy$.complete();
   }
 
-  ngOnInit() {
-    this.activatedRoute.url.pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(() => {
-      this.update();
-    });
-  }
-
   update() {
     this.isDataLoaded = false;
     this.getPosts().pipe(finalize(() => {
@@ -53,6 +45,15 @@ export class ShowPostsComponent implements OnDestroy, OnInit {
       this.posts = res;
     });
   }
+
+  ngOnInit() {
+    combineLatest(this.activatedRoute.url, this.activatedRoute.queryParams).pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(() => {
+      this.update();
+    });
+  }
+
 
   getPosts(): Observable<IPost[]> {
     const content: ForShowPostComponent = this.activatedRoute.snapshot.data.content;
@@ -73,7 +74,8 @@ export class ShowPostsComponent implements OnDestroy, OnInit {
         return this.postService.getPostsByTag(id);
 
       case ForShowPostComponent.SEARCH:
-        return of([]);
+        const query = this.activatedRoute.snapshot.queryParams.q;
+        return this.postService.getPostsForSearch(query);
 
       default:
         return of([]);

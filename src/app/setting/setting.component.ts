@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {Router} from '@angular/router';
 import {finalize} from 'rxjs/operators';
 import {IUser} from '../models';
 import {PostsService} from '../services/posts.service';
@@ -17,17 +18,13 @@ export class SettingComponent implements OnInit {
   user: IUser;
   isLoad = false;
   avatar = 'https://faucethub.io/assets/img/avatars/3523614_1531331166.jpg';
-
   fileName: string;
-  default = {
-    avatar: null,
-    desc: null
-  };
 
   constructor(
     private postService: PostsService,
     private userService: UserService,
     private fb: FormBuilder,
+    private router: Router
   ) {
     this.createForm();
   }
@@ -39,19 +36,15 @@ export class SettingComponent implements OnInit {
       }))
       .subscribe(res => {
         this.user = res;
-        if (res.description) {
-          this.default.desc = res.description;
-        }
-        if (res.avatar) {
-          this.default.avatar = res.avatar;
-        }
+        this.form.get('desc').setValue(res.description);
+        this.form.get('img').setValue(res.avatar);
       });
   }
 
   createForm() {
     this.form = this.fb.group({
-      desc: this.default.desc,
-      img: this.default.avatar
+      desc: null,
+      img: null,
     });
   }
 
@@ -65,9 +58,12 @@ export class SettingComponent implements OnInit {
   onSubmit() {
     this.loading = true;
     const { desc, img } = this.form.value;
-    this.userService.editProfile(img, desc).subscribe(() => {
-      this.loading = false;
-    });
-
+    this.userService.editProfile(img, desc)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.router.navigateByUrl('/profile');
+        }))
+      .subscribe();
   }
 }
