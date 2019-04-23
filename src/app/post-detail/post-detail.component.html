@@ -1,20 +1,21 @@
-<div *ngIf="isPostLoaded">
+<ng-container *ngIf="isDataLoaded">
   <app-post [post]="post" [extendable]="false"></app-post>
-</div>
-<h1>КОММЕНТАРИИ</h1>
 
-<div *ngIf="isCommentsLoaded">
+  <h1>КОММЕНТАРИИ</h1>
+
   <nb-card *ngFor="let comment of comments;">
     <nb-card-header>
       <div class="info-block-container">
         <app-info-post-links [text]="comment.author.login" [image]="comment.author.avatar" [id]="comment.author.id"
                              class="block"></app-info-post-links>
-        <app-info-post-links [text]="comment.createdAt | formatDate" icon="calendar-o" class="block"></app-info-post-links>
+        <app-info-post-links [text]="comment.createdAt | formatDate" icon="calendar-o"
+                             class="block"></app-info-post-links>
       </div>
     </nb-card-header>
     <nb-card-body>
       {{comment.text}}
     </nb-card-body>
   </nb-card>
-</div>
-<app-create-comment (refresh)="refresh($event)"></app-create-comment>
+
+  <app-create-comment (refresh)="refresh($event)"></app-create-comment>
+</ng-container>
