@@ -1,6 +1,6 @@
 <ng-container *ngIf="isLong; else full">
   <ngx-md>
-    {{short}}
+    {{text | sliceText}}
   </ngx-md>
 </ng-container>
 <a *ngIf="isLong" (click)="showFull()" tabindex="0" class="show-full-post-button">Читать полностью</a>
