@@ -90,4 +90,24 @@ export class PostService {
       })
       .getMany();
   }
+
+  async getSubscriberPosts(user: User): Promise<Post[]> {
+    return this.postRepo.createQueryBuilder('post')
+      .innerJoin("post.author", "author")
+      .addSelect(["author.login", "author.avatar", "author.id"])
+      .leftJoinAndSelect('post.tags', 'tags')
+      .loadRelationCountAndMap('post.comments', 'post.comments')
+      .where(qb => {
+        const subQuery = qb.subQuery()
+          .select('user.id')
+          .from(User, 'user')
+          .innerJoin('user.subscriptions', 'sub')
+          .where('sub.followerId = :id', {id: user.id})
+          .getQuery();
+        return `post.author.id IN ${subQuery}`;
+      })
+      .orWhere('post.author.id = :id', {id: user.id})
+      .orderBy('post.createdAt', 'DESC')
+      .getMany();
+  }
 }

@@ -21,9 +21,17 @@ export class PostController {
 
   @Get()
   @UseInterceptors(ClassSerializerInterceptor)
-  async posts(): Promise<PostModel[]> {
+  @UseGuards(AuthGuard())
+  @UseInterceptors(ClassSerializerInterceptor)
+  async posts(@Request() req): Promise<PostModel[]> {
+    return await this.postService.getSubscriberPosts(req.user);
+  }
+
+  @Get('/popular')
+  async popular(): Promise<PostModel[]> {
     return await this.postService.getPosts();
   }
+
 
   @Get('/profile')
   @UseInterceptors(ClassSerializerInterceptor)
