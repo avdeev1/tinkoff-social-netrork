@@ -65,6 +65,8 @@ export class AuthService {
           localStorage.setItem('userName', login);
           this.isAuth.next(true);
           this.closeForm();
+          this.router.navigate(['/'], {queryParams: {time: Date.now()}});
+          // this.router.navigateByUrl('/');
         }),
         shareReplay());
   }
@@ -84,7 +86,8 @@ export class AuthService {
         localStorage.removeItem('isAuth');
         localStorage.removeItem('userName');
         this.isAuth.next(false);
-        this.router.navigateByUrl('/');
+        this.router.navigate(['/'], {queryParams: {time: Date.now()}});
+        // this.router.navigateByUrl('/');
       }));
   }
 }

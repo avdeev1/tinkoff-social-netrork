@@ -14,7 +14,7 @@ export class PostService {
   }
 
   async getPosts(): Promise<Post[]> {
-    return this.postRepo
+    const res = await this.postRepo
       .createQueryBuilder('post')
       .innerJoin('post.author', 'author')
       .addSelect(['author.login', 'author.avatar', 'author.id'])
@@ -22,6 +22,10 @@ export class PostService {
       .loadRelationCountAndMap('post.comments', 'post.comments')
       .leftJoinAndSelect('post.likes', 'likes')
       .getMany();
+
+    return res.sort((a: Post, b: Post) => {
+        return b.likes.length - a.likes.length;
+    });
   }
 
   async create(postDto: PostDto, user: User): Promise<Post> {
@@ -73,6 +77,7 @@ export class PostService {
       .loadRelationCountAndMap('post.comments', 'post.comments')
       .leftJoinAndSelect('post.likes', 'likes')
       .where('likes.id = :userId', {userId})
+      .orderBy('post.createdAt', 'DESC')
       .getMany();
   }
 
@@ -102,6 +107,7 @@ export class PostService {
       .addSelect(["author.login", "author.avatar", "author.id"])
       .leftJoinAndSelect('post.tags', 'tags')
       .loadRelationCountAndMap('post.comments', 'post.comments')
+      .leftJoinAndSelect('post.likes', 'likes')
       .where(qb => {
         const subQuery = qb.subQuery()
           .select('user.id')

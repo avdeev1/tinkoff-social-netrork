@@ -30,25 +30,28 @@ export class PostComponent implements OnInit {
 
   likePost(event) {
     event.stopPropagation();
-    if (this.isLike) {
-      this.likeService.deleteLikePost(this.post.id).pipe(
-        finalize(() => {
-          this.isLike = false;
-          this.quantityLike--;
-          this.cd.markForCheck();
-        })
-      ).subscribe();
-    } else {
-      this.likeService.likePost(this.post.id)
-        .pipe(
+    if (this.authService.isAuth.value) {
+      if (this.isLike) {
+        this.likeService.deleteLikePost(this.post.id).pipe(
           finalize(() => {
-            this.isLike = true;
-            this.quantityLike++;
+            this.isLike = false;
+            this.quantityLike--;
             this.cd.markForCheck();
-          }))
-        .subscribe();
+          })
+        ).subscribe();
+      } else {
+        this.likeService.likePost(this.post.id)
+          .pipe(
+            finalize(() => {
+              this.isLike = true;
+              this.quantityLike++;
+              this.cd.markForCheck();
+            }))
+          .subscribe();
+      }
+    } else {
+      this.authService.openSignInDialog();
     }
-
   }
 
   goToPostPage() {

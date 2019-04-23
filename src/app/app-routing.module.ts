@@ -6,6 +6,7 @@ import {ProfileComponent} from "./profile/profile.component";
 import {PostDetailComponent} from './post-detail/post-detail.component';
 import {ForShowPostComponent} from "./models/for-show-post-component.enum";
 import {EditorComponent} from './editor/editor.component';
+import {AuthGuard} from "./guards/auth.guard";
 
 const routes: Routes = [
   {
@@ -19,19 +20,14 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [AuthGuard],
     data: {
       profile: true
     }
   },
   {
-    path: 'profile/draft',
-    component: ShowPostsComponent,
-    data: {
-      content: ForShowPostComponent.DRAFTS
-    }
-  },
-  {
     path: 'profile/setting',
+    canActivate: [AuthGuard],
     component: SettingComponent,
   },
   {
@@ -40,6 +36,7 @@ const routes: Routes = [
   },
   {
     path: 'favourites',
+    canActivate: [AuthGuard],
     component: ShowPostsComponent,
     data: {
       content: ForShowPostComponent.FAVOURITES
@@ -51,6 +48,7 @@ const routes: Routes = [
   },
   {
     path: 'create',
+    canActivate: [AuthGuard],
     component: EditorComponent
   },
   {

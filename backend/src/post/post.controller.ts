@@ -29,6 +29,7 @@ export class PostController {
   }
 
   @Get('/popular')
+  @UseInterceptors(ClassSerializerInterceptor)
   async popular(): Promise<PostModel[]> {
     return await this.postService.getPosts();
   }
