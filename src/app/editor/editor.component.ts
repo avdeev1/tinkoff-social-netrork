@@ -38,7 +38,7 @@ export class EditorComponent implements OnInit {
       title: ['', Validators.required],
       text: ['', Validators.required],
       tags: [''],
-      url: ['']
+      image: ['']
     });
     this.simplemde = new SimpleMDE({
       element: this.textarea.nativeElement,
@@ -55,17 +55,17 @@ export class EditorComponent implements OnInit {
 
   onFileSelect(file: File) {
     this.postService.uploadImage(file).subscribe(url => {
-      this.editorForm.patchValue({ url });
+      this.editorForm.patchValue({ image: url });
       this.file = file;
       this.changeDetectorRef.markForCheck();
     });
   }
 
   onSubmit() {
-    let { title, text, tags, url } = this.editorForm.value;
-    if (tags === '') {
-      tags = [];
+    const prepareData = this.editorForm.value;
+    if (prepareData.tags === '') {
+      prepareData.tags = [];
     }
-    this.postService.createPost({title, text, image: url, tags}).subscribe(() => this.router.navigateByUrl('/'));
+    this.postService.createPost(prepareData).subscribe(() => this.router.navigateByUrl('/'));
   }
 }
