@@ -7,6 +7,7 @@ import {IPost, ITag} from "../models";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
+import {previewTag} from "../slice-text.pipe";
 
 @Component({
   selector: 'app-editor',
@@ -51,7 +52,7 @@ export class EditorComponent implements OnInit {
         {
         name: 'preview',
         action: function customFunction(editor) {
-          editor.value(editor.value() + '\n<preview>\n');
+          editor.value(editor.value() + `\n${previewTag}\n`);
         },
         className: 'fa fa-scissors',
         title: 'Preview',

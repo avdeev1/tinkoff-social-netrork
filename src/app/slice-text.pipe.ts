@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-export const previewTag = '<preview>';
+export const previewTag = '{{preview-for-post}}';
 
 @Pipe({
   name: 'sliceText'
