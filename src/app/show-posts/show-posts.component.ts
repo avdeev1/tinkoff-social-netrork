@@ -62,9 +62,7 @@ export class ShowPostsComponent implements OnDestroy, OnInit {
         return this.postService.getPostsByTag(id);
 
       case ForShowPostComponent.SEARCH:
-        const query = this.activatedRoute.snapshot.queryParams.searchWord;
-        console.log("1");
-        console.log(query);
+        const query = this.activatedRoute.snapshot.queryParams.q;
         return this.postService.getPostsForSearch(query);
 
       default:

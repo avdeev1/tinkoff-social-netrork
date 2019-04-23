@@ -25,9 +25,9 @@ export class PostController {
   async posts(): Promise<PostModel[]> {
     return await this.postService.getPosts();
   }
-  @Get('searchWord')
-  async getPostsForSearch(@Query() query): Promise<PostModel[]> {
-    return await this.postService.getPostsForSearch(query);
+  @Get('search/q')
+  async getPostsForSearch(@Query() q): Promise<PostModel[]> {
+    return await this.postService.getPostsForSearch(q);
   }
 
   @Get('/profile')
@@ -52,8 +52,6 @@ export class PostController {
     }
     return res;
   }
-
-
 
   @Get('/user/:id')
   async getPostsForUser(@Param('id') id): Promise<PostModel[]> {

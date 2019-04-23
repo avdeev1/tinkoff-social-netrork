@@ -45,7 +45,7 @@ export class PostService {
         .innerJoin('post.author', 'author')
         .addSelect(['author.login', 'author.avatar', 'author.id'])
         .leftJoinAndSelect('post.tags', 'tags')
-        .where('post.text like :str', {str: '%' + query + '%'})
+        .where('post.text like :str', {str: `%${query}%`})
         .loadRelationCountAndMap('post.comments', 'post.comments')
         .printSql()
         .getMany();

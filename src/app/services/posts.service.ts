@@ -38,8 +38,6 @@ export class PostsService {
   }
 
   getPostsForSearch(str: string): Observable<IPost[]> {
-    console.log("2");
-    console.log(str);
-    return this.http.get<IPost[]>(`api/posts/${str}`);
+    return this.http.get<IPost[]>(`api/posts/search/${str}`);
   }
 }
