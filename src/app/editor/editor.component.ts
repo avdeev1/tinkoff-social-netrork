@@ -53,7 +53,7 @@ export class EditorComponent implements OnInit {
         action: function customFunction(editor) {
           editor.value(editor.value() + '\n<preview>\n');
         },
-        className: 'fa fa-star',
+        className: 'fa fa-scissors',
         title: 'Preview',
       }]
     });
