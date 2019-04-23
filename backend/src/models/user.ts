@@ -32,7 +32,7 @@ export class User {
   avatar: string;
 
   @ManyToMany(type => Post, post => post.likes)
-  postsLike: User[];
+  postsLike: Post[];
 
   @OneToMany(type => Subscriber, sub => sub.subscription)
   subscriptions: User[];
