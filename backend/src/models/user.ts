@@ -1,8 +1,8 @@
-import {Entity, PrimaryGeneratedColumn, Column, OneToMany} from 'typeorm';
-import { Exclude } from 'class-transformer';
-import {Comment} from "./comment";
-import {Post} from "./post";
-import {Subscriber} from "./subscriber";
+import {Exclude} from 'class-transformer';
+import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
+import {Comment} from './comment';
+import {Post} from './post';
+import {Subscriber} from './subscriber';
 
 @Entity()
 export class User {

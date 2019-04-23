@@ -1,23 +1,14 @@
-import {
-  Body,
-  ClassSerializerInterceptor,
-  Controller,
-  Get,
-  Param,
-  Post,
-  Request,
-  UseGuards,
-  UseInterceptors
-} from "@nestjs/common";
-import {Comment as CommentModel} from "../models/comment";
-import {CommentService} from "./comment.service";
-import {AuthGuard} from "@nestjs/passport";
-import {CommentDto} from "./dto/comment.dto";
+import {Body, ClassSerializerInterceptor, Controller, Get, Param, Post, Request, UseGuards, UseInterceptors} from '@nestjs/common';
+import {AuthGuard} from '@nestjs/passport';
+import {Comment as CommentModel} from '../models/comment';
+import {CommentService} from './comment.service';
+import {CommentDto} from './dto/comment.dto';
 
 @Controller('comments')
 export class CommentController {
 
-  constructor(private commentService: CommentService) {}
+  constructor(private commentService: CommentService) {
+  }
 
   @Get('post/:id')
   async comment(@Param('id') id): Promise<CommentModel[]> {

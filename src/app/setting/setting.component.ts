@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from '../services/user.service';
 import {PostsService} from '../services/posts.service';
 import {IUser} from '../models';
-import {finalize} from "rxjs/operators";
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-setting',
@@ -13,8 +13,8 @@ export class SettingComponent implements OnInit {
 
 
   user: IUser;
-  isLoad: boolean = false;
-  avatar: string = 'https://faucethub.io/assets/img/avatars/3523614_1531331166.jpg';
+  isLoad = false;
+  avatar = 'https://faucethub.io/assets/img/avatars/3523614_1531331166.jpg';
 
   constructor(
     private postService: PostsService,

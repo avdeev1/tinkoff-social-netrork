@@ -29,7 +29,7 @@ export class PostService {
       text: postDto.text,
       title: postDto.title,
       image: postDto.image,
-      tags: tags,
+      tags,
       author: user,
     };
     const post = this.postRepo.create(postModel);

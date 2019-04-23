@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {forkJoin} from 'rxjs';
+import {finalize} from 'rxjs/operators';
 import {IComment, IPost} from '../models';
 import {CommentsService} from '../services/comments.service';
-import {PostsService} from "../services/posts.service";
-import {ActivatedRoute} from "@angular/router";
-import {forkJoin} from "rxjs";
-import {finalize} from "rxjs/operators";
+import {PostsService} from '../services/posts.service';
 
 
 @Component({
@@ -19,7 +19,8 @@ export class PostDetailComponent implements OnInit {
   isDataLoaded: boolean = false;
   private id = this.router.snapshot.paramMap.get('id');
 
-  constructor(private postService: PostsService, private commentService: CommentsService, private router: ActivatedRoute) {}
+  constructor(private postService: PostsService, private commentService: CommentsService, private router: ActivatedRoute) {
+  }
 
   ngOnInit() {
     this.getData()
@@ -31,7 +32,7 @@ export class PostDetailComponent implements OnInit {
       .subscribe(([post, comments]) => {
         this.post = post;
         this.comments = comments;
-      })
+      });
   }
 
   refresh(comment: IComment) {

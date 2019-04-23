@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~font-awesome/css/font-awesome.css';
 @import "assets/font.css";
+@import "~simplemde/dist/simplemde.min.css";
 
 .nb-theme-default nb-menu .menu-items>.menu-item{
   border: 0;
@@ -28,6 +29,10 @@
 
 .menu-title{
  padding-top: 0.4rem;
+}
+
+.nb-theme-default nb-sidebar.compacted nb-menu .menu-item a.active::before {
+  background-color: #47a4ff;
 }
 
 .nb-theme-default nb-sidebar.compacted .main-container, .nb-theme-default nb-sidebar.expanded .main-container {

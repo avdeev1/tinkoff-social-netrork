@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {IUser} from '../models';
-import {ActivatedRoute} from "@angular/router";
-import {AuthService} from "../services/auth.service";
-import {UserService} from "../services/user.service";
+import {AuthService} from '../services/auth.service';
+import {UserService} from '../services/user.service';
 
 @Component({
   selector: 'app-profile-header',
@@ -12,7 +12,7 @@ import {UserService} from "../services/user.service";
 export class ProfileHeaderComponent implements OnInit {
 
   @Input() user: IUser;
-  defaultAvatar: string = 'https://faucethub.io/assets/img/avatars/3523614_1531331166.jpg';
+  defaultAvatar = 'https://faucethub.io/assets/img/avatars/3523614_1531331166.jpg';
   isProfile: boolean;
   isFollower: boolean = false;
   private id = this.activatedRoute.snapshot.paramMap.get('id');
