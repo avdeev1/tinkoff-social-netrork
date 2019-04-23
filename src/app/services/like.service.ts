@@ -9,15 +9,15 @@ export class LikeService {
 
   constructor(private http: HttpClient) { }
 
-  likePost(postId: number): Observable<any>{
+  likePost(postId: number): Observable<{ [key: string]: boolean }> {
     return  this.http
-      .post<any>( '/api/posts/like ', {id: postId});
+      .post<{ [key: string]: boolean }>( '/api/posts/like ', {id: postId});
 
   }
 
-  deletePost(postId: number): Observable<any> {
+  deleteLikePost(postId: number): Observable<{ [key: string]: boolean }> {
      return this.http
-      .post<any>( '/api/posts/delete ', {id: postId});
+      .post<{ [key: string]: boolean }>( '/api/posts/like/delete ', {id: postId});
   }
 
 }

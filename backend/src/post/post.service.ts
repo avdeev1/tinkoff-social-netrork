@@ -16,13 +16,11 @@ export class PostService {
   async getPosts(): Promise<Post[]> {
     return this.postRepo
       .createQueryBuilder('post')
-      .innerJoin("post.author", "author")
-      .addSelect(["author.login", "author.avatar", "author.id"])
+      .innerJoin('post.author', 'author')
+      .addSelect(['author.login', 'author.avatar', 'author.id'])
       .leftJoinAndSelect('post.tags', 'tags')
       .loadRelationCountAndMap('post.comments', 'post.comments')
       .leftJoinAndSelect('post.likes', 'likes')
-
-
       .getMany();
   }
 
@@ -50,6 +48,7 @@ export class PostService {
       .leftJoinAndSelect('post.tags', 'tags')
       .where('post.authorId = :id', {id})
       .loadRelationCountAndMap('post.comments', 'post.comments')
+      .leftJoinAndSelect('post.likes', 'likes')
       .getMany();
   }
 
@@ -61,17 +60,19 @@ export class PostService {
       .leftJoinAndSelect('post.tags', 'tags')
       .where('post.id = :id', {id})
       .loadRelationCountAndMap('post.comments', 'post.comments')
+      .leftJoinAndSelect('post.likes', 'likes')
       .getOne();
   }
 
-  async getPostsForFavourite(): Promise<Post[]> {
+  async getPostsForFavourite(userId: number): Promise<Post[]> {
     return this.postRepo
       .createQueryBuilder('post')
       .innerJoin('post.author', 'author')
       .addSelect(['author.login', 'author.avatar', 'author.id'])
       .leftJoinAndSelect('post.tags', 'tags')
       .loadRelationCountAndMap('post.comments', 'post.comments')
-      .orderBy('post.createdAt', 'DESC')
+      .leftJoinAndSelect('post.likes', 'likes')
+      .where('likes.id = :userId', {userId})
       .getMany();
   }
 
@@ -80,6 +81,7 @@ export class PostService {
       .createQueryBuilder('post')
       .innerJoin('post.author', 'author')
       .addSelect(['author.login', 'author.avatar', 'author.id'])
+      .leftJoinAndSelect('post.likes', 'likes')
       .leftJoinAndSelect('post.tags', 'tags')
       .loadRelationCountAndMap('post.comments', 'post.comments')
       .where(qb => {
@@ -94,18 +96,20 @@ export class PostService {
       .getMany();
   }
 
-  async like(postid: number, userId: number) {
-    return await this.postRepo.createQueryBuilder('post')
+  async like(postid: number, userId: number): Promise<{ [key: string]: boolean }> {
+     await this.postRepo.createQueryBuilder('post')
       .relation(Post, 'likes')
       .of(postid)
       .add(userId);
+     return {success: true};
   }
 
-  async delete(postid: number, userId: number) {
-   return await this.postRepo.createQueryBuilder('post')
+  async deleteLike(postid: number, userId: number): Promise<{ [key: string]: boolean }> {
+    await this.postRepo.createQueryBuilder('post')
       .relation(Post, 'likes')
       .of(postid)
       .remove(userId);
+    return {success: true};
   }
 
 }

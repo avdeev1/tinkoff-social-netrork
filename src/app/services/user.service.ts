@@ -20,6 +20,7 @@ export class UserService {
   getProfile(): Observable<IUser> {
     return this.http.get<IUser>(`api/user/profile`);
   }
+
   uploadImage(image: File): Observable<string> {
     const form = new FormData();
     form.append('file', image);
@@ -31,8 +32,7 @@ export class UserService {
       );
 
   }
-  editProfile(url: string, desc: string): Observable<object> {
-    if ( url === '') { url = null; }
+  editProfile(url: string = null, desc: string): Observable<object> {
     return this.http.post<object>('api/user/update', {
       description: desc,
       avatar: url,

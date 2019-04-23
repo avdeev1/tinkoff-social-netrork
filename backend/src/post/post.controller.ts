@@ -14,6 +14,7 @@ import {AuthGuard} from '@nestjs/passport';
 import {Post as PostModel} from '../models/post';
 import {PostService} from './post.service';
 import {PostDto} from "./dto/post.dto";
+import {LikeDto} from "../comment/dto/like.dto";
 
 @Controller('posts')
 export class PostController {
@@ -37,7 +38,7 @@ export class PostController {
   @UseInterceptors(ClassSerializerInterceptor)
   @UseGuards(AuthGuard())
   async getPostsForFavourites(@Request() req): Promise<PostModel[]> {
-    return await this.postService.getPostsForFavourite();
+    return await this.postService.getPostsForFavourite(req.user.id);
   }
 
   @Get('/:id')
@@ -69,13 +70,14 @@ export class PostController {
   @Post('/like')
   @UseInterceptors(ClassSerializerInterceptor)
   @UseGuards(AuthGuard())
-  async like(@Body() data: any, @Request() req) {
-      await this.postService.like(data.id, req.user.id);
+  async like(@Body() likeDto: LikeDto, @Request() req): Promise<{ [key: string]: boolean }> {
+     return  await this.postService.like(likeDto.id, req.user.id);
   }
-  @Post('/delete')
+
+  @Post('/like/delete')
   @UseInterceptors(ClassSerializerInterceptor)
   @UseGuards(AuthGuard())
-  async delete(@Body() data: any, @Request() req) {
-     return await this.postService.delete(data.id, req.user.id);
+  async delete(@Body() likeDto: LikeDto, @Request() req): Promise<{ [key: string]: boolean }> {
+     return await this.postService.deleteLike(likeDto.id, req.user.id);
   }
 }
