@@ -17,6 +17,10 @@ export class ProfileHeaderComponent implements OnInit {
   isFollower: boolean = false;
   private id = this.activatedRoute.snapshot.paramMap.get('id');
 
+  get isAuth() {
+    return this.authService.isAuth.value;
+  }
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private authService: AuthService,
@@ -38,14 +42,14 @@ export class ProfileHeaderComponent implements OnInit {
     });
   }
 
-  unfollow() {
-    this.userService.unfollow(this.user.id).subscribe(res => {
+  unsubscribe() {
+    this.userService.unsubscribe(this.user.id).subscribe(res => {
       this.updateUser();
     });
   }
 
-  follow() {
-    this.userService.follow(this.user.id).subscribe(res => {
+  subscribe() {
+    this.userService.subscribe(this.user.id).subscribe(res => {
       this.updateUser();
     });
   }

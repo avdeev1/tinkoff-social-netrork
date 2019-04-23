@@ -1,41 +1,43 @@
 import {
+  Body,
   ClassSerializerInterceptor,
   Controller,
   Get,
   Param,
-  UseGuards,
-  UseInterceptors,
+  Post,
   Request,
-  Post, Body
+  UseGuards,
+  UseInterceptors
 } from "@nestjs/common";
 import {AuthGuard} from "@nestjs/passport";
 import {SubscriberService} from "./subscriber.service";
 import {Subscriber} from "../models/subscriber";
 import {SubscriberDto} from "./subscriber.dto.ts/subscriber.dto";
 
-@Controller('subs')
+@Controller('subscribers')
 export class SubscriberController {
 
-  constructor(private readonly subService: SubscriberService) {}
+  constructor(private readonly subscriberService: SubscriberService) {
+  }
 
   @Get('/find/:id')
   @UseInterceptors(ClassSerializerInterceptor)
   @UseGuards(AuthGuard())
-  async findSubs(@Param('id') id: number, @Request() req): Promise<Subscriber> {
-    return await this.subService.fundSub(id, req.user);
+  async findSubscription(@Param('id') subscriptionId: number, @Request() req): Promise<Subscriber> {
+    return await this.subscriberService.findSubscription(subscriptionId, req.user);
   }
 
-  @Post('/follow')
+  @Post('/subscribe')
   @UseInterceptors(ClassSerializerInterceptor)
   @UseGuards(AuthGuard())
-  async follow(@Body() subs: SubscriberDto, @Request() req): Promise<Subscriber> {
-    return await this.subService.follow(subs.id, req.user);
+  async subscribe(@Body() subscription: SubscriberDto, @Request() req): Promise<Subscriber> {
+    return await this.subscriberService.subscribe(subscription.id, req.user);
   }
 
-  @Post('/unfollow')
+  @Post('/unsubscribe')
   @UseInterceptors(ClassSerializerInterceptor)
   @UseGuards(AuthGuard())
-  async unfollow(@Body() subs: SubscriberDto, @Request() req): Promise<{ [key: string]: boolean }> {
-    return await this.subService.unfollow(subs.id, req.user);
+  async unsubscribe(@Body() subscription: SubscriberDto, @Request() req): Promise<{ [key: string]: boolean }> {
+    return await this.subscriberService.unsubscribe(subscription.id, req.user);
   }
 }

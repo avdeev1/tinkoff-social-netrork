@@ -23,13 +23,13 @@
 </nb-card>
 
 <ng-template #notProfile>
-  <ng-container *ngIf="authService.isAuth.value">
+  <ng-container *ngIf="isAuth">
     <ng-container *ngIf="isFollower; else unfollower">
-      <a tabindex="0" (click)="unfollow()" class="sub-btn">Отписаться</a>
+      <a (click)="unsubscribe()" class="sub-btn" tabindex="0">Отписаться</a>
     </ng-container>
 
     <ng-template #unfollower>
-      <a tabindex="0" (click)="follow()" class="sub-btn">Подписаться</a>
+      <a (click)="subscribe()" class="sub-btn" tabindex="0">Подписаться</a>
     </ng-template>
   </ng-container>
 </ng-template>

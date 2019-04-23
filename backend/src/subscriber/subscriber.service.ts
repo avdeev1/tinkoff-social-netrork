@@ -5,45 +5,47 @@ import {User} from "../models/user";
 import {UserService} from "../user/user.service";
 
 export class SubscriberService {
-  constructor(@InjectRepository(Subscriber) private readonly subRepo: Repository<Subscriber>, private userService: UserService) {}
+  constructor(
+    @InjectRepository(Subscriber) private readonly subscriberRepository: Repository<Subscriber>,
+    private userService: UserService
+  ) {
+  }
 
-  async fundSub(id: number, user: User): Promise<Subscriber> {
-    console.log(id);
-    console.log(user.id);
-    return this.subRepo.findOne(
+  async findSubscription(subscriptionId: number, user: User): Promise<Subscriber> {
+    return this.subscriberRepository.findOne(
       {
         where: {
-          subscription: await this.userService.getUser(id),
+          subscription: await this.userService.getUser(subscriptionId),
           follower: user
         }
       }
     )
   }
 
-  async follow(id: number, user: User): Promise<Subscriber> {
-    const subs = await this.userService.getUser(id);
-    const sub = this.subRepo.create({subscription: subs, follower: user});
+  async subscribe(subscriptionId: number, user: User): Promise<Subscriber> {
+    const subscription = await this.userService.getUser(subscriptionId);
+    const subscriber = this.subscriberRepository.create({subscription: subscription, follower: user});
 
-    await this.subRepo.save(sub);
+    await this.subscriberRepository.save(subscriber);
 
-    return sub;
+    return subscriber;
   }
 
-  async getIdOfSub(id: number, user: User): Promise<Subscriber> {
-    const subUser = await this.userService.getUser(id);
+  async getIdOfSubscription(subscriptionId: number, user: User): Promise<Subscriber> {
+    const subscriber = await this.userService.getUser(subscriptionId);
 
-    return this.subRepo.findOne(
+    return this.subscriberRepository.findOne(
       {
-        subscription: subUser,
+        subscription: subscriber,
         follower: user
       }
     )
   }
 
-  async unfollow(id: number, user: User): Promise<{ [key: string]: boolean }> {
-    const idOfSub = await this.getIdOfSub(id, user);
+  async unsubscribe(id: number, user: User): Promise<{ [key: string]: boolean }> {
+    const subscription = await this.getIdOfSubscription(id, user);
 
-    await this.subRepo.delete(idOfSub.id);
+    await this.subscriberRepository.delete(subscription.id);
 
     return {success: true}
   }

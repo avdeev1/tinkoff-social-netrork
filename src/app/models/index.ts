@@ -35,7 +35,7 @@ export interface ITag {
   tag: string;
 }
 
-export interface ISub {
+export interface ISubscriber {
   id: number;
   subscription: IUser;
   follower: IUser;
