@@ -1,4 +1,4 @@
-<form *ngIf="isLoad" [formGroup]="form" (submit)="onSubmit()">
+<form *ngIf="isLoad; else loading" [formGroup]="form" (submit)="onSubmit()">
 <nb-card class="nb-card-user">
   <div class="img-container">
     <img [src]="user.avatar || avatar" alt="">
@@ -18,11 +18,14 @@
 
   <div class="about-user">
     <span>О Себе:</span> <br>
-      <textarea formControlName="desc" nbInput fullWidth [value]="user.description" cols="130" rows="5"  #textarea
+      <textarea formControlName="desc" nbInput fullWidth [value]="user.description" cols="130" rows="5" status="info"
     ></textarea>
 
   </div>
-  <button type="submit"  nbButton status="info" size="small" outline class="btnSave">Сохранить <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
+  <button type="submit"  nbButton status="info" size="small" outline class="btnSave" [disabled]="loading">Сохранить <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading" ></i></button>
 </nb-card>
 </form>
+<ng-template #loading>
+  <div>Loading</div>
+</ng-template>
 
