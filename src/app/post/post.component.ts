@@ -15,6 +15,7 @@ export class PostComponent implements OnInit {
   @Input() post: IPost;
   @Input() extendable = true;
   quantityLike = 0;
+
   isLike = false;
 
   constructor(private router: Router, private likeService: LikeService, private authService: AuthService, private cd: ChangeDetectorRef) {
