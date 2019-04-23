@@ -18,6 +18,8 @@ export interface IUser {
   posts: IPost[];
   comments: IComment[];
   registrationDate: number;
+  subscriptions: number;
+  followers: number;
 }
 
 export interface IComment {
@@ -31,5 +33,11 @@ export interface IComment {
 export interface ITag {
   id: number;
   tag: string;
+}
+
+export interface ISubscriber {
+  id: number;
+  subscription: IUser[];
+  follower: IUser[];
 }
 

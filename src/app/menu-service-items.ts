@@ -1,9 +1,12 @@
 export const MENU_NAVBAR_LINK = [
   {
+    link: '',
+    home: true
+  },
+  {
     title: 'Профиль',
     link: '/profile',
     icon: 'fa fa-user',
-    home: true
   },
   {
     title: 'Написать пост',

@@ -5,12 +5,13 @@
       <div class="user-name">{{user.login}}</div>
       <div class="count-div">В сервисе дней: {{user.registrationDate | getDiffDateFromNow}}</div>
     </div>
-    <a *ngIf="isProfile" class="img-edit" routerLink="setting">
+    <a *ngIf="isProfile; else notProfile" class="img-edit" routerLink="setting">
       <i class="fa fa-gear" aria-hidden="true"></i>
     </a>
   </div>
-  <div class="posts-and-likes">
-    ПОСТЫ: <span>{{user.posts}}</span>  КОММЕНТАРИИ: <span>{{user.comments}}</span>
+  <div class="user-activity">
+    <div>ПОСТЫ: <span>{{user.posts}}</span>  КОММЕНТАРИИ: <span>{{user.comments}}</span></div>
+    <div>ПОДПИСКИ: <span>{{user.followers}}</span>  ПОДПИСЧИКИ: <span>{{user.subscriptions}}</span></div>
   </div>
 </nb-card>
 
@@ -21,3 +22,14 @@
   </div>
 </nb-card>
 
+<ng-template #notProfile>
+  <ng-container *ngIf="isAuth">
+    <ng-container *ngIf="isFollower; else unfollower">
+      <a (click)="unsubscribe()" class="sub-btn" tabindex="0">Отписаться</a>
+    </ng-container>
+
+    <ng-template #unfollower>
+      <a (click)="subscribe()" class="sub-btn" tabindex="0">Подписаться</a>
+    </ng-template>
+  </ng-container>
+</ng-template>
