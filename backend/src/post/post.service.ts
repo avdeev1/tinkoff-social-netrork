@@ -39,6 +39,17 @@ export class PostService {
     return post;
   }
 
+  async getPostsForSearch(query: string): Promise<Post[]> {
+      return this.postRepo
+        .createQueryBuilder('post')
+        .innerJoin('post.author', 'author')
+        .addSelect(['author.login', 'author.avatar', 'author.id'])
+        .leftJoinAndSelect('post.tags', 'tags')
+        .where('post.text like :str OR post.title like :str', {str: `%${query}%`})
+        .loadRelationCountAndMap('post.comments', 'post.comments')
+        .getMany();
+  }
+
   async getPostsForUser(id: number): Promise<Post[]> {
     return this.postRepo
       .createQueryBuilder('post')

@@ -5,7 +5,7 @@ import {
   Get,
   HttpException,
   Param,
-  Post,
+  Post, Query,
   Request,
   UseGuards,
   UseInterceptors
@@ -32,6 +32,10 @@ export class PostController {
     return await this.postService.getPosts();
   }
 
+  @Get('search')
+  async getPostsForSearch(@Query('q') q: string): Promise<PostModel[]> {
+    return await this.postService.getPostsForSearch(q);
+  }
 
   @Get('/profile')
   @UseInterceptors(ClassSerializerInterceptor)
