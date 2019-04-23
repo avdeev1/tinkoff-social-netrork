@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {previewTag} from "../slice-text.pipe";
 
 const MAX_POST_LENGTH = 600;
 
@@ -18,17 +19,11 @@ export class TextPostComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.isLong = this.text.length > MAX_POST_LENGTH;
-    if (this.isLong) {
-      this.short = this.text.slice(0, MAX_POST_LENGTH) + '...';
-    } else {
-      this.short = this.text;
-    }
+    this.isLong = this.text.indexOf(previewTag) >= 0;
   }
 
   showFull() {
     event.stopPropagation();
-    this.short = this.text;
     this.isLong = false;
   }
 }

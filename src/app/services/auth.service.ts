@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { tap, shareReplay } from 'rxjs/operators';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {shareReplay, tap} from 'rxjs/operators';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import {SignFormComponent} from '../sign-form/sign-form.component';
 import {NbDialogRef, NbDialogService} from '@nebular/theme';
 import {Router} from '@angular/router';
@@ -65,6 +65,7 @@ export class AuthService {
           localStorage.setItem('userName', login);
           this.isAuth.next(true);
           this.closeForm();
+          this.router.navigate(['/'], {queryParams: {time: Date.now()}});
         }),
         shareReplay());
   }
@@ -84,7 +85,7 @@ export class AuthService {
         localStorage.removeItem('isAuth');
         localStorage.removeItem('userName');
         this.isAuth.next(false);
-        this.router.navigateByUrl('/');
+        this.router.navigate(['/'], {queryParams: {time: Date.now()}});
       }));
   }
 }
