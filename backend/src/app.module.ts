@@ -22,6 +22,9 @@ import {CommentService} from "./comment/comment.service";
 import {TagService} from "./tag/tag.service";
 import {TagController} from "./tag/tag.controller";
 import {Tag} from "./models/tag";
+import {Subscriber} from "./models/subscriber";
+import {SubscriberController} from "./subscriber/subscriber.controller";
+import {SubscriberService} from "./subscriber/subscriber.service";
 
 const options: ConnectionOptions = {
   type: 'sqlite',
@@ -34,11 +37,11 @@ const options: ConnectionOptions = {
 @Module({
   imports: [
     TypeOrmModule.forRoot(options),
-    TypeOrmModule.forFeature([User, Post, Auth, Comment, Tag]),
+    TypeOrmModule.forFeature([User, Post, Auth, Comment, Tag, Subscriber]),
     PassportModule.register({ defaultStrategy: 'bearer', property: 'user' }),
     ConfigModule,
   ],
-  controllers: [AuthController, PostController, UploadController, UserController, CommentController, TagController],
-  providers: [AuthService, HttpStrategy, PostService, UploadService, UserService, CommentService, TagService],
+  controllers: [AuthController, PostController, UploadController, UserController, CommentController, TagController, SubscriberController],
+  providers: [AuthService, HttpStrategy, PostService, UploadService, UserService, CommentService, TagService, SubscriberService],
 })
 export class AppModule {}

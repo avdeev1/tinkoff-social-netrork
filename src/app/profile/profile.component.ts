@@ -32,7 +32,7 @@ export class ProfileComponent implements OnInit {
     })).subscribe(([posts, user]) => {
       this.posts = posts;
       this.user = user;
-    })
+    });
   }
 
   getData() {

@@ -29,7 +29,7 @@ export class PostService {
       text: postDto.text,
       title: postDto.title,
       image: postDto.image,
-      tags: tags,
+      tags,
       author: user,
     };
     const post = this.postRepo.create(postModel);
@@ -45,7 +45,7 @@ export class PostService {
         .innerJoin('post.author', 'author')
         .addSelect(['author.login', 'author.avatar', 'author.id'])
         .leftJoinAndSelect('post.tags', 'tags')
-        .where('post.text like :str', {str: `%${query}%`})
+        .where('post.text like :str OR post.title like :str', {str: `%${query}%`})
         .loadRelationCountAndMap('post.comments', 'post.comments')
         .getMany();
   }
@@ -99,6 +99,26 @@ export class PostService {
           .getQuery();
         return `post.id IN ${subQuery}`;
       })
+      .getMany();
+  }
+
+  async getSubscriberPosts(user: User): Promise<Post[]> {
+    return this.postRepo.createQueryBuilder('post')
+      .innerJoin("post.author", "author")
+      .addSelect(["author.login", "author.avatar", "author.id"])
+      .leftJoinAndSelect('post.tags', 'tags')
+      .loadRelationCountAndMap('post.comments', 'post.comments')
+      .where(qb => {
+        const subQuery = qb.subQuery()
+          .select('user.id')
+          .from(User, 'user')
+          .innerJoin('user.subscriptions', 'sub')
+          .where('sub.followerId = :id', {id: user.id})
+          .getQuery();
+        return `post.author.id IN ${subQuery}`;
+      })
+      .orWhere('post.author.id = :id', {id: user.id})
+      .orderBy('post.createdAt', 'DESC')
       .getMany();
   }
 }

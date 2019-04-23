@@ -13,11 +13,11 @@
 
 <ng-template #noPosts>
   <nb-card>
-    <nb-card-body>
-      Публикаций пока нет<br>
-      <ng-container *ngIf="isProfile">
-        Бегом <a routerLink="/create">публиковать</a> публикации!
-      </ng-container>
+    <nb-card-header>
+      Публикаций пока нет
+    </nb-card-header>
+    <nb-card-body *ngIf="isProfile">
+      <a routerLink="/create">Опубликуйте</a> свой первый пост!
     </nb-card-body>
   </nb-card>
 </ng-template>

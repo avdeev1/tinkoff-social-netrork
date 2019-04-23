@@ -6,6 +6,7 @@ import {finalize, takeUntil} from 'rxjs/operators';
 import {ActivatedRoute} from '@angular/router';
 import {combineLatest, Observable, race, Subject} from 'rxjs';
 import {of} from "rxjs/internal/observable/of";
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-show-posts',
@@ -17,8 +18,18 @@ export class ShowPostsComponent implements OnDestroy, OnInit {
   posts: IPost[];
   isDataLoaded: boolean;
   private destroy$ = new Subject<undefined>();
+  isSubscribersPosts = true;
+  isMainPage: boolean = this.activatedRoute.snapshot.data.content === ForShowPostComponent.MAIN;
 
-  constructor(private postService: PostsService, private activatedRoute: ActivatedRoute) {
+  constructor(private postService: PostsService, private activatedRoute: ActivatedRoute, private authService: AuthService) {
+  }
+
+  get isAuth() {
+    return this.authService.isAuth.value;
+  }
+
+  get isSubscribers() {
+    return this.isSubscribersPosts;
   }
 
   public ngOnDestroy(): void {
@@ -68,5 +79,25 @@ export class ShowPostsComponent implements OnDestroy, OnInit {
       default:
         return of([]);
     }
+  }
+
+  showPopularPosts() {
+    this.postService.getPopularPostForMainPage()
+      .pipe(finalize(() => {
+        this.isSubscribersPosts = !this.isSubscribersPosts;
+      }))
+      .subscribe(res => {
+        this.posts = res;
+      });
+  }
+
+  showSubscribersPosts() {
+    return this.postService.getPostsForMainPage()
+      .pipe(finalize(() => {
+        this.isSubscribersPosts = !this.isSubscribersPosts;
+      }))
+      .subscribe(res => {
+        this.posts = res;
+      });
   }
 }

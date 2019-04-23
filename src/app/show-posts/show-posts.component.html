@@ -1,3 +1,17 @@
+<nb-card *ngIf="isAuth && isMainPage">
+  <nb-card-body class="change-list-of-posts">
+
+    <ng-container *ngIf="isSubscribers; else popular">
+      <a (click)="showPopularPosts()" tabindex="0">Показать популярные посты</a>
+    </ng-container>
+
+    <ng-template #popular>
+      <a (click)="showSubscribersPosts()" tabindex="0">Показать ленту подписок</a>
+    </ng-template>
+
+  </nb-card-body>
+</nb-card>
+
 <div *ngIf="isDataLoaded; else loading">
   <ng-container *ngIf="posts.length > 0; else noPosts">
     <app-post *ngFor="let post of posts" [post]="post"></app-post>
