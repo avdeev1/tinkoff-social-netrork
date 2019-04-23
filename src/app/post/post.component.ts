@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {finalize} from 'rxjs/operators';
 import {IPost} from '../models';
@@ -8,14 +8,13 @@ import {LikeService} from '../services/like.service';
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./post.component.less']
 })
 export class PostComponent implements OnInit {
   @Input() post: IPost;
   @Input() extendable = true;
-  quantityLike = 0;
 
+  quantityLike = 0;
   isLike = false;
 
   constructor(private router: Router, private likeService: LikeService, private authService: AuthService, private cd: ChangeDetectorRef) {
