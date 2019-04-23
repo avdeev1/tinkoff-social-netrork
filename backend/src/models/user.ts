@@ -30,9 +30,6 @@ export class User {
   @Column({ nullable: true })
   avatar: string;
 
-  // @ManyToMany(type => Post, post => post.id)
-  // @JoinTable()
-  // likes: User[];
   @ManyToMany(type => Post, post => post.likes)
   postsLike: User[];
 }
