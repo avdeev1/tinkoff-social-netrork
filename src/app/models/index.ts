@@ -37,7 +37,7 @@ export interface ITag {
 
 export interface ISubscriber {
   id: number;
-  subscription: IUser;
-  follower: IUser;
+  subscription: IUser[];
+  follower: IUser[];
 }
 
