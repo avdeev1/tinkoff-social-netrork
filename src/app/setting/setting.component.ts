@@ -4,6 +4,8 @@ import {PostsService} from '../services/posts.service';
 import {IUser} from '../models';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {finalize} from 'rxjs/operators';
+import {Router} from "@angular/router";
+
 @Component({
   selector: 'app-setting',
   templateUrl: './setting.component.html',
@@ -25,6 +27,7 @@ export class SettingComponent implements OnInit {
     private postService: PostsService,
     private userService: UserService,
     private fb: FormBuilder,
+    private router: Router
   ) {
     this.createForm();
   }
@@ -63,6 +66,7 @@ export class SettingComponent implements OnInit {
     const {desc, img } = this.form.value;
     this.userService.editProfile(img, desc).subscribe(() => {
       this.loading = false;
+      this.router.navigateByUrl('/profile');
     });
 
   }
