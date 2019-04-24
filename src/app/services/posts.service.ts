@@ -13,9 +13,6 @@ import {AuthService} from './auth.service';
 export class PostsService {
 
   constructor(private userService: UserService, private http: HttpClient, private authService: AuthService) {
-    this.http.get('/api/user/subscribers/list').subscribe(res => {
-      console.log(res);
-    })
   }
 
   getPostsForProfilePage(): Observable<IPost[]> {

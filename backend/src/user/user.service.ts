@@ -24,24 +24,23 @@ export class UserService {
 
 
   async getSubscriptionList(u: UserModel): Promise<any> {
-    // const user = await this.userRepo.findOne({
-    //   relations: ['subscriptions', 'followers'],
-    //   where: {id: u.id}
-    // });
     const user = await this.userRepo.createQueryBuilder('user')
       .leftJoinAndSelect("user.followers", "followers")
       .leftJoinAndSelect("user.subscriptions", "subscriptions")
       .where('user.id = :id', {id: u.id})
       .getOne();
 
-    user.followers = <any>await Promise.all(user.followers.map(u => this.subscriberRepo.findOne(u.id, {relations: ['subscription', 'follower']})));
-    user.subscriptions = <any>await Promise.all(user.subscriptions.map(u => this.subscriberRepo.findOne(u.id)));
+    user.followers = <any>await Promise.all(user.followers
+      .map(u => this.subscriberRepo.findOne(u.id, {relations: ['subscription', 'follower']})));
+    user.subscriptions = <any>await Promise.all(user.subscriptions
+      .map(u => this.subscriberRepo.createQueryBuilder('subs')
+        .innerJoinAndSelect('subs.follower', 'follower')
+        .innerJoin('subs.subscription', 'subscription')
+        .addSelect('subscription.login')
+        .where('subs.id = :id', {id: u.id})
+        .getOne()));
 
     return user;
-    // return this.userRepo.createQueryBuilder('user')
-    //   .leftJoinAndMapMany('user.some', 'user.subscriptions', 'sub')
-    //   .where('user.id = :id', {id: user.id})
-    //   .getOne()
   }
 
   async update(userDto: UserDto, user: UserModel): Promise<{ [key: string]: boolean }> {

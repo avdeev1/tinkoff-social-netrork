@@ -1,0 +1,24 @@
+<nb-card>
+  <nb-card-header>
+    <a tabindex="0" [class.active]=isFollower (click)="toggle()">Подписки</a>
+    <a tabindex="0" [class.active]=!isFollower (click)="toggle()">Подписчики</a>
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng-container *ngIf="isFollower; then followers; else subscriptions">
+
+    </ng-container>
+
+    <ng-template #followers>
+      <app-info-post-links *ngFor="let follower of followerList"
+                           [id]="follower.subscription.id" [image]="follower.subscription.avatar" [text]="follower.subscription.login">
+      </app-info-post-links>
+    </ng-template>
+
+    <ng-template #subscriptions>
+      <app-info-post-links *ngFor="let subscription of subscriptionList"
+                           [id]="subscription.follower.id" [image]="subscription.follower.avatar" [text]="subscription.follower.login">
+      </app-info-post-links>
+    </ng-template>
+  </nb-card-body>
+</nb-card>
