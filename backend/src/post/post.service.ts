@@ -52,6 +52,8 @@ export class PostService {
       .leftJoinAndSelect('post.tags', 'tags')
       .where('post.text like :str OR post.title like :str', {str: `%${query}%`})
       .loadRelationCountAndMap('post.comments', 'post.comments')
+      .leftJoinAndSelect('post.likes', 'likes')
+      .orderBy('post.createdAt', 'DESC')
       .getMany();
   }
 
@@ -64,6 +66,7 @@ export class PostService {
       .where('post.authorId = :id', {id})
       .loadRelationCountAndMap('post.comments', 'post.comments')
       .leftJoinAndSelect('post.likes', 'likes')
+      .orderBy('post.createdAt', 'DESC')
       .getMany();
   }
 
@@ -80,16 +83,21 @@ export class PostService {
   }
 
   async getPostsForFavourite(userId: number): Promise<Post[]> {
-    return this.postRepo
+    const posts = await this.postRepo
       .createQueryBuilder('post')
       .innerJoin('post.author', 'author')
       .addSelect(['author.login', 'author.avatar', 'author.id'])
       .leftJoinAndSelect('post.tags', 'tags')
       .loadRelationCountAndMap('post.comments', 'post.comments')
       .leftJoinAndSelect('post.likes', 'likes')
-      .where('likes.id = :userId', {userId})
       .orderBy('post.createdAt', 'DESC')
       .getMany();
+
+    return posts.filter(post => {
+      return post.likes.some(like => {
+        return like.id === userId;
+      })
+    });
   }
 
   async findPostsByTag(id: string): Promise<Post[]> {

@@ -13,6 +13,10 @@ export class UserService {
   constructor(private route: ActivatedRoute, private http: HttpClient) {
   }
 
+  getUserSubscriptionList(): Observable<IUser> {
+    return this.http.get<IUser>('/api/user/subscribers/list');
+  }
+
   getUserById(id: string): Observable<IUser> {
     return this.http.get<IUser>(`api/user/${id}`);
   }
@@ -50,17 +54,4 @@ export class UserService {
       avatar: url,
     });
   }
-
-  getInfoAboutSubscribes(id: string): Observable<ISubscriber> {
-    return this.http.get<ISubscriber>(`api/subscribers/find/${id}`);
-  }
-
-  subscribe(id: number): Observable<ISubscriber> {
-    return this.http.post<ISubscriber>('api/subscribers/subscribe', {id});
-  }
-
-  unsubscribe(id: number): Observable<{ [key: string]: boolean }> {
-    return this.http.post<{ [key: string]: boolean }>('api/subscribers/unsubscribe', {id});
-  }
-
 }

@@ -1,4 +1,4 @@
-import { StripPreviewTagPipe } from './strip-preview-tag.pipe';
+import {StripPreviewTagPipe} from './strip-preview-tag.pipe';
 
 describe('StripPreviewTagPipe', () => {
   it('create an instance', () => {
