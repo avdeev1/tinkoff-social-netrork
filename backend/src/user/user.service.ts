@@ -31,15 +31,11 @@ export class UserService {
       .getOne();
 
     user.followers = <any>await Promise.all(user.followers
-      .map(u => this.subscriberRepo.findOne(u.id, {relations: ['subscription', 'follower']})));
+      .map(u => this.subscriberRepo.findOne(u.id, {relations: ['subscription']})));
     user.subscriptions = <any>await Promise.all(user.subscriptions
-      .map(u => this.subscriberRepo.createQueryBuilder('subs')
-        .innerJoinAndSelect('subs.follower', 'follower')
-        .innerJoin('subs.subscription', 'subscription')
-        .addSelect('subscription.login')
-        .where('subs.id = :id', {id: u.id})
-        .getOne()));
-
+      .map(u => this.subscriberRepo.findOne(u.id, {
+        relations: ['follower', 'follower.subscriptions', 'follower.subscriptions.follower']
+      })));
     return user;
   }
 

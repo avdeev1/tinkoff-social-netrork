@@ -1,4 +1,4 @@
-<nb-card>
+<nb-card *ngIf="isDataLoad">
   <nb-card-header>
     <a tabindex="0" [class.active]=isFollower (click)="toggle()">Подписки</a>
     <a tabindex="0" [class.active]=!isFollower (click)="toggle()">Подписчики</a>
@@ -10,15 +10,47 @@
     </ng-container>
 
     <ng-template #followers>
-      <app-info-post-links *ngFor="let follower of followerList"
-                           [id]="follower.subscription.id" [image]="follower.subscription.avatar" [text]="follower.subscription.login">
-      </app-info-post-links>
+      <ng-container *ngIf="followerList.length > 0; else nobody">
+        <div *ngFor="let follower of followerList" class="sub-list">
+          <app-info-post-links
+            [id]="follower.subscription.id" [image]="follower.subscription.avatar" [text]="follower.subscription.login">
+          </app-info-post-links>
+          <a (click)="unsubscribe(follower.subscription.id)" class="sub-btn" tabindex="0">Отписаться</a>
+        </div>
+      </ng-container>
+
+      <ng-template #nobody>
+        <div class="subscribers-are-absent">
+          Подписок нет
+        </div>
+      </ng-template>
+
     </ng-template>
 
     <ng-template #subscriptions>
-      <app-info-post-links *ngFor="let subscription of subscriptionList"
-                           [id]="subscription.follower.id" [image]="subscription.follower.avatar" [text]="subscription.follower.login">
-      </app-info-post-links>
+      <ng-container *ngIf="subscriptionList.length > 0; else nobody">
+        <div *ngFor="let subscription of subscriptionList" class="sub-list">
+          <app-info-post-links
+            [id]="subscription.follower.id" [image]="subscription.follower.avatar" [text]="subscription.follower.login">
+          </app-info-post-links>
+
+          <ng-container *ngIf="isSub(subscription.follower); then sub; else notsub"></ng-container>
+
+          <ng-template #sub>
+            <a (click)="unsubscribe(subscription.follower.id)" class="sub-btn" tabindex="0">Отписаться</a>
+          </ng-template>
+
+          <ng-template #notsub>
+            <a (click)="subscribe(subscription.follower.id)" class="sub-btn" tabindex="0">Подписаться</a>
+          </ng-template>
+        </div>
+      </ng-container>
+
+      <ng-template #nobody>
+        <div class="subscribers-are-absent">
+          Подписчиков нет
+        </div>
+      </ng-template>
     </ng-template>
   </nb-card-body>
 </nb-card>
