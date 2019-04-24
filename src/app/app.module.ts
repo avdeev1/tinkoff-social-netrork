@@ -47,6 +47,7 @@ import {UploadingButtonComponent} from './uploading-button/uploading-button.comp
 import {SliceTextPipe} from './slice-text.pipe';
 import {SubscriberListComponent} from './subscriber-list/subscriber-list.component';
 import {StripPreviewTagPipe} from './strip-preview-tag.pipe';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import {StripPreviewTagPipe} from './strip-preview-tag.pipe';
     SliceTextPipe,
     StripPreviewTagPipe,
     SubscriberListComponent,
+    NotfoundComponent,
   ],
   imports: [
     FormsModule,

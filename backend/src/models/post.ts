@@ -36,7 +36,6 @@ export class Post {
   @Column({ default: false })
   draft: boolean;
 
-
   @ManyToMany(type => User, user => user.postsLike)
   @JoinTable()
   likes: User[];
