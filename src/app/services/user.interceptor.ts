@@ -23,7 +23,8 @@ export class UserInterceptor implements HttpInterceptor {
       catchError((err: HttpErrorResponse) => {
         if (err.status == 401) {
           localStorage.clear();
-          this.router.navigate(['/'], {queryParams: {time: Date.now()}});
+          this.authService.isAuth.next(false);
+          this.router.navigate(['/']);
         }
 
         return throwError(err);
