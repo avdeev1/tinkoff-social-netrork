@@ -48,6 +48,7 @@ import {SliceTextPipe} from './slice-text.pipe';
 import {SubscriberListComponent} from './subscriber-list/subscriber-list.component';
 import {StripPreviewTagPipe} from './strip-preview-tag.pipe';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
     GetDiffDateFromNowPipe,
     UploadingButtonComponent,
     SliceTextPipe,
+    LoadingComponent
     StripPreviewTagPipe,
     SubscriberListComponent,
     NotfoundComponent,

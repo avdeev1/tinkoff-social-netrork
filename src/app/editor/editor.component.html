@@ -15,17 +15,30 @@
                 placeholder="Текст"
                 rows="10"></textarea>
 
-      <app-uploading-button (fileSelect)="onFileSelect($event)"></app-uploading-button>
-      <span>{{file ? file.name : 'Файл не выбран'}}</span>
+      <app-uploading-button (fileSelect)="onFileSelect($event)">
+      </app-uploading-button>
+
+      <span style="display: inline-flex; margin-left: 20px;">
+        {{file ? file.name : 'Файл не выбран'}}
+        <ng-container *ngIf="imageIsLoading">
+          <app-loading size='s'></app-loading>
+        </ng-container>
+      </span>
+
 
       <label for="multiple_select">
-        <h4>Метки</h4>
+        <h4 style="display: flex;">Метки
+          <ng-container *ngIf="!isDataLoaded">
+            <app-loading size='s'></app-loading>
+          </ng-container>
+        </h4>
       </label>
       <nb-select formControlName="tags" id="multiple_select" class="add-margin-bottom" multiple outline status="info"
                  placeholder="Выберите метки">
         <nb-option *ngFor="let tag of tags" [value]="tag.id">{{tag.tag}}</nb-option>
       </nb-select>
-      <button type="submit" nbButton class="add-margin-right" status="info" [disabled]="!editorForm.valid">
+      <button type="submit" nbButton class="add-margin-right" status="info"
+              [disabled]="!editorForm.valid || imageIsLoading">
         Опубликовать
       </button>
     </form>

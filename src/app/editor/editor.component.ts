@@ -1,11 +1,12 @@
+import {HttpClient} from '@angular/common/http';
 import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import * as SimpleMDE from 'simplemde';
-import {PostsService} from '../services/posts.service';
 import {Router} from '@angular/router';
-import {ITag} from "../models";
-import {HttpClient} from "@angular/common/http";
-import {previewTag} from "../slice-text.pipe";
+import {finalize} from 'rxjs/operators';
+import * as SimpleMDE from 'simplemde';
+import {ITag} from '../models';
+import {PostsService} from '../services/posts.service';
+import {previewTag} from '../slice-text.pipe';
 
 @Component({
   selector: 'app-editor',
@@ -21,6 +22,8 @@ export class EditorComponent implements OnInit {
   @ViewChild('textarea')
   textarea: ElementRef;
   simplemde: SimpleMDE;
+  isDataLoaded = false;
+  imageIsLoading = false;
 
   constructor(private fb: FormBuilder,
               private postService: PostsService,
@@ -29,14 +32,20 @@ export class EditorComponent implements OnInit {
               private http: HttpClient) {
   }
 
+
   ngOnInit() {
-    this.http.get<ITag[]>('api/tags').subscribe(data => {
-      this.tags = data;
-    });
+    this.http.get<ITag[]>('api/tags')
+      .pipe(finalize(() => {
+        this.isDataLoaded = true;
+        this.editorForm.get('tags').enable();
+      }))
+      .subscribe(data => {
+        this.tags = data;
+      });
     this.editorForm = this.fb.group({
       title: ['', Validators.required],
       text: ['', Validators.required],
-      tags: [''],
+      tags: [{ value: '', disabled: true }],
       image: ['']
     });
     this.simplemde = new SimpleMDE({
@@ -65,11 +74,16 @@ export class EditorComponent implements OnInit {
   }
 
   onFileSelect(file: File) {
-    this.postService.uploadImage(file).subscribe(url => {
-      this.editorForm.patchValue({ image: url });
-      this.file = file;
-      this.changeDetectorRef.markForCheck();
-    });
+    this.imageIsLoading = true;
+    this.postService.uploadImage(file)
+      .pipe(finalize(() => {
+        this.imageIsLoading = false;
+      }))
+      .subscribe(url => {
+        this.editorForm.patchValue({ image: url });
+        this.file = file;
+        this.changeDetectorRef.markForCheck();
+      });
   }
 
   onSubmit() {
