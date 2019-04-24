@@ -5,9 +5,17 @@
            placeholder="Логин">
     <input class="pass" formControlName="pass" status="info" fullWidth fieldSize="medium" type="password" nbInput
            placeholder="Пароль">
+    <div class="error" *ngIf="isControlInvalid()">
+      Пароль минимум 5 символов
+      <br>
+    </div>
+    <div *ngIf="errorAuth">
+      Неверный логин/пароль
+    </div>
     <div class="sign-in-button">
       <button type="submit" nbButton outline status="info" size="xsmall" [disabled]="signInForm.invalid">Вход</button>
     </div>
+
   </form>
 </div>
 

@@ -7,6 +7,7 @@ import {PostDetailComponent} from './post-detail/post-detail.component';
 import {ForShowPostComponent} from "./models/for-show-post-component.enum";
 import {EditorComponent} from './editor/editor.component';
 import {AuthGuard} from "./guards/auth.guard";
+import {NotfoundComponent} from "./notfound/notfound.component";
 
 const routes: Routes = [
   {
@@ -64,7 +65,11 @@ const routes: Routes = [
     data: {
       content: ForShowPostComponent.TAG
     }
-  }
+  },
+  {
+    path: '**',
+    component: NotfoundComponent
+  },
 ];
 
 @NgModule({

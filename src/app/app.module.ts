@@ -45,6 +45,7 @@ import {SwitcherForFormComponent} from './switcher-for-form/switcher-for-form.co
 import {TextPostComponent} from './text-post/text-post.component';
 import {UploadingButtonComponent} from './uploading-button/uploading-button.component';
 import {SliceTextPipe} from './slice-text.pipe';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import {SliceTextPipe} from './slice-text.pipe';
     GetDiffDateFromNowPipe,
     UploadingButtonComponent,
     SliceTextPipe,
+    NotfoundComponent,
   ],
   imports: [
     FormsModule,
