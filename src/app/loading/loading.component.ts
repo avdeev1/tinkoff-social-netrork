@@ -1,4 +1,4 @@
-import {Component, HostBinding, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, HostBinding, Input, OnInit, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-loading',
@@ -7,14 +7,14 @@ import {Component, HostBinding, Input, OnInit} from '@angular/core';
 })
 export class LoadingComponent implements OnInit {
   @Input() size: string;
+  @ViewChild('loading') loadingElement: ElementRef<HTMLElement>;
 
-  @HostBinding('class.lds-eclipse') spinnerStyle = true;
 
   constructor() { }
 
   ngOnInit() {
-    if (this.size === 's') {
-      this.spinnerStyle = true;
+    if (this.size === 'l') {
+      this.loadingElement.nativeElement.classList.add('lds-eclipse__center');
     }
   }
 

@@ -22,6 +22,7 @@ export class EditorComponent implements OnInit {
   textarea: ElementRef;
   simplemde: SimpleMDE;
   isDataLoaded = false;
+  imageIsLoading = false;
 
   constructor(private fb: FormBuilder,
               private postService: PostsService,
@@ -72,7 +73,12 @@ export class EditorComponent implements OnInit {
   }
 
   onFileSelect(file: File) {
-    this.postService.uploadImage(file).subscribe(url => {
+    this.imageIsLoading = true;
+    this.postService.uploadImage(file)
+      .pipe(finalize(() => {
+        this.imageIsLoading = false;
+      }))
+      .subscribe(url => {
       this.editorForm.patchValue({ image: url });
       this.file = file;
       this.changeDetectorRef.markForCheck();
