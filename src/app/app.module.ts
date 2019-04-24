@@ -45,7 +45,8 @@ import {SwitcherForFormComponent} from './switcher-for-form/switcher-for-form.co
 import {TextPostComponent} from './text-post/text-post.component';
 import {UploadingButtonComponent} from './uploading-button/uploading-button.component';
 import {SliceTextPipe} from './slice-text.pipe';
-import { SubscriberListComponent } from './subscriber-list/subscriber-list.component';
+import {SubscriberListComponent} from './subscriber-list/subscriber-list.component';
+import {StripPreviewTagPipe} from './strip-preview-tag.pipe';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { SubscriberListComponent } from './subscriber-list/subscriber-list.compo
     GetDiffDateFromNowPipe,
     UploadingButtonComponent,
     SliceTextPipe,
+    StripPreviewTagPipe,
     SubscriberListComponent,
   ],
   imports: [
