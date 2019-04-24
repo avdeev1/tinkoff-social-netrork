@@ -8,7 +8,6 @@ import {AuthService} from '../services/auth.service';
   styleUrls: ['./sign-up-form.component.less']
 })
 export class SignUpFormComponent implements OnInit {
-  errors: string;
   constructor(private fb: FormBuilder, private authService: AuthService) {}
   signUpForm: FormGroup;
 
@@ -38,7 +37,7 @@ export class SignUpFormComponent implements OnInit {
   onSubmit() {
     const {login, passwords: {pass, doublePass}} = this.signUpForm.value;
 
-    this.authService.register(login, pass, doublePass).subscribe( () => {}, error => { console.log(1); } );
+    this.authService.register(login, pass, doublePass).subscribe( );
   }
 
 }
