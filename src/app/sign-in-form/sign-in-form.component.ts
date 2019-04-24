@@ -36,9 +36,7 @@ export class SignInFormComponent implements OnInit {
       catchError((err) => {
         if (err) {
           this.errorAuth = true;
-          return err;
         }
-        console.log(err);
         return err;
       })
     ).subscribe();
