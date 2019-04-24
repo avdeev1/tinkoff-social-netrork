@@ -1,4 +1,4 @@
-<nb-card *ngIf="isAuth && isMainPage">
+<nb-card *ngIf="isAuth && isMainPage && isDataLoaded">
   <nb-card-body class="change-list-of-posts">
 
     <ng-container *ngIf="isSubscribers; else popular">

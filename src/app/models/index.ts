@@ -26,8 +26,8 @@ export interface IUser {
   posts: IPost[];
   comments: IComment[];
   registrationDate: number;
-  subscriptions: number;
-  followers: number;
+  subscriptions: IUser[];
+  followers: IUser[];
 }
 
 export interface IUploadResponse {

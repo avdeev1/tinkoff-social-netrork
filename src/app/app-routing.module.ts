@@ -7,6 +7,7 @@ import {PostDetailComponent} from './post-detail/post-detail.component';
 import {ForShowPostComponent} from "./models/for-show-post-component.enum";
 import {EditorComponent} from './editor/editor.component';
 import {AuthGuard} from "./guards/auth.guard";
+import {SubscriberListComponent} from "./subscriber-list/subscriber-list.component";
 
 const routes: Routes = [
   {
@@ -24,6 +25,11 @@ const routes: Routes = [
     data: {
       profile: true
     }
+  },
+  {
+    path: 'subscriber',
+    component: SubscriberListComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'profile/setting',
