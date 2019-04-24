@@ -5,6 +5,7 @@ import {PostsService} from '../services/posts.service';
 import {Router} from '@angular/router';
 import {ITag} from "../models";
 import {HttpClient} from "@angular/common/http";
+import {finalize} from "rxjs/operators";
 
 @Component({
   selector: 'app-editor',
@@ -20,6 +21,7 @@ export class EditorComponent implements OnInit {
   @ViewChild('textarea')
   textarea: ElementRef;
   simplemde: SimpleMDE;
+  isDataLoaded = false;
 
   constructor(private fb: FormBuilder,
               private postService: PostsService,
@@ -28,14 +30,20 @@ export class EditorComponent implements OnInit {
               private http: HttpClient) {
   }
 
+
   ngOnInit() {
-    this.http.get<ITag[]>('api/tags').subscribe(data => {
+    this.http.get<ITag[]>('api/tags')
+      .pipe(finalize(() => {
+        this.isDataLoaded = true;
+        this.editorForm.get('tags').enable();
+      }))
+      .subscribe(data => {
       this.tags = data;
     });
     this.editorForm = this.fb.group({
       title: ['', Validators.required],
       text: ['', Validators.required],
-      tags: [''],
+      tags: [{value: '', disabled: true}],
       image: ['']
     });
     this.simplemde = new SimpleMDE({

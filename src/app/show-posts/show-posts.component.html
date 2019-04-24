@@ -16,12 +16,10 @@
   <ng-container *ngIf="posts?.length > 0; else noPosts">
     <app-post *ngFor="let post of posts" [post]="post"></app-post>
   </ng-container>
-
-
 </div>
 
 <ng-template #loading>
-  <div>Loading</div>
+  <app-loading></app-loading>
 </ng-template>
 
 <ng-template #noPosts>

@@ -12,7 +12,7 @@ import {
   NbLayoutModule,
   NbMenuModule,
   NbSelectModule,
-  NbSidebarModule,
+  NbSidebarModule, NbSpinnerModule,
   NbThemeModule
 } from '@nebular/theme';
 import {NgxMdModule} from 'ngx-md';
@@ -45,6 +45,8 @@ import {SwitcherForFormComponent} from './switcher-for-form/switcher-for-form.co
 import {TextPostComponent} from './text-post/text-post.component';
 import {UploadingButtonComponent} from './uploading-button/uploading-button.component';
 import {SliceTextPipe} from './slice-text.pipe';
+import { LoadingComponent } from './loading/loading.component';
+import { SpinnerScaleDirective } from './spinner-scale.directive';
 
 @NgModule({
   declarations: [
@@ -71,6 +73,8 @@ import {SliceTextPipe} from './slice-text.pipe';
     GetDiffDateFromNowPipe,
     UploadingButtonComponent,
     SliceTextPipe,
+    LoadingComponent,
+    SpinnerScaleDirective
   ],
   imports: [
     FormsModule,
@@ -90,7 +94,8 @@ import {SliceTextPipe} from './slice-text.pipe';
     NbMenuModule.forRoot(),
     NbCardModule,
     NbSidebarModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NbSpinnerModule,
   ],
   providers: [
     NbDialogService,

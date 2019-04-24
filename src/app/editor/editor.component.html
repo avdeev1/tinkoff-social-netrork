@@ -20,6 +20,9 @@
 
       <label for="multiple_select">
         <h4>Метки</h4>
+        <ng-container *ngIf="!isDataLoaded">
+          <app-loading [size]="'s'"></app-loading>
+        </ng-container>
       </label>
       <nb-select formControlName="tags" id="multiple_select" class="add-margin-bottom" multiple outline status="info"
                  placeholder="Выберите метки">
