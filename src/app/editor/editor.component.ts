@@ -1,11 +1,12 @@
+import {HttpClient} from '@angular/common/http';
 import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import * as SimpleMDE from 'simplemde';
-import {PostsService} from '../services/posts.service';
 import {Router} from '@angular/router';
-import {ITag} from "../models";
-import {HttpClient} from "@angular/common/http";
-import {finalize} from "rxjs/operators";
+import {finalize} from 'rxjs/operators';
+import * as SimpleMDE from 'simplemde';
+import {ITag} from '../models';
+import {PostsService} from '../services/posts.service';
+import {previewTag} from '../slice-text.pipe';
 
 @Component({
   selector: 'app-editor',
@@ -39,12 +40,12 @@ export class EditorComponent implements OnInit {
         this.editorForm.get('tags').enable();
       }))
       .subscribe(data => {
-      this.tags = data;
-    });
+        this.tags = data;
+      });
     this.editorForm = this.fb.group({
       title: ['', Validators.required],
       text: ['', Validators.required],
-      tags: [{value: '', disabled: true}],
+      tags: [{ value: '', disabled: true }],
       image: ['']
     });
     this.simplemde = new SimpleMDE({
@@ -58,7 +59,7 @@ export class EditorComponent implements OnInit {
         {
           name: 'preview',
           action: function customFunction(editor) {
-            editor.value(editor.value() + '\n<preview>\n');
+            editor.value(editor.value() + `\n${previewTag}\n`);
           },
           className: 'fa fa-scissors',
           title: 'Preview',
@@ -79,10 +80,10 @@ export class EditorComponent implements OnInit {
         this.imageIsLoading = false;
       }))
       .subscribe(url => {
-      this.editorForm.patchValue({ image: url });
-      this.file = file;
-      this.changeDetectorRef.markForCheck();
-    });
+        this.editorForm.patchValue({ image: url });
+        this.file = file;
+        this.changeDetectorRef.markForCheck();
+      });
   }
 
   onSubmit() {

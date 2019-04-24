@@ -16,7 +16,7 @@ export class AuthController {
     );
 
     if (!user) {
-      throw new HttpException('Not authorized', 401);
+      throw new HttpException('Not authorized', 403);
     }
 
     const token = await this.authService.createToken(user);

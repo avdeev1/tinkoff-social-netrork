@@ -22,9 +22,9 @@ export class UserInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((err: HttpErrorResponse) => {
         if (err.status == 401) {
-          console.log('401');
           localStorage.clear();
-          this.router.navigate(['/'], {queryParams: {time: Date.now()}});
+          this.authService.isAuth.next(false);
+          this.router.navigate(['/']);
         }
 
         return throwError(err);

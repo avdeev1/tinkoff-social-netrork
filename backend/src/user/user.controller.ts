@@ -37,6 +37,14 @@ export class UserController {
     return user;
   }
 
+  @Get('/subscribers/list')
+  @UseInterceptors(ClassSerializerInterceptor)
+  @UseGuards(AuthGuard())
+  async getSubscribersList(@Request() req): Promise<UserModel> {
+    return await this.userService.getSubscriptionList(req.user);
+  }
+
+
   @Post('/update')
   @UseInterceptors(ClassSerializerInterceptor)
   @UseGuards(AuthGuard())
