@@ -38,6 +38,7 @@ export class EditorComponent implements OnInit {
       .pipe(finalize(() => {
         this.isDataLoaded = true;
         this.editorForm.get('tags').enable();
+        this.changeDetectorRef.markForCheck();
       }))
       .subscribe(data => {
         this.tags = data;

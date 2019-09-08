@@ -75,7 +75,7 @@ import { LoadingComponent } from './loading/loading.component';
     GetDiffDateFromNowPipe,
     UploadingButtonComponent,
     SliceTextPipe,
-    LoadingComponent
+    LoadingComponent,
     StripPreviewTagPipe,
     SubscriberListComponent,
     NotfoundComponent,

@@ -53,6 +53,7 @@ export class AuthService {
       localStorage.setItem('userName', login);
       this.isAuth.next(true);
       this.closeForm();
+      this.router.navigate(['/'], {queryParams: {time: Date.now()}});
     }), shareReplay());
   }
 
