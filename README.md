@@ -1,4 +1,13 @@
-# FintechSocialNetwork
+# Tinkoff Social Network
+
+## About
+This project is a graduation project in [Tinkoff Fintech Frontend school](https://fintech.tinkoff.ru).
+This is a social network in which users can post their posts, subscribe to other users, put likes on your favorite posts. The social network [Twitter](https://twitter.com/) was taken as a basis. <br>
+Frontend: Angular 7 <br>
+[Backend](https://github.com/avdeev1/tinkoff-social-network/tree/master/backend): [Nest](https://github.com/nestjs/nest) <br>
+Database: SQLite
+
+## Version
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.6.
 
