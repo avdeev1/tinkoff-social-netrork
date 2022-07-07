@@ -24,7 +24,7 @@
     "@types/simplemde": "^1.11.6",
     "core-js": "^2.5.4",
     "font-awesome": "^4.7.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "nebular-icons": "^1.1.0",
     "ngx-md": "^7.1.3",
     "rxjs": "~6.3.3",
